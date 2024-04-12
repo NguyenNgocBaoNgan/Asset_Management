@@ -28,7 +28,7 @@
                             <form method="post" action="#" th:action="@{/checkLogin}" th:object="${account}">
                                 <div class="mb-3">
                                     <label class="form-label">ID</label>
-                                    <input type="text" pattern="[1-9]*" maxlength="6" inputmode="numeric"
+                                    <input type="text" pattern="[1-9]*" maxlength="6" minlength="6" inputmode="numeric"
                                            class="form-control" id="id_account" name="id_account"
                                            th:field="*{id_account}">
                                 </div>
