@@ -12,5 +12,13 @@ public class StatusService {
     @Autowired
     StatusRepository statusRepository;
 
+    public List<Status> getAllStatus(){
+        return statusRepository.findAll();
+    }
+
+    public Status getStatusByAssetId(int id){
+        return statusRepository.findStatusByIdAsset(id);
+    }
+
 
 }
