@@ -307,7 +307,7 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title fw-semibold mb-4">Forms</h5>
-                  <div class="card-body" style="margin-top: -20px;">
+                  <div class="card-body" style="margin-top: -20px;" >
                     <form method="post" action="#" th:action="@{/addNewAsset}" th:object="${asset}">
                       <div class="row formbold-input-group">
                         <div class="col-40">
@@ -396,7 +396,7 @@
         </div>
         <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
           <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-            <button type="button" class="btn btn-info m-1" onclick="momodal()">Add</button>
+            <button  th:if="${loggedInAccount.role == 0}" type="button" class="btn btn-info m-1" onclick="momodal()">Add</button>
 
 
             <li class="nav-item dropdown">
@@ -505,13 +505,12 @@
                     <td class="border-bottom-0">
                       <h6 class="fw-semibold mb-0 fs-4" th:text="${asset.description}"></h6>
                     </td>
-
-                    <td class="border-bottom-0">
+                    <td class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
                       <form th:action="@{/deleteAsset/{id}(id=${asset.idAsset})}" method="post" onsubmit="return confirm('Are you sure you want to delete this asset?')">
                         <button type="submit" class="btn btn-danger m-1">Delete</button>
                       </form>
                     </td>
-                    <td class="border-bottom-0">
+                    <td class="border-bottom-0"  th:if="${loggedInAccount.role == 0}">
                       <button type="submit" class="btn btn-warning m-1"  >
                         <a th:href="@{/updateAsset/{id}(id=${asset.idAsset})}" style="color:white">Update</a>
                       </button>
