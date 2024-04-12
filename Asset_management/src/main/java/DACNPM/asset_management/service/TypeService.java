@@ -12,5 +12,12 @@ public class TypeService {
     @Autowired
     TypeRepository typeRepository;
 
+    public Type getTypeByAssetId(int id){
+        return typeRepository.findTypeByIdAsset(id);
+    }
+
+    public List<Type> getAllType(){
+        return typeRepository.findAll();
+    }
 
 }

@@ -33,6 +33,66 @@ public class AssetController {
 
 
 
+    @GetMapping("/home")
+    public String getAllAsset( Model model, HttpSession session) {
+
+        List<Asset> listAsset= assetService.getAllAssets();
+        List<Type> listType=typeService.getAllType();
+        model.addAttribute("listAsset", listAsset);
+        model.addAttribute("listType",listType);
+        model.addAttribute("asset", new Asset());
+
+        return "index";
+    }
+    @ResponseBody
+    @GetMapping("/listAsset")
+    public List<Asset> getAll(){
+        return assetService.getAllAssets();
+    }
+
+    @PostMapping("/addNewAsset")
+    public String addNewAsset(@ModelAttribute("asset")  Asset asset){
+        assetService.addNewAsset(asset);
+        return "redirect:/home";
+    }
+
+    @GetMapping("/updateAsset/{id}")
+    public String getUpdateAsset(@PathVariable("id") int id, Model model) {
+        Optional<Asset> optionalAsset  = assetService.findAssetById(id);
+        Type oldType = typeService.getTypeByAssetId(id);
+        List<Type> listType=typeService.getAllType();
+        List<Status> listStatus=statusService.getAllStatus();
+        Status oldStatus=statusService.getStatusByAssetId(id);
+
+        model.addAttribute("listType",listType);
+        model.addAttribute("oldType",oldType);
+
+        if (optionalAsset.isPresent()) {
+            Asset asset = optionalAsset.get();
+            model.addAttribute("asset", asset);
+        } else {
+            model.addAttribute("errorMessage", "Not found asset with ID: " + id);
+        }
+
+//        model.addAttribute("listStatus",listStatus);
+//        model.addAttribute("oldStatus",oldStatus);
+        return "edit-asset";
+    }
+
+    @PostMapping("updateAsset/{id}")
+    public String updateAsset(@PathVariable("id") int id, @ModelAttribute("asset") Asset asset) throws Exception {
+        assetService.updateAsset(id, asset);
+        return "redirect:/home";
+    }
+
+    @PostMapping("deleteAsset/{id}")
+    public String deleteAsset(@PathVariable("id")String id){
+        assetService.deleteAsset(Integer.parseInt(id));
+        return "redirect:/home";
+    }
+
+
+
 }
 
 
