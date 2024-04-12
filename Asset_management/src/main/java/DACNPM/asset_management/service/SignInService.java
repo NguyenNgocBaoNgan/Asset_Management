@@ -11,5 +11,8 @@ public class SignInService {
     @Autowired
     AccountRepository accountRepository;
 
+    public Account checkLogin(int id, String pass) {
+        return accountRepository.checkLogin(id, pass);
+    }
 
 }
