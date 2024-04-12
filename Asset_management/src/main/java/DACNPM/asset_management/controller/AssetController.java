@@ -38,12 +38,14 @@ public class AssetController {
         if (loggedInAccount == null) {
             return "redirect:/login";
         }
+        model.addAttribute("loggedInAccount", loggedInAccount);
+
         List<Asset> listAsset= assetService.getAllAssets();
         List<Type> listType=typeService.getAllType();
         model.addAttribute("listAsset", listAsset);
         model.addAttribute("listType",listType);
         model.addAttribute("asset", new Asset());
-        model.addAttribute("loggedInAccount", loggedInAccount);
+
 
         return "index";
     }
@@ -60,7 +62,12 @@ public class AssetController {
     }
 
     @GetMapping("/updateAsset/{id}")
-    public String getUpdateAsset(@PathVariable("id") int id, Model model) {
+    public String getUpdateAsset(@SessionAttribute(name = "loggedInAccount", required = false) Account loggedInAccount, @PathVariable("id") int id, Model model) {
+
+        if (loggedInAccount == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("loggedInAccount", loggedInAccount);
         Optional<Asset> optionalAsset  = assetService.findAssetById(id);
         Type oldType = typeService.getTypeByAssetId(id);
         List<Type> listType=typeService.getAllType();
@@ -77,8 +84,8 @@ public class AssetController {
             model.addAttribute("errorMessage", "Not found asset with ID: " + id);
         }
 
-//        model.addAttribute("listStatus",listStatus);
-//        model.addAttribute("oldStatus",oldStatus);
+        model.addAttribute("listStatus",listStatus);
+        model.addAttribute("oldStatus",oldStatus);
         return "edit-asset";
     }
 

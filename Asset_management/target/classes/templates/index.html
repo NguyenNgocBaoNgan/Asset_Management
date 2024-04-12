@@ -429,28 +429,7 @@
     <!--  Header End -->
     <div class="container-fluid">
       <!--  Row 1 -->
-      <div class="row">
-        <div class="col-lg-8 d-flex align-items-strech">
-          <div class="card w-100">
-            <div class="card-body">
-              <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-                <div class="mb-3 mb-sm-0">
-                  <h5 class="card-title fw-semibold">Sales Overview</h5>
-                </div>
-                <div>
-                  <select class="form-select">
-                    <option value="1">March 2023</option>
-                    <option value="2">April 2023</option>
-                    <option value="3">May 2023</option>
-                    <option value="4">June 2023</option>
-                  </select>
-                </div>
-              </div>
 
-            </div>
-          </div>
-        </div>
-      </div>
 
         <div class="row">
         <div class="col-lg-12 d-flex align-items-stretch">
@@ -470,9 +449,16 @@
                     <th class="border-bottom-0">
                       <h6 class="fw-semibold mb-0">Asset Category</h6>
                     </th>
+
+                    <th class="border-bottom-0">
+                      <h6 class="fw-semibold mb-0">Status</h6>
+                    </th>
                     <th class="border-bottom-0">
                       <h6 class="fw-semibold mb-0">Price</h6>
                     </th>
+
+
+
                     <th class="border-bottom-0">
                       <h6 class="fw-semibold mb-0">Date</h6>
                     </th>
@@ -494,8 +480,17 @@
                             <h6 class="fw-semibold mb-1" th:case="3">May tinh</h6>
                         </div>
                     </td>
+
                     <td class="border-bottom-0">
-                      <p class="mb-0 fw-normal" th:text="${asset.purchasePrice}"></p>
+                      <div th:switch="${asset.status}">
+                        <h6 class="fw-semibold mb-1" th:case="0">mới mua</h6>
+                        <h6 class="fw-semibold mb-1" th:case="1">đang được mượn</h6>
+                        <h6 class="fw-semibold mb-1" th:case="2">cũ rồi</h6>
+                      </div>
+                    </td>
+
+                    <td class="border-bottom-0">
+                      <h6 class="fw-semibold mb-1" th:text="${asset.purchasePrice}"></h6>
                     </td>
                     <td class="border-bottom-0">
                       <div class="d-flex align-items-center gap-2">
