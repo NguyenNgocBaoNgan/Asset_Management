@@ -34,13 +34,16 @@ public class AssetController {
 
 
     @GetMapping("/home")
-    public String getAllAsset( Model model, HttpSession session) {
-
+    public String getAllAsset(@SessionAttribute(name = "loggedInAccount", required = false) Account loggedInAccount, Model model, HttpSession session) {
+        if (loggedInAccount == null) {
+            return "redirect:/login";
+        }
         List<Asset> listAsset= assetService.getAllAssets();
         List<Type> listType=typeService.getAllType();
         model.addAttribute("listAsset", listAsset);
         model.addAttribute("listType",listType);
         model.addAttribute("asset", new Asset());
+        model.addAttribute("loggedInAccount", loggedInAccount);
 
         return "index";
     }

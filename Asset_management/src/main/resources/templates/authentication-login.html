@@ -49,13 +49,18 @@
     </div>
 </div>
 <script>
-    document.addEventListener('click', function(event) {
-        // Kiểm tra nếu người dùng nhấn vào bất kỳ đâu trên trang
-        if (event.target.id !== 'id_account') {
-            const errorMessage = document.getElementById('error-message');
-            // Ẩn #error-message
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputField = document.getElementById('id_account');
+        const password = document.getElementById('password');
+        const errorMessage = document.getElementById('error-message');
+
+        inputField.addEventListener('focus', function () {
             errorMessage.style.display = 'none';
-        }
+        });
+
+        password.addEventListener('focus', function () {
+            errorMessage.style.display = 'none';
+        });
     });
 </script>
 <script src="../assets/libs/jquery/dist/jquery.min.js"></script>

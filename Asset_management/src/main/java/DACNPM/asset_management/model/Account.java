@@ -18,7 +18,7 @@ public class Account {
 
     @Id
     @Column(name="id_account")
-    private int id_account;
+    private Integer id_account;
 
     @Column(name="password")
     private String password;
