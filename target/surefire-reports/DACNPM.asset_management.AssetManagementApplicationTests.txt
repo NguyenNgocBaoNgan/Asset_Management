@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: DACNPM.asset_management.AssetManagementApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.27 s -- in DACNPM.asset_management.AssetManagementApplicationTests
