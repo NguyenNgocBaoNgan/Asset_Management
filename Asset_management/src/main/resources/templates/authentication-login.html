@@ -28,14 +28,14 @@
                             <form method="post" action="#" th:action="@{/checkLogin}" th:object="${account}">
                                 <div class="mb-3">
                                     <label class="form-label">ID</label>
-                                    <input type="text" pattern="[1-9]*" maxlength="6" minlength="6" inputmode="numeric"
+                                    <input type="text" pattern="[1-9]*" required maxlength="6" minlength="6" inputmode="numeric"
                                            class="form-control" id="id_account" name="id_account"
                                            th:field="*{id_account}">
                                 </div>
                                 <div class="mb-4">
                                     <label class="form-label">Password</label>
                                     <input type="password" class="form-control" id="password" name="password"
-                                           th:field="*{password}" maxlength="12" minlength="8">
+                                           th:field="*{password}" required maxlength="12" minlength="8">
                                 </div>
                                 <button href="templates/index.html" type="submit"
                                         class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In
