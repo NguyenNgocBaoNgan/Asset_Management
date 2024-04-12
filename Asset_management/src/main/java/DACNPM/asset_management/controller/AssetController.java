@@ -96,11 +96,19 @@ public class AssetController {
     }
 
     @PostMapping("deleteAsset/{id}")
-    public String deleteAsset(@PathVariable("id")String id){
-        assetService.deleteAsset(Integer.parseInt(id));
+    public String deleteAsset(@PathVariable("id")String id) throws Exception {
+        Optional<Asset> optionalAsset  = assetService.findAssetById(Integer.parseInt(id));
+        if (optionalAsset.isPresent()) {
+            Asset asset = optionalAsset.get();
+            if(asset.getStatus()!=1){
+                assetService.deleteAsset(Integer.parseInt(id));
+            }else{
+
+            }
+        }
+
         return "redirect:/home";
     }
-
 
 
 }
