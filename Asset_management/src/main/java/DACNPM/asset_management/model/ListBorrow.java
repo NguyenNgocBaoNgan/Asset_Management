@@ -12,12 +12,6 @@ import java.util.Date;
 @AllArgsConstructor
 @Table(name = "list_borrow")
 public class ListBorrow {
-    //    @Id
-//    @Column(name="id_account")
-//    private int idAccount;
-//    @Id
-//    @Column(name="id_asset")
-//    private String idAsset;
     @EmbeddedId
     private BorrowId id;
 

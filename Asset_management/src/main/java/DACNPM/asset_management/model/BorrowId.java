@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 public class BorrowId implements Serializable {
 
     @Column(name = "id_account")
-    private int idAccount;
+    private Integer idAccount;
 
     @Column(name = "id_asset")
-    private String idAsset;
+    private Integer idAsset;
 
 }

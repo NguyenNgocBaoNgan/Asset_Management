@@ -204,18 +204,19 @@
                         <h5 class="card-title fw-semibold mb-4">Mượn tài sản</h5>
                         <div class="card">
                             <div class="card-body">
+                                <p th:if="${session.error}" class="alert alert-primary" role="alert" th:text="${session.error}">
+                                </p>
                                 <form action="/form/request" method="post" th:object="${formData}">
                                     <div class="mb-3">
                                         <label class="form-label">Mã nhân viên</label>
                                         <input type="text" th:field="*{id.idAccount}"
                                                name="idAccount" id="disabledTextInput" class="form-control"
-                                               placeholder="Mã nhân viên">
+                                               placeholder="Mã nhân viên" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="disabledSelect" class="form-label">Tài sản</label>
                                         <select id="disabledSelect" th:field="*{id.idAsset}"
                                                 name="idAsset" class="form-select">
-<!--                                            <option value="1">Chọn tài sản</option>-->
                                         </select>
                                     </div>
                                     <div class="mb-3">
