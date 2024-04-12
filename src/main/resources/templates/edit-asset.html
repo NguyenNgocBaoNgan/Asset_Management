@@ -308,7 +308,7 @@
                                             </div>
 
                                             <div class="col-60">
-                                                <div id="oldTypeOptions2" class="type-options" style="display: block">
+                                                <div id="oldTypeOptions" class="type-options" style="display: block">
                                                     <select name="occupation"  id="assetType" class="formbold-form-select" onchange="displaySelectedValue()">
                                                         <option  disabled selected hidden th:object="${oldType}" th:text="*{typeName}" ></option>
                                                         <option th:each="type : ${listType}" th:value="${type.typeName}" th:text="${type.typeName}"></option>
@@ -323,14 +323,14 @@
                                                         var typeHidden = document.getElementById("typeHidden");
 
                                                         switch(selectedOption) {
-                                                            case "mới mua":
-                                                                typeHidden.value = 0;
-                                                                break;
-                                                            case "đang được mượn":
+                                                            case "Ban":
                                                                 typeHidden.value = 1;
                                                                 break;
-                                                            case "cũ rồi":
+                                                            case "Ghe":
                                                                 typeHidden.value = 2;
+                                                                break;
+                                                            case "May Tinh":
+                                                                typeHidden.value = 3;
                                                                 break;
                                                             default:
                                                                 typeHidden.value = ""; // Nếu không có lựa chọn nào phù hợp, có thể đặt lại giá trị là rỗng
@@ -361,14 +361,14 @@
                                                         var typeHidden = document.getElementById("typeHiddenStatus");
 
                                                         switch(selectedOption) {
-                                                            case "Ban":
+                                                            case "mới mua":
+                                                                typeHiddenStatus.value = 0;
+                                                                break;
+                                                            case "đang được mượn":
                                                                 typeHiddenStatus.value = 1;
                                                                 break;
-                                                            case "Ghe":
+                                                            case "cũ rồi":
                                                                 typeHiddenStatus.value = 2;
-                                                                break;
-                                                            case "May Tinh":
-                                                                typeHiddenStatus.value = 3;
                                                                 break;
                                                             default:
                                                                 typeHiddenStatus.value = ""; // Nếu không có lựa chọn nào phù hợp, có thể đặt lại giá trị là rỗng
