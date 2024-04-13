@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Modernize Free</title>
-    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png"/>
+<!--    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png"/>-->
     <link rel="stylesheet" href="../assets/css/styles.min.css"/>
 </head>
 
@@ -20,21 +20,30 @@
                 <div class="col-md-8 col-lg-6 col-xxl-3">
                     <div class="card mb-0">
                         <div class="card-body">
-                            <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                                <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
-                            </a>
+                            <div style=" text-align: center" ><b >SIGN IN</b></div>
+<!--                            <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">-->
+<!--                                <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">-->
+<!--                            </a>-->
                             <p th:if="${session.error}" class="alert alert-danger" role="alert"
                                th:text="${session.error}" id="error-message"></p>
                             <form method="post" action="#" th:action="@{/checkLogin}" th:object="${account}">
                                 <div class="mb-3">
                                     <label class="form-label">ID</label>
+<<<<<<< Updated upstream:Asset_management/target/classes/templates/authentication-login.html
                                     <input type="text" pattern="[1-9]*" maxlength="6" minlength="6" inputmode="numeric"
+=======
+                                    <input type="text" required pattern="[1-9]*" maxlength="6" minlength="6" inputmode="numeric"
+>>>>>>> Stashed changes:target/classes/templates/authentication-login.html
                                            class="form-control" id="id_account" name="id_account"
                                            th:field="*{id_account}">
                                 </div>
                                 <div class="mb-4">
                                     <label class="form-label">Password</label>
+<<<<<<< Updated upstream:Asset_management/target/classes/templates/authentication-login.html
                                     <input type="password" class="form-control" id="password" name="password"
+=======
+                                    <input type="password" required class="form-control" id="password" name="password"
+>>>>>>> Stashed changes:target/classes/templates/authentication-login.html
                                            th:field="*{password}" maxlength="12" minlength="8">
                                 </div>
                                 <button href="templates/index.html" type="submit"

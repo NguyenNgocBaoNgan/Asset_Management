@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fb5be585-4465-41b4-8656-8f7ce8aae262" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/view-borrow.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.azure/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.azure/default/connections.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.azure/profiles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/controller/FormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/controller/FormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/repository/ListBorrowRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/repository/ListBorrowRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/service/FormService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/service/FormService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/authentication-login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/authentication-login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/AssetManagementApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/AssetManagementApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/AssetController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/AssetController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/CreateAccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/CreateAccountController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/FormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/FormController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/LogoutController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/LogoutController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/RegisterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/RegisterController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/SignInController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/SignInController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/Account.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/Asset.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/Asset.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/BorrowId.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/BorrowId.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/DetailAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/DetailAccount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/ListBorrow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/ListBorrow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/Status.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/Type.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/Warehouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/Warehouse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/repository/AccountRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/repository/AccountRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/repository/AssetRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/repository/AssetRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/repository/DetailAccountRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/repository/DetailAccountRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/repository/ListBorrowRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/repository/ListBorrowRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/repository/StatusRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/repository/StatusRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/repository/TypeRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/repository/TypeRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/repository/WarehouseRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/repository/WarehouseRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/service/AssetService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/service/AssetService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/service/FormService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/service/FormService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/service/SignInService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/service/SignInService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/service/SignUpService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/service/SignUpService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/service/StatusService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/service/StatusService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/service/TypeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/service/TypeService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/authentication-login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/authentication-login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2f1jsUXhXHSlUrQ4Jmgj4XY5qvH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Asset_management/src/main/resources/templates",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Asset_management\src\main\resources\templates" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
+      <option name="appName" />
+      <option name="appServicePlanName" />
+      <option name="appServicePlanResourceGroup" />
+      <option name="appSettingsKey" value="f11d7eaf-1f51-4bb6-9f41-50a381b23b10" />
+      <option name="artifact" />
+      <option name="debugOptions" />
+      <option name="deployment" />
+      <option name="deploymentStagingDirectoryPath" />
+      <option name="funcPath" />
+      <option name="functionHostArguments" />
+      <option name="hostJsonPath" />
+      <option name="insightsName" />
+      <option name="instrumentationKey" />
+      <option name="javaVersion" />
+      <option name="localSettingsJsonPath" />
+      <option name="moduleName" />
+      <option name="os" />
+      <option name="pricingTier" />
+      <option name="providerMap">
+        <map />
+      </option>
+      <option name="region" />
+      <option name="resourceGroup" />
+      <option name="stagingFolder" />
+      <option name="subscription" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AssetManagementApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Asset_management" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="DACNPM.asset_management.AssetManagementApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fb5be585-4465-41b4-8656-8f7ce8aae262" name="Changes" comment="" />
+      <created>1712975685741</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1712975685741</updated>
+      <workItem from="1712975686770" duration="2346000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
