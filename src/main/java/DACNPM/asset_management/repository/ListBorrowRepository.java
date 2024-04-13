@@ -11,4 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface ListBorrowRepository extends JpaRepository<ListBorrow, BorrowId> {
     @Query(value = "select * from list_borrow where id_account = :idAccount and id_asset = :idAsset",nativeQuery = true)
     ListBorrow findByIdAccountAndIdAsset(@Param("idAccount") int idAccount, @Param("idAsset") int idAsset);
+
+    @Query(value = "select * from list_borrow",nativeQuery = true)
+    ListBorrow listBorrow();
 }

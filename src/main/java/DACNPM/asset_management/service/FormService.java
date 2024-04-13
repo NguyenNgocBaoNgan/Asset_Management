@@ -40,4 +40,7 @@ public class FormService {
         }
         return true;
     }
+    public void listborrow(){
+        listBorrowRepository.listBorrow();
+    }
 }

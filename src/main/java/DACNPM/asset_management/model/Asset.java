@@ -28,7 +28,7 @@ public class Asset {
     private String description;
 
     @Column(name="id_status")
-    private int status;
+    private Integer status;
 
     @Column(name="purchase_price")
     private int purchasePrice;

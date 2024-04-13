@@ -40,6 +40,15 @@ public class FormController {
         }
         session.removeAttribute("error");
         return "redirect:/home";
-
     }
+//    @GetMapping("/viewborrow")
+//    public String showBorrow(@SessionAttribute(name = "loggedInAccount", required = false) Account loggedInAccount, Model model, Asset asset, ListBorrow listBorrow) {
+//        if (loggedInAccount == null) {
+//            return "redirect:/login";
+//        }
+//        String name = formService.listborrow();
+//        model.addAttribute("name", name);
+//        model.addAttribute("loggedInAccount", loggedInAccount);
+//        return "view-borrow";
+//    }
 }
