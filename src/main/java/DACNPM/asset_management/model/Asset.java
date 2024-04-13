@@ -19,7 +19,7 @@ import java.util.Date;
 public class Asset {
     @Id
     @Column(name="id_asset")
-    private Integer idAsset;
+    private int idAsset;
 
     @Column(name="asset_name")
     private String assetName;
@@ -31,7 +31,7 @@ public class Asset {
     private int status;
 
     @Column(name="purchase_price")
-    private Integer purchasePrice;
+    private int purchasePrice;
 
 
 

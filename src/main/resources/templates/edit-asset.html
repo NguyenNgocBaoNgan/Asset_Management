@@ -289,7 +289,7 @@
                 <div class="nenmodall"  id="nenmodal-1" >
                     <div class="nenmodal2" ></div>
                     <div class="container-fluid ndmodal" style="margin-top: -40px">
-                        <div class="card" style="margin-top: -30px">
+                        <div class="card">
                             <div class="card-body" >
                                 <h5 class="card-title fw-semibold mb-4">Forms</h5>
                                 <div class="card-body" style="margin-top: -20px;">
@@ -342,11 +342,11 @@
                                         </div>
                                         <div class="row formbold-input-group">
                                             <div class="col-40">
-                                                <label  class="formbold-form-label">Status</label>
+                                                <label  class="formbold-form-label">status</label>
                                             </div>
 
                                             <div class="col-60">
-                                                <div id="oldTypeOptions2" class="type-options" style="display: block">
+                                                <div id="oldTypeOptions" class="type-options" style="display: block">
                                                     <select name="occupation"  id="assetStatus" class="formbold-form-select" onchange="displaySelectedValueStatus()">
                                                         <option  disabled selected hidden th:object="${oldStatus}" th:text="*{valueStatus}" ></option>
                                                         <option th:each="status : ${listStatus}" th:value="${status.valueStatus}" th:text="${status.valueStatus}"></option>
@@ -381,25 +381,6 @@
 
                                         <div class="row formbold-input-group">
                                             <div class="col-40">
-                                                <label class="formbold-form-label">Quantity in stock</label>
-                                            </div>
-                                            <div class="col-60">
-                                                <input type="text" name="newStockQuantity"th:value="${warehouse.getStockQuantity()}"  class="formbold-form-input"/>
-                                            </div>
-                                        </div>
-
-                                        <div class="row formbold-input-group">
-                                            <div class="col-40">
-                                                <label class="formbold-form-label">Quantity borrowed</label>
-                                            </div>
-                                            <div class="col-60">
-                                                <input type="text" name="newUnavailable"th:value="${warehouse.getUnavailableQuantity()}"  class="formbold-form-input"/>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="row formbold-input-group">
-                                            <div class="col-40">
                                                 <label class="formbold-form-label">Purchase Price</label>
                                             </div>
                                             <div class="col-60">
@@ -422,7 +403,7 @@
                                                 <textarea rows="6" name="description" th:field="*{description}" placeholder="Type the description of asset" class="formbold-form-input"></textarea>
                                             </div>
                                         </div>
-                                        <div class="row btn-form" style="margin-top: -70px">
+                                        <div class="row btn-form">
                                             <button  type="submit" class="col-2 btn btn-success m-1">Success</button>
                                             <button  type="cancel" class="col-2 btn btn-default m-1">Cancel</button>
                                         </div>
