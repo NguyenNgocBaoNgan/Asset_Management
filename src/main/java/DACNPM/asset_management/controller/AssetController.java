@@ -1,13 +1,11 @@
 package DACNPM.asset_management.controller;
 
-import DACNPM.asset_management.model.Account;
-import DACNPM.asset_management.model.Asset;
-import DACNPM.asset_management.model.Status;
-import DACNPM.asset_management.model.Type;
+import DACNPM.asset_management.model.*;
 import DACNPM.asset_management.service.AssetService;
 
 import DACNPM.asset_management.service.StatusService;
 import DACNPM.asset_management.service.TypeService;
+import DACNPM.asset_management.service.WarehouseService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -31,6 +31,9 @@ public class AssetController {
     @Resource
     TypeService typeService;
 
+    @Resource
+    WarehouseService warehouseService;
+
 
 
     @GetMapping("/home")
@@ -38,8 +41,19 @@ public class AssetController {
         if (loggedInAccount == null) {
             return "redirect:/login";
         }
+
         List<Asset> listAsset= assetService.getAllAssets();
+        Map<Integer, Warehouse> warehouseMap = new HashMap<>();
+
+        for(Asset asset:listAsset){
+            Optional<Warehouse> warehouseOptional=warehouseService.getQuantityByAssetId(asset.getIdAsset());
+            if(warehouseOptional.isPresent()){
+                Warehouse warehouse=warehouseOptional.get();
+                warehouseMap.put(asset.getIdAsset(), warehouse); // Store warehouse info by assetId
+            }
+        }
         List<Type> listType=typeService.getAllType();
+        model.addAttribute("assetWarehouseMap", warehouseMap);
         model.addAttribute("listAsset", listAsset);
         model.addAttribute("listType",listType);
         model.addAttribute("asset", new Asset());
@@ -54,8 +68,9 @@ public class AssetController {
     }
 
     @PostMapping("/addNewAsset")
-    public String addNewAsset(@ModelAttribute("asset")  Asset asset){
+    public String addNewAsset(@ModelAttribute("asset")  Asset asset,@RequestParam("quantity") int quantity) throws Exception {
         assetService.addNewAsset(asset);
+        warehouseService.initWarehouse(asset.getIdAsset(),quantity,0);
         return "redirect:/home";
     }
 
@@ -71,6 +86,11 @@ public class AssetController {
         List<Type> listType=typeService.getAllType();
         List<Status> listStatus=statusService.getAllStatus();
         Status oldStatus=statusService.getStatusByAssetId(id);
+        Optional<Warehouse> warehouseOptional=warehouseService.getQuantityByAssetId(id);
+        if(warehouseOptional.isPresent()){
+            Warehouse warehouse=warehouseOptional.get();
+            model.addAttribute("warehouse",warehouse);
+        }
 
         model.addAttribute("listType",listType);
         model.addAttribute("oldType",oldType);
@@ -88,8 +108,9 @@ public class AssetController {
     }
 
     @PostMapping("updateAsset/{id}")
-    public String updateAsset(@PathVariable("id") int id, @ModelAttribute("asset") Asset asset) throws Exception {
+    public String updateAsset(@PathVariable("id") int id, @ModelAttribute("asset") Asset asset,@RequestParam("newStockQuantity") int newQuantity,@RequestParam("newUnavailable") int unavalQuantity) throws Exception {
         assetService.updateAsset(id, asset);
+        warehouseService.updateQuantity(id,newQuantity,unavalQuantity);
         return "redirect:/home";
     }
 
@@ -99,11 +120,7 @@ public class AssetController {
         Optional<Asset> optionalAsset  = assetService.findAssetById(Integer.parseInt(id));
         if (optionalAsset.isPresent()) {
             Asset asset = optionalAsset.get();
-            if(asset.getStatus()!=1){
-                assetService.deleteAsset(Integer.parseInt(id));
-            }else{
-
-            }
+            assetService.deleteAsset(Integer.parseInt(id));
         }
 
         return "redirect:/home";
