@@ -197,8 +197,8 @@
               <span class="hide-menu">Alerts</span>
             </a>
           </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+          <li class="sidebar-item" th:if="${loggedInAccount.role == 0}">
+            <a class="sidebar-link" href="/response" aria-expanded="false">
                 <span>
                   <i class="ti ti-cards"></i>
                 </span>

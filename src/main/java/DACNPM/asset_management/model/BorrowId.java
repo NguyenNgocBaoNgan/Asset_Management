@@ -17,5 +17,7 @@ public class BorrowId implements Serializable {
 
     @Column(name = "id_asset")
     private Integer idAsset;
+    @Column(name = "status")
+    private Integer status;
 
 }

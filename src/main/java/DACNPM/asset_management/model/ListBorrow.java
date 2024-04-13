@@ -25,13 +25,12 @@ public class ListBorrow {
 
     @Column(name = "quantity")
     private Integer quantity;
-    @Column(name = "status")
-    private Integer status;
 
-    public ListBorrow(BorrowId id, Integer quantity, Integer status) {
+
+    public ListBorrow(BorrowId id, Integer quantity) {
         this.id = id;
         this.quantity = quantity;
-        this.status = status;
+
     }
 
     public ListBorrow(BorrowId borrowId) {

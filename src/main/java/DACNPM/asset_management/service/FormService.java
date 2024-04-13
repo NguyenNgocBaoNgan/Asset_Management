@@ -1,11 +1,15 @@
 package DACNPM.asset_management.service;
 
+import DACNPM.asset_management.model.BorrowId;
 import DACNPM.asset_management.model.ListBorrow;
 import DACNPM.asset_management.repository.AccountRepository;
 import DACNPM.asset_management.repository.ListBorrowRepository;
 import DACNPM.asset_management.repository.WarehouseRepository;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class FormService {
@@ -19,6 +23,34 @@ public class FormService {
 
     public static String MESS = "SUCCESSFULLY";
 
+    public List<ListBorrow> listAllRequestUser(int id_account) {
+        return listBorrowRepository.listAllRequestUser(id_account);
+    }
+
+    public List<ListBorrow> listAllRequest() {
+        return listBorrowRepository.listAllRequest();
+    }
+
+    public String nameAsset(int id) {
+        return listBorrowRepository.nameAsset(id);
+    }
+
+    public List<ListBorrow> listAllRequestSubmit() {
+        return listBorrowRepository.listAllResponse();
+    }
+
+    public List<ListBorrow> listAllResponse() {
+        return listBorrowRepository.listAllResponse();
+    }
+
+    public boolean update(int idAccount, int idAsset) {
+        int listBorrow = listBorrowRepository.updateStatus(idAccount,idAsset);
+        if (listBorrow == 0) {
+            return false;
+        }
+        return true;
+    }
+
     public boolean create(ListBorrow listBorrow) {
         if (!accountRepository.existsById(listBorrow.getId().getIdAccount())) {
             MESS = "ACCOUNT NOT EXISTS";
@@ -27,7 +59,7 @@ public class FormService {
         }
         if (listBorrowRepository.existsById(listBorrow.getId())) {
             System.out.println(warehouseRepository.checkQuantity(listBorrow.getId().getIdAsset()).get(0));
-            if(warehouseRepository.checkQuantity(listBorrow.getId().getIdAsset()).get(0) < listBorrow.getQuantity()){
+            if (warehouseRepository.checkQuantity(listBorrow.getId().getIdAsset()).get(0) < listBorrow.getQuantity()) {
                 MESS = "NOT ENOUGH QUANTITY";
                 return false;
             }
@@ -39,8 +71,5 @@ public class FormService {
             return false;
         }
         return true;
-    }
-    public void listborrow(){
-        listBorrowRepository.listBorrow();
     }
 }
