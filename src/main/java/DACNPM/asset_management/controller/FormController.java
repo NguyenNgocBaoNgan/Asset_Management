@@ -1,5 +1,6 @@
 package DACNPM.asset_management.controller;
 
+import DACNPM.asset_management.model.Account;
 import DACNPM.asset_management.model.BorrowId;
 import DACNPM.asset_management.model.ListBorrow;
 import DACNPM.asset_management.service.FormService;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.util.Date;
 
@@ -20,7 +22,10 @@ public class FormController {
     FormService formService;
 
     @GetMapping("/form")
-    public String showForm(Model model) {
+    public String showForm(@SessionAttribute(name = "loggedInAccount", required = false) Account loggedInAccount, Model model, HttpSession session) {
+        if (loggedInAccount == null) {
+            return "redirect:/login";
+        }
         model.addAttribute("formData", new ListBorrow(new BorrowId()));
         return "ui-forms";
     }
