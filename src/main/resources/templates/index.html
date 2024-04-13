@@ -516,7 +516,7 @@
                       <h6 class="fw-semibold mb-1" th:text="${assetWarehouseMap.get(asset.idAsset).getStockQuantity()}"></h6>
                     </td>
                     <td class="border-bottom-0">
-                      <h6 class="fw-semibold mb-1" th:text="${assetWarehouseMap.get(asset.idAsset).getUnavailableQuantity()}"></h6>
+                      <h6 class="fw-semibold mb-1" name="unavailableQuantity"  th:text="${assetWarehouseMap.get(asset.idAsset).getUnavailableQuantity()}"></h6>
                     </td>
 
                     <td class="border-bottom-0">
@@ -533,8 +533,22 @@
 
                     <td class="border-bottom-0">
                       <form id="deleteForm" th:action="@{/deleteAsset/{id}(id=${asset.idAsset})}" method="post" onsubmit="return confirm('Are you sure you want to delete this asset?')">
-                        <button type="submit" class="btn btn-danger m-1" th:attr="${assetWarehouseMap.get(asset.idAsset).getUnavailableQuantity() > 0 ? 'disabled' : ''}">Delete</button>
+                        <button type="submit" class="btn btn-danger m-1" id="deleteButton">Delete</button>
                       </form>
+<!--                      <script>-->
+<!--                        // Đợi tài liệu được tải hoàn toàn trước khi thực hiện các thao tác JavaScript-->
+<!--                        document.addEventListener("DOMContentLoaded", function() {-->
+<!--                          // Lấy số lượng không khả dụng từ h6 và kiểm tra nếu nó không phù hợp-->
+<!--                          var unavailableQuantity = document.getElementById('unavailableQuantity').innerText.trim();-->
+<!--                          console.log("quantity: "+unavailableQuantity);-->
+<!--                          if (unavailableQuantity != 0) {-->
+<!--                            // Nếu không phù hợp, vô hiệu hóa nút Delete-->
+<!--                            document.getElementById('deleteButton').setAttribute('disabled', 'disabled');-->
+<!--                          }else{-->
+<!--                            document.getElementById('deleteButton').removeAttribute('disabled');-->
+<!--                          }-->
+<!--                        });-->
+<!--                      </script>-->
 
                     </td>
 
