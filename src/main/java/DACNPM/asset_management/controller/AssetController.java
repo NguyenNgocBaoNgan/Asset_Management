@@ -11,6 +11,7 @@ import DACNPM.asset_management.service.TypeService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -34,23 +35,25 @@ public class AssetController {
 
 
     @GetMapping("/home")
-    public String getAllAsset(@SessionAttribute(name = "loggedInAccount", required = false) Account loggedInAccount, Model model, HttpSession session) {
+    public String getAllAsset(@SessionAttribute(name = "loggedInAccount", required = false) Account loggedInAccount, Model model,@Param("keyword") String keyword, HttpSession session) {
         if (loggedInAccount == null) {
             return "redirect:/login";
         }
-        List<Asset> listAsset= assetService.getAllAssets();
+        List<Asset> listAsset= assetService.getAllAssets(keyword);
         List<Type> listType=typeService.getAllType();
         model.addAttribute("listAsset", listAsset);
         model.addAttribute("listType",listType);
         model.addAttribute("asset", new Asset());
         model.addAttribute("loggedInAccount", loggedInAccount);
+        model.addAttribute("keyword", keyword);
+
 
         return "index";
     }
     @ResponseBody
     @GetMapping("/listAsset")
-    public List<Asset> getAll(){
-        return assetService.getAllAssets();
+    public List<Asset> getAll(@Param("keyword") String keyword){
+        return assetService.getAllAssets(keyword);
     }
 
     @PostMapping("/addNewAsset")
