@@ -312,7 +312,7 @@
                                                     <select name="occupation"  id="assetType" class="formbold-form-select" onchange="displaySelectedValue()">
                                                         <option  disabled selected hidden th:object="${oldType}" th:text="*{typeName}" ></option>
                                                         <option th:each="type : ${listType}" th:value="${type.typeName}" th:text="${type.typeName}"></option>
-                                                        <input type="hidden" id="typeHidden" name="type" th:field="*{type}" />
+                                                        <input type="hidden" id="typeHidden" name="type"  th:field="*{type}" />
                                                     </select>
                                                 </div>
                                                 <script>
@@ -344,9 +344,39 @@
                                             <div class="col-40">
                                                 <label  class="formbold-form-label">status</label>
                                             </div>
+
                                             <div class="col-60">
-                                                <input type="text" name="number" th:field="*{status}" class="formbold-form-input"/>
+                                                <div id="oldTypeOptions" class="type-options" style="display: block">
+                                                    <select name="occupation"  id="assetStatus" class="formbold-form-select" onchange="displaySelectedValueStatus()">
+                                                        <option  disabled selected hidden th:object="${oldStatus}" th:text="*{valueStatus}" ></option>
+                                                        <option th:each="status : ${listStatus}" th:value="${status.valueStatus}" th:text="${status.valueStatus}"></option>
+                                                        <input type="hidden" id="typeHiddenStatus" name="type" th:field="*{status}" />
+                                                    </select>
+                                                </div>
+                                                <script>
+                                                    function displaySelectedValueStatus() {
+                                                        var select = document.getElementById("assetStatus");
+                                                        var selectedIndex = select.selectedIndex;
+                                                        var selectedOption = select.options[selectedIndex].text;
+                                                        var typeHidden = document.getElementById("typeHiddenStatus");
+
+                                                        switch(selectedOption) {
+                                                            case "mới mua":
+                                                                typeHiddenStatus.value = 0;
+                                                                break;
+                                                            case "đang được mượn":
+                                                                typeHiddenStatus.value = 1;
+                                                                break;
+                                                            case "cũ rồi":
+                                                                typeHiddenStatus.value = 2;
+                                                                break;
+                                                            default:
+                                                                typeHiddenStatus.value = ""; // Nếu không có lựa chọn nào phù hợp, có thể đặt lại giá trị là rỗng
+                                                        }
+                                                    }
+                                                </script>
                                             </div>
+
                                         </div>
 
                                         <div class="row formbold-input-group">
@@ -362,7 +392,7 @@
                                                 <label  class="formbold-form-label">Purchase Date</label>
                                             </div>
                                             <div class="col-60">
-                                                <input type="date" name="date-purcharse"  th:field="*{datePurchase}" class="formbold-form-input"/>
+                                                <input type="date" name="date-purcharse" th:field="*{datePurchase}" id="date-purcharse"  class="formbold-form-input"/>
                                             </div>
                                         </div>
                                         <div class="row formbold-input-group">

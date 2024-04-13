@@ -95,9 +95,9 @@
       box-sizing: border-box;
       resize: vertical;
     }
-     .type-options {
-       display: none;
-     }
+    .type-options {
+      display: none;
+    }
 
     .col-40 {
       float: left;
@@ -131,13 +131,13 @@
       document.getElementById("nenmodal-1").classList.toggle("active");
     }
 
-        function showOptions() {
-        var typeOptions = document.getElementById("typeOptions");
-        if (typeOptions.style.display === "none") {
+    function showOptions() {
+      var typeOptions = document.getElementById("typeOptions");
+      if (typeOptions.style.display === "none") {
         typeOptions.style.display = "block";
-    } else {
+      } else {
         typeOptions.style.display = "none";
-    }
+      }
     }
 
 
@@ -307,88 +307,88 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title fw-semibold mb-4">Forms</h5>
-                  <div class="card-body" style="margin-top: -20px;" >
-                    <form method="post" action="#" th:action="@{/addNewAsset}" th:object="${asset}">
-                      <div class="row formbold-input-group">
-                        <div class="col-40">
-                          <label class="formbold-form-label">Asset Name</label>
+                <div class="card-body" style="margin-top: -20px;">
+                  <form method="post" action="#" th:action="@{/addNewAsset}" th:object="${asset}">
+                    <div class="row formbold-input-group">
+                      <div class="col-40">
+                        <label class="formbold-form-label">Asset Name</label>
 
-                        </div>
-                        <div class="col-60">
-                          <input type="text"  id="assetName" th:field="*{assetName}" placeholder="Enter asset name" class="formbold-form-input"/>
-                        </div>
                       </div>
-                      <div class="row formbold-input-group">
-                        <div class="col-40">
-                          <label  class="formbold-form-label">Asset Category</label>
+                      <div class="col-60">
+                        <input type="text"  id="assetName" th:field="*{assetName}" placeholder="Enter asset name" class="formbold-form-input"/>
+                      </div>
+                    </div>
+                    <div class="row formbold-input-group">
+                      <div class="col-40">
+                        <label  class="formbold-form-label">Asset Category</label>
+                      </div>
+
+                      <div class="col-60">
+
+                        <div id="typeOptions" class="type-options" style="display: block">
+                          <select name="occupation" id="assetType" class="formbold-form-select" onchange="displaySelectedValue()">
+                            <option value="" disabled selected hidden>Select a category</option>
+                            <option th:each="type : ${listType}" th:value="${type.typeName}" th:text="${type.typeName}"></option>
+                          </select>
+                          <input type="hidden" id="typeHidden" name="type" th:field="*{type}" />
                         </div>
 
-                        <div class="col-60">
+                        <script>
+                          function displaySelectedValue() {
+                            var select = document.getElementById("assetType");
+                            var selectedIndex = select.selectedIndex;
+                            var selectedOption = select.options[selectedIndex].text;
+                            var typeHidden = document.getElementById("typeHidden");
 
-                          <div id="typeOptions" class="type-options" style="display: block">
-                            <select name="occupation" id="assetType" class="formbold-form-select" onchange="displaySelectedValue()">
-                              <option value="" disabled selected hidden>Select a category</option>
-                              <option th:each="type : ${listType}" th:value="${type.typeName}" th:text="${type.typeName}"></option>
-                            </select>
-                            <input type="hidden" id="typeHidden" name="type" th:field="*{type}" />
-                          </div>
-
-                          <script>
-                            function displaySelectedValue() {
-                              var select = document.getElementById("assetType");
-                              var selectedIndex = select.selectedIndex;
-                              var selectedOption = select.options[selectedIndex].text;
-                              var typeHidden = document.getElementById("typeHidden");
-
-                              switch(selectedOption) {
-                                case "Ban":
-                                  typeHidden.value = 1;
-                                  break;
-                                case "Ghe":
-                                  typeHidden.value = 2;
-                                  break;
-                                case "May Tinh":
-                                  typeHidden.value = 3;
-                                  break;
-                                default:
-                                  typeHidden.value = ""; // Nếu không có lựa chọn nào phù hợp, có thể đặt lại giá trị là rỗng
-                              }
+                            switch(selectedOption) {
+                              case "Ban":
+                                typeHidden.value = 1;
+                                break;
+                              case "Ghe":
+                                typeHidden.value = 2;
+                                break;
+                              case "May Tinh":
+                                typeHidden.value = 3;
+                                break;
+                              default:
+                                typeHidden.value = ""; // Nếu không có lựa chọn nào phù hợp, có thể đặt lại giá trị là rỗng
                             }
-                          </script>
-                        </div>
+                          }
+                        </script>
                       </div>
-                      <div class="row formbold-input-group">
-                        <div class="col-40">
-                          <label for="number" class="formbold-form-label">Purchase Price</label>
-                        </div>
-                        <div class="col-60">
-                          <input type="text" name="number" id="number"th:field="*{purchasePrice}" placeholder="Enter the purchrse price of asset" class="formbold-form-input"/>
-                        </div>
+                    </div>
+                    <div class="row formbold-input-group">
+                      <div class="col-40">
+                        <label for="number" class="formbold-form-label">Purchase Price</label>
                       </div>
-                      <div class="row formbold-input-group">
-                        <div class="col-40">
-                          <label for="date-purcharse"  class="formbold-form-label">Purchase Date</label>
-                        </div>
-                        <div class="col-60">
-                          <input type="date" name="date-purcharse" th:field="*{datePurchase}" id="date-purcharse"  class="formbold-form-input"/>
-                        </div>
+                      <div class="col-60">
+                        <input type="text" name="number" id="number"th:field="*{purchasePrice}" placeholder="Enter the purchrse price of asset" class="formbold-form-input"/>
                       </div>
-                      <div class="row formbold-input-group">
-                        <div class="col-40">
-                          <label for="description" class="formbold-form-label">Description</label>
-                        </div>
-                        <div class="col-60">
-                          <textarea rows="6" name="description" id="description" th:field="*{description}" placeholder="Type the description of asset" class="formbold-form-input"></textarea>
-                        </div>
+                    </div>
+                    <div class="row formbold-input-group">
+                      <div class="col-40">
+                        <label for="date-purcharse"  class="formbold-form-label">Purchase Date</label>
                       </div>
-                      <div class="row btn-form">
-                        <button  type="submit" class="col-2 btn btn-success m-1">Success</button>
-                        <button  type="cancel" class="col-2 btn btn-default m-1">Cancel</button>
+                      <div class="col-60">
+                        <input type="date" name="date-purcharse" th:field="*{datePurchase}" id="date-purcharse"  class="formbold-form-input"/>
                       </div>
+                    </div>
+                    <div class="row formbold-input-group">
+                      <div class="col-40">
+                        <label for="description" class="formbold-form-label">Description</label>
+                      </div>
+                      <div class="col-60">
+                        <textarea rows="6" name="description" id="description" th:field="*{description}" placeholder="Type the description of asset" class="formbold-form-input"></textarea>
+                      </div>
+                    </div>
+                    <div class="row btn-form">
+                      <button  type="submit" class="col-2 btn btn-success m-1">Success</button>
+                      <button  type="cancel" class="col-2 btn btn-default m-1">Cancel</button>
+                    </div>
 
-                    </form>
+                  </form>
 
-                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -396,7 +396,7 @@
         </div>
         <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
           <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-            <button  th:if="${loggedInAccount.role == 0}" type="button" class="btn btn-info m-1" onclick="momodal()">Add</button>
+            <button type="button" class="btn btn-info m-1" onclick="momodal()">Add</button>
 
 
             <li class="nav-item dropdown">
@@ -429,30 +429,9 @@
     <!--  Header End -->
     <div class="container-fluid">
       <!--  Row 1 -->
+
+
       <div class="row">
-        <div class="col-lg-8 d-flex align-items-strech">
-          <div class="card w-100">
-            <div class="card-body">
-              <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-                <div class="mb-3 mb-sm-0">
-                  <h5 class="card-title fw-semibold">Sales Overview</h5>
-                </div>
-                <div>
-                  <select class="form-select">
-                    <option value="1">March 2023</option>
-                    <option value="2">April 2023</option>
-                    <option value="3">May 2023</option>
-                    <option value="4">June 2023</option>
-                  </select>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-        <div class="row">
         <div class="col-lg-12 d-flex align-items-stretch">
           <div class="card w-100">
             <div class="card-body p-4">
@@ -470,9 +449,16 @@
                     <th class="border-bottom-0">
                       <h6 class="fw-semibold mb-0">Asset Category</h6>
                     </th>
+
+                    <th class="border-bottom-0">
+                      <h6 class="fw-semibold mb-0">Status</h6>
+                    </th>
                     <th class="border-bottom-0">
                       <h6 class="fw-semibold mb-0">Price</h6>
                     </th>
+
+
+
                     <th class="border-bottom-0">
                       <h6 class="fw-semibold mb-0">Date</h6>
                     </th>
@@ -488,14 +474,23 @@
                       <h6 class="fw-semibold mb-1" th:text="${asset.assetName}"></h6>
                     </td>
                     <td class="border-bottom-0">
-                        <div th:switch="${asset.type}">
-                            <h6 class="fw-semibold mb-1" th:case="1">Ban</h6>
-                            <h6 class="fw-semibold mb-1" th:case="2">Ghe</h6>
-                            <h6 class="fw-semibold mb-1" th:case="3">May tinh</h6>
-                        </div>
+                      <div th:switch="${asset.type}">
+                        <h6 class="fw-semibold mb-1" th:case="1">Ban</h6>
+                        <h6 class="fw-semibold mb-1" th:case="2">Ghe</h6>
+                        <h6 class="fw-semibold mb-1" th:case="3">May tinh</h6>
+                      </div>
                     </td>
+
                     <td class="border-bottom-0">
-                      <p class="mb-0 fw-normal" th:text="${asset.purchasePrice}"></p>
+                      <div th:switch="${asset.status}">
+                        <h6 class="fw-semibold mb-1" th:case="0">mới mua</h6>
+                        <h6 class="fw-semibold mb-1" th:case="1">đang được mượn</h6>
+                        <h6 class="fw-semibold mb-1" th:case="2">cũ rồi</h6>
+                      </div>
+                    </td>
+
+                    <td class="border-bottom-0">
+                      <h6 class="fw-semibold mb-1" th:text="${asset.purchasePrice}"></h6>
                     </td>
                     <td class="border-bottom-0">
                       <div class="d-flex align-items-center gap-2">
@@ -505,16 +500,20 @@
                     <td class="border-bottom-0">
                       <h6 class="fw-semibold mb-0 fs-4" th:text="${asset.description}"></h6>
                     </td>
-                    <td class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
-                      <form th:action="@{/deleteAsset/{id}(id=${asset.idAsset})}" method="post" onsubmit="return confirm('Are you sure you want to delete this asset?')">
+
+                    <td class="border-bottom-0">
+                      <form id="deleteForm" th:action="@{/deleteAsset/{id}(id=${asset.idAsset})}" method="post" onsubmit="return confirm('Are you sure you want to delete this asset?')">
                         <button type="submit" class="btn btn-danger m-1">Delete</button>
                       </form>
+
                     </td>
-                    <td class="border-bottom-0"  th:if="${loggedInAccount.role == 0}">
+
+                    <td class="border-bottom-0">
                       <button type="submit" class="btn btn-warning m-1"  >
                         <a th:href="@{/updateAsset/{id}(id=${asset.idAsset})}" style="color:white">Update</a>
                       </button>
                     </td>
+
 
                   </tr>
                   <tr>

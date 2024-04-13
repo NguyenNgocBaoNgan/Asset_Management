@@ -60,7 +60,12 @@ public class AssetController {
     }
 
     @GetMapping("/updateAsset/{id}")
-    public String getUpdateAsset(@PathVariable("id") int id, Model model) {
+    public String getUpdateAsset(@SessionAttribute(name = "loggedInAccount", required = false) Account loggedInAccount, @PathVariable("id") int id, Model model) {
+
+        if (loggedInAccount == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("loggedInAccount", loggedInAccount);
         Optional<Asset> optionalAsset  = assetService.findAssetById(id);
         Type oldType = typeService.getTypeByAssetId(id);
         List<Type> listType=typeService.getAllType();
@@ -77,8 +82,8 @@ public class AssetController {
             model.addAttribute("errorMessage", "Not found asset with ID: " + id);
         }
 
-//        model.addAttribute("listStatus",listStatus);
-//        model.addAttribute("oldStatus",oldStatus);
+        model.addAttribute("listStatus",listStatus);
+        model.addAttribute("oldStatus",oldStatus);
         return "edit-asset";
     }
 
@@ -88,9 +93,19 @@ public class AssetController {
         return "redirect:/home";
     }
 
+
     @PostMapping("deleteAsset/{id}")
-    public String deleteAsset(@PathVariable("id")String id){
-        assetService.deleteAsset(Integer.parseInt(id));
+    public String deleteAsset(@PathVariable("id")String id) throws Exception {
+        Optional<Asset> optionalAsset  = assetService.findAssetById(Integer.parseInt(id));
+        if (optionalAsset.isPresent()) {
+            Asset asset = optionalAsset.get();
+            if(asset.getStatus()!=1){
+                assetService.deleteAsset(Integer.parseInt(id));
+            }else{
+
+            }
+        }
+
         return "redirect:/home";
     }
 
