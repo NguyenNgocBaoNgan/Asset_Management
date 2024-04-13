@@ -18,6 +18,9 @@ public class RegisterController {
         if (loggedInAccount == null) {
             return "redirect:/login";
         }
+        if(loggedInAccount.getRole()==1){
+            return "redirect:/login";
+        }
         model.addAttribute("account", new Account());
         return "authentication-register";
     }

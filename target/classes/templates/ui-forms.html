@@ -201,30 +201,30 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Mượn tài sản</h5>
+                        <h5 class="card-title fw-semibold mb-4">Request</h5>
                         <div class="card">
                             <div class="card-body">
                                 <p th:if="${session.error}" class="alert alert-primary" role="alert" th:text="${session.error}">
                                 </p>
                                 <form action="/form/request" method="post" th:object="${formData}">
                                     <div class="mb-3">
-                                        <label class="form-label">Mã nhân viên</label>
+                                        <label class="form-label">ID Account</label>
                                         <input type="text" th:field="*{id.idAccount}"
                                                name="idAccount" id="disabledTextInput" class="form-control"
                                                placeholder="Mã nhân viên" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="disabledSelect" class="form-label">Tài sản</label>
+                                        <label for="disabledSelect" class="form-label">Asset Name</label>
                                         <select id="disabledSelect" th:field="*{id.idAsset}"
                                                 name="idAsset" class="form-select">
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Số lượng</label>
+                                        <label class="form-label">Quantity</label>
                                         <input id="quantityInput" type="number" th:field="*{quantity}" name="quantity" class="form-control"
                                                placeholder="">
                                     </div>
-                                    <button type="submit" id="submit" class="btn btn-primary">Gửi</button>
+                                    <button type="submit" id="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
                         </div>

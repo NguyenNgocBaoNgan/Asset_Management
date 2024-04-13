@@ -18,6 +18,10 @@ public class AssetService {
         }
         return assetRepository.findAll();
     }
+
+    public List<Asset> getAllAssets(){
+        return assetRepository.findAll();
+    }
     public Asset addNewAsset(Asset asset){
         return assetRepository.save(asset);
     }
