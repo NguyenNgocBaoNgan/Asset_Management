@@ -12,7 +12,10 @@ import java.util.Optional;
 public class AssetService {
     @Autowired
     AssetRepository assetRepository;
-    public List<Asset> getAllAssets(){
+    public List<Asset> getAllAssets(String keyword){
+        if (keyword != null) {
+            return assetRepository.search(keyword);
+        }
         return assetRepository.findAll();
     }
     public Asset addNewAsset(Asset asset){
@@ -47,6 +50,14 @@ public class AssetService {
     }
 
 
+
+
+    public List<Asset> listSearch(String keyword) {
+        if (keyword != null) {
+            return assetRepository.search(keyword);
+        }
+        return assetRepository.findAll();
+    }
 
 
 }
