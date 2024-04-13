@@ -361,17 +361,15 @@
                                                         var typeHidden = document.getElementById("typeHiddenStatus");
 
                                                         switch(selectedOption) {
-                                                            case "mới mua":
+                                                            case "Available":
                                                                 typeHiddenStatus.value = 0;
                                                                 break;
-                                                            case "đang được mượn":
+                                                            case "Unavailable":
                                                                 typeHiddenStatus.value = 1;
                                                                 break;
-                                                            case "cũ rồi":
-                                                                typeHiddenStatus.value = 2;
-                                                                break;
+
                                                             default:
-                                                                typeHiddenStatus.value = ""; // Nếu không có lựa chọn nào phù hợp, có thể đặt lại giá trị là rỗng
+                                                                typeHiddenStatus.value = 0; // Nếu không có lựa chọn nào phù hợp, có thể đặt lại giá trị là rỗng
                                                         }
                                                     }
                                                 </script>

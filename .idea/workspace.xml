@@ -5,21 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="294a451f-359e-4727-b73d-f17553fc1779" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/controller/AssetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/controller/AssetController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/controller/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/model/Asset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/model/Asset.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/service/AssetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/service/AssetService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/authentication-login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/authentication-login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/edit-asset.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/edit-asset.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/ui-forms.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/ui-forms.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/view-borrow.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/view-borrow.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/authentication-login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/authentication-login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/AssetController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/AssetController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/RegisterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/RegisterController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/Asset.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/model/Asset.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/service/AssetService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/service/AssetService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/edit-asset.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/edit-asset.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/ui-forms.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/ui-forms.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/view-borrow.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/view-borrow.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

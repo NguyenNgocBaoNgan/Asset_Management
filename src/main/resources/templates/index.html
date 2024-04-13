@@ -520,9 +520,8 @@
 
                     <td class="border-bottom-0">
                       <div th:switch="${asset.status}">
-                        <h6 class="fw-semibold mb-1" th:case="0">mới mua</h6>
-                        <h6 class="fw-semibold mb-1" th:case="1">đang được mượn</h6>
-                        <h6 class="fw-semibold mb-1" th:case="2">cũ rồi</h6>
+                        <h6 class="fw-semibold mb-1" th:case="0">Available</h6>
+                        <h6 class="fw-semibold mb-1" th:case="1">Unavailable</h6>
                       </div>
                     </td>
 

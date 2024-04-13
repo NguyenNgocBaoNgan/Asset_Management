@@ -346,7 +346,7 @@
                                             </div>
 
                                             <div class="col-60">
-                                                <div id="oldTypeOptions" class="type-options" style="display: block">
+                                                <div id="oldTypeOptions2" class="type-options" style="display: block">
                                                     <select name="occupation"  id="assetStatus" class="formbold-form-select" onchange="displaySelectedValueStatus()">
                                                         <option  disabled selected hidden th:object="${oldStatus}" th:text="*{valueStatus}" ></option>
                                                         <option th:each="status : ${listStatus}" th:value="${status.valueStatus}" th:text="${status.valueStatus}"></option>
@@ -361,22 +361,38 @@
                                                         var typeHidden = document.getElementById("typeHiddenStatus");
 
                                                         switch(selectedOption) {
-                                                            case "mới mua":
+                                                            case "Available":
                                                                 typeHiddenStatus.value = 0;
                                                                 break;
-                                                            case "đang được mượn":
+                                                            case "Unavailable":
                                                                 typeHiddenStatus.value = 1;
                                                                 break;
-                                                            case "cũ rồi":
-                                                                typeHiddenStatus.value = 2;
-                                                                break;
+
                                                             default:
-                                                                typeHiddenStatus.value = ""; // Nếu không có lựa chọn nào phù hợp, có thể đặt lại giá trị là rỗng
+                                                                typeHiddenStatus.value = 0; // Nếu không có lựa chọn nào phù hợp, có thể đặt lại giá trị là rỗng
                                                         }
                                                     }
                                                 </script>
                                             </div>
 
+                                        </div>
+
+                                        <div class="row formbold-input-group">
+                                            <div class="col-40">
+                                                <label class="formbold-form-label">Quantity in stock</label>
+                                            </div>
+                                            <div class="col-60">
+                                                <input type="text" name="newStockQuantity"th:value="${warehouse.getStockQuantity()}"  class="formbold-form-input"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row formbold-input-group">
+                                            <div class="col-40">
+                                                <label class="formbold-form-label">Quantity borrowed</label>
+                                            </div>
+                                            <div class="col-60">
+                                                <input type="text" name="newUnavailable"th:value="${warehouse.getUnavailableQuantity()}"  class="formbold-form-input"/>
+                                            </div>
                                         </div>
 
                                         <div class="row formbold-input-group">
