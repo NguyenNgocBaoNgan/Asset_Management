@@ -206,7 +206,7 @@
             </a>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
+            <a class="sidebar-link" href="/form" aria-expanded="false">
                 <span>
                   <i class="ti ti-file-description"></i>
                 </span>
@@ -312,6 +312,16 @@
                   <form method="post" action="#" th:action="@{/addNewAsset}" th:object="${asset}">
                     <div class="row formbold-input-group">
                       <div class="col-40">
+                        <label class="formbold-form-label">Asset ID</label>
+
+                      </div>
+                      <div class="col-60">
+                        <input type="text"  id="assetID" required th:field="*{idAsset}" placeholder="Enter asset ID" class="formbold-form-input"/>
+                      </div>
+                    </div>
+
+                    <div class="row formbold-input-group">
+                      <div class="col-40">
                         <label class="formbold-form-label">Asset Name</label>
 
                       </div>
@@ -358,6 +368,16 @@
                         </script>
                       </div>
                     </div>
+
+                    <div class="row formbold-input-group">
+                      <div class="col-40">
+                        <label for="number"  class="formbold-form-label">Quantity</label>
+                      </div>
+                      <div class="col-60">
+                        <input type="text" name="quantity" required id="quantity" placeholder="Enter the quantity  of asset" class="formbold-form-input"/>
+                      </div>
+                    </div>
+
                     <div class="row formbold-input-group">
                       <div class="col-40">
                         <label for="number" class="formbold-form-label">Purchase Price</label>
@@ -384,7 +404,7 @@
                     </div>
                     <div class="row btn-form">
                       <button  type="submit" class="col-2 btn btn-success m-1">Success</button>
-                      <button  type="cancel" class="col-2 btn btn-default m-1">Cancel</button>
+<!--                      <button  type="cancel" class="col-2 btn btn-default m-1">Cancel</button>-->
                     </div>
 
                   </form>
@@ -465,6 +485,12 @@
                       <h6 class="fw-semibold mb-0">Status</h6>
                     </th>
                     <th class="border-bottom-0">
+                      <h6 class="fw-semibold mb-0">Quantity in stock</h6>
+                    </th>
+                    <th class="border-bottom-0">
+                      <h6 class="fw-semibold mb-0">Quantity borrowed</h6>
+                    </th>
+                    <th class="border-bottom-0">
                       <h6 class="fw-semibold mb-0">Price</h6>
                     </th>
 
@@ -501,6 +527,13 @@
                     </td>
 
                     <td class="border-bottom-0">
+                      <h6 class="fw-semibold mb-1" th:text="${assetWarehouseMap.get(asset.idAsset).getStockQuantity()}"></h6>
+                    </td>
+                    <td class="border-bottom-0">
+                      <h6 class="fw-semibold mb-1" name="unavailableQuantity"  th:text="${assetWarehouseMap.get(asset.idAsset).getUnavailableQuantity()}"></h6>
+                    </td>
+
+                    <td class="border-bottom-0">
                       <h6 class="fw-semibold mb-1" th:text="${asset.purchasePrice}"></h6>
                     </td>
                     <td class="border-bottom-0">
@@ -532,88 +565,6 @@
 
                   </tbody>
                 </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 col-xl-3">
-          <div class="card overflow-hidden rounded-2">
-            <div class="position-relative">
-              <a href="javascript:void(0)"><img src="../assets/images/products/s4.jpg" class="card-img-top rounded-0" alt="..."></a>
-              <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
-            <div class="card-body pt-3 p-4">
-              <h6 class="fw-semibold fs-4">Boat Headphone</h6>
-              <div class="d-flex align-items-center justify-content-between">
-                <h6 class="fw-semibold fs-4 mb-0">$50 <span class="ms-2 fw-normal text-muted fs-3"><del>$65</del></span></h6>
-                <ul class="list-unstyled d-flex align-items-center mb-0">
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-          <div class="card overflow-hidden rounded-2">
-            <div class="position-relative">
-              <a href="javascript:void(0)"><img src="../assets/images/products/s5.jpg" class="card-img-top rounded-0" alt="..."></a>
-              <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
-            <div class="card-body pt-3 p-4">
-              <h6 class="fw-semibold fs-4">MacBook Air Pro</h6>
-              <div class="d-flex align-items-center justify-content-between">
-                <h6 class="fw-semibold fs-4 mb-0">$650 <span class="ms-2 fw-normal text-muted fs-3"><del>$900</del></span></h6>
-                <ul class="list-unstyled d-flex align-items-center mb-0">
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-          <div class="card overflow-hidden rounded-2">
-            <div class="position-relative">
-              <a href="javascript:void(0)"><img src="../assets/images/products/s7.jpg" class="card-img-top rounded-0" alt="..."></a>
-              <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
-            <div class="card-body pt-3 p-4">
-              <h6 class="fw-semibold fs-4">Red Valvet Dress</h6>
-              <div class="d-flex align-items-center justify-content-between">
-                <h6 class="fw-semibold fs-4 mb-0">$150 <span class="ms-2 fw-normal text-muted fs-3"><del>$200</del></span></h6>
-                <ul class="list-unstyled d-flex align-items-center mb-0">
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-          <div class="card overflow-hidden rounded-2">
-            <div class="position-relative">
-              <a href="javascript:void(0)"><img src="../assets/images/products/s11.jpg" class="card-img-top rounded-0" alt="..."></a>
-              <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
-            <div class="card-body pt-3 p-4">
-              <h6 class="fw-semibold fs-4">Cute Soft Teddybear</h6>
-              <div class="d-flex align-items-center justify-content-between">
-                <h6 class="fw-semibold fs-4 mb-0">$285 <span class="ms-2 fw-normal text-muted fs-3"><del>$345</del></span></h6>
-                <ul class="list-unstyled d-flex align-items-center mb-0">
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                </ul>
               </div>
             </div>
           </div>

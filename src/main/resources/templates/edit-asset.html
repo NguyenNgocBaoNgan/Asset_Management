@@ -346,7 +346,7 @@
                                             </div>
 
                                             <div class="col-60">
-                                                <div id="oldTypeOptions" class="type-options" style="display: block">
+                                                <div id="oldTypeOptions2" class="type-options" style="display: block">
                                                     <select name="occupation"  id="assetStatus" class="formbold-form-select" onchange="displaySelectedValueStatus()">
                                                         <option  disabled selected hidden th:object="${oldStatus}" th:text="*{valueStatus}" ></option>
                                                         <option th:each="status : ${listStatus}" th:value="${status.valueStatus}" th:text="${status.valueStatus}"></option>
@@ -377,6 +377,24 @@
                                                 </script>
                                             </div>
 
+                                        </div>
+
+                                        <div class="row formbold-input-group">
+                                            <div class="col-40">
+                                                <label class="formbold-form-label">Quantity in stock</label>
+                                            </div>
+                                            <div class="col-60">
+                                                <input type="text" name="newStockQuantity"th:value="${warehouse.getStockQuantity()}"  class="formbold-form-input"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row formbold-input-group">
+                                            <div class="col-40">
+                                                <label class="formbold-form-label">Quantity borrowed</label>
+                                            </div>
+                                            <div class="col-60">
+                                                <input type="text" name="newUnavailable"th:value="${warehouse.getUnavailableQuantity()}"  class="formbold-form-input"/>
+                                            </div>
                                         </div>
 
                                         <div class="row formbold-input-group">
