@@ -23,6 +23,7 @@ public class SignInController {
             return "redirect:/home";
         }
         model.addAttribute("account", new Account());
+
         return "authentication-login";
     }
 

@@ -25,6 +25,8 @@ public class FormController {
             return "redirect:/login";
         }
         model.addAttribute("formData", new ListBorrow(new BorrowId()));
+        model.addAttribute("loggedInAccount", loggedInAccount);
+
         return "ui-forms";
     }
 

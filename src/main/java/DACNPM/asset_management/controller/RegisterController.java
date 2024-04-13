@@ -22,6 +22,8 @@ public class RegisterController {
             return "redirect:/login";
         }
         model.addAttribute("account", new Account());
+        model.addAttribute("loggedInAccount", loggedInAccount);
+
         return "authentication-register";
     }
 
