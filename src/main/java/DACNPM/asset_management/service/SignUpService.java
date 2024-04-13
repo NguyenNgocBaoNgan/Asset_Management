@@ -86,6 +86,7 @@ public class SignUpService {
             return date.equals(parsedDate);
         } catch (Exception e) {
             // Nếu có bất kỳ ngoại lệ nào xảy ra, tức là ngày tháng không đúng định dạng
+            System.out.println("aaaaaaaaaaa");
             return false;
         }
     }

@@ -29,9 +29,9 @@ public class CreateAccountController {
             if (da.getRole() != 1 && da.getRole() != 0) {
                 session.setAttribute("error", "Nhập role sai, chỉ có thể nhập 0 (manager) hoặc 1 (employee).");
                 return "redirect:/register";
-            } if (!signUpService.isValidDateFormat(da.getDayOfBirth())) {
-                session.setAttribute("error", "Sai định dạng ngày sinh.");
-                return "redirect:/register";
+//            } if (!signUpService.isValidDateFormat(da.getDayOfBirth())) {
+//                session.setAttribute("error", "Sai định dạng ngày sinh.");
+//                return "redirect:/register";
             } else {
                 session.removeAttribute("error");
                 signUpService.register(da, acc);
