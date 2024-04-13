@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface AccountRepository extends JpaRepository<Account, Integer> {
-    @Query(value = "CALL checkLogin(:id_account, :password);", nativeQuery = true)
+    @Query(value = "CALL checkLogin(?, ?);", nativeQuery = true)
     Account checkLogin(@Param("id_account") int id_account, @Param("password") String password);
 }

@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -27,7 +28,7 @@ public class DetailAccount {
 
     @Column(name="last_name")
     private String lastName;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="day_of_birth")
     private Date dayOfBirth;
 
