@@ -131,6 +131,10 @@
       document.getElementById("nenmodal-1").classList.toggle("active");
     }
 
+    function redirectToHome() {
+      console.log("abc")
+      window.location.href = "/home"; // Adjust the URL if necessary
+    }
     function showOptions() {
       var typeOptions = document.getElementById("typeOptions");
       if (typeOptions.style.display === "none") {
@@ -365,7 +369,7 @@
                     </div>
                     <div class="row btn-form">
                       <button  type="submit" class="col-2 btn btn-success m-1">Success</button>
-                      <button  type="cancel" class="col-2 btn btn-default m-1">Cancel</button>
+                      <button  type="button" class="col-2 btn btn-default m-1" onclick="redirectToHome()">Cancel</button>
                     </div>
 
                   </form>
