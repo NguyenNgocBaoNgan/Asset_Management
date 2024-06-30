@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="294a451f-359e-4727-b73d-f17553fc1779" name="Changes" comment="">
+    <list default="true" id="294a451f-359e-4727-b73d-f17553fc1779" name="Changes" comment="fix bug">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/controller/CreateAccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/controller/CreateAccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/service/SignUpService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/service/SignUpService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/authentication-register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/authentication-register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/ui-card.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/ui-card.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/ui-forms.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/ui-forms.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/view-borrow.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/view-borrow.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/RegisterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/RegisterController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
     </list>
@@ -43,6 +40,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Asset_management.wasFacetEverAdded": "true",
+    "Git.Branch.Popup.ShowAllRemotes": "true",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -122,9 +120,21 @@
       <workItem from="1712981540134" duration="1934000" />
       <workItem from="1712984567357" duration="2550000" />
     </task>
+    <task id="LOCAL-00001" summary="fix bug">
+      <created>1719767815745</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1719767815746</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug" />
   </component>
 </project>
