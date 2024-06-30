@@ -1,17 +1,23 @@
 package DACNPM.asset_management.service;
-
 import DACNPM.asset_management.model.Account;
 import DACNPM.asset_management.model.DetailAccount;
 import DACNPM.asset_management.repository.AccountRepository;
 import DACNPM.asset_management.repository.DetailAccountRepository;
+import jakarta.annotation.Resource;
+import DACNPM.asset_management.model.Asset;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.stereotype.Service;
+import DACNPM.asset_management.repository.DetailAccountRepository;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import java.security.SecureRandom;
+import java.util.Random;
 
 @Service
 public class SignUpService {
@@ -19,7 +25,6 @@ public class SignUpService {
     private DetailAccountRepository detailAccountRepository;
     @Autowired
     private AccountRepository accountRepository;
-
     private static final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
     private static final String CHAR_UPPER = CHAR_LOWER.toUpperCase();
     private static final String NUMBER = "0123456789";
@@ -30,15 +35,14 @@ public class SignUpService {
     private static SecureRandom random = new SecureRandom();
     private static final String DATE_PATTERN = "^\\d{4}/\\d{2}/\\d{2}$";
 
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public void register(DetailAccount da, Account acc) {
         int userId = generateUserId();
         da.setIdAccount(userId);
         acc.setId_account(userId);
         String userPass = generateRandomPassword(8);
-        String encodedPassword = passwordEncoder.encode(userPass);
-        acc.setPassword(encodedPassword);
+//        da.setPassword(userPass);
+        acc.setPassword(userPass);
         acc.setRole(da.getRole());
 
         accountRepository.save(acc);
@@ -51,8 +55,7 @@ public class SignUpService {
         int max = 999999; // Giá trị lớn nhất của id, 6 chữ số
         return random.nextInt(max - min + 1) + min;
     }
-
-    private String generateRandomPassword(int length) {
+    private String generateRandomPassword(int length){
         if (length < 4) {
             throw new IllegalArgumentException("Password length must be at least 4 characters");
         }
@@ -71,7 +74,6 @@ public class SignUpService {
 
         return password.toString();
     }
-
     public boolean isValidDateFormat(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         sdf.setLenient(false); // Đặt giá trị lenient thành false để kiểm tra chặt chẽ định dạng ngày tháng
@@ -84,8 +86,10 @@ public class SignUpService {
             return date.equals(parsedDate);
         } catch (Exception e) {
             // Nếu có bất kỳ ngoại lệ nào xảy ra, tức là ngày tháng không đúng định dạng
-            System.out.println("Date format is invalid");
+            System.out.println("aaaaaaaaaaa");
             return false;
         }
     }
+
 }
+
