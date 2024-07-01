@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="294a451f-359e-4727-b73d-f17553fc1779" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/controller/CreateAccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/controller/CreateAccountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/service/SignUpService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/service/SignUpService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/authentication-register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/authentication-register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/ui-card.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/ui-card.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/ui-forms.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/ui-forms.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/view-borrow.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/view-borrow.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/RegisterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/RegisterController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/ui-forms.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/ui-forms.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/view-borrow.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/view-borrow.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/webSecurity/PasswordEncoderConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/webSecurity/UserDetailServiceImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/webSecurity/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/controller/SignInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/controller/SignInController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,28 +35,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Asset_management.wasFacetEverAdded&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Asset_management&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;16ae747461ada035d77384a1a4dfd11b&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Asset_management.wasFacetEverAdded": "true",
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Asset_management/src/main/java/webSecurity",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "spring.configuration.checksum": "16ae747461ada035d77384a1a4dfd11b",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Asset_management\src\main\resources\templates" />
@@ -123,9 +118,21 @@
       <workItem from="1712981540134" duration="1934000" />
       <workItem from="1712984567357" duration="2550000" />
     </task>
+    <task id="LOCAL-00001" summary="fix bug">
+      <created>1719767815745</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1719767815746</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug" />
   </component>
 </project>
