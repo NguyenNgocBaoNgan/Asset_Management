@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="294a451f-359e-4727-b73d-f17553fc1779" name="Changes" comment="fix bug">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="294a451f-359e-4727-b73d-f17553fc1779" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/webSecurity/PasswordEncoderConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/webSecurity/UserDetailServiceImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/webSecurity/WebSecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/service/SignUpService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/service/SignUpService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/RegisterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DACNPM/asset_management/controller/RegisterController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/controller/SignInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DACNPM/asset_management/controller/SignInController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +46,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Asset_management",
+    "last_opened_file_path": "D:/Asset_management/src/main/java/webSecurity",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
