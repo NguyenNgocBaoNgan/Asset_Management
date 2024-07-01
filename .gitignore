@@ -1,9 +1,4 @@
 HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
 ### STS ###
 .apt_generated
 .classpath
@@ -19,6 +14,7 @@ target/
 *.iml
 *.ipr
 target/
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -26,8 +22,29 @@ target/
 /nbdist/
 /.nb-gradle/
 build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
+
+### macOS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+### Eclipse ###
+.metadata
+bin/
+tmp/
+
+### Node ###
+node_modules/
+npm-debug.log
+yarn-error.log
+
+
+### python ###
+__pycache__/
+*.py[cod]
+
+### aws ###
+azure/
