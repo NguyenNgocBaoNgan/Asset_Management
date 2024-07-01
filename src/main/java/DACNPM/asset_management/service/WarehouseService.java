@@ -1,6 +1,5 @@
 package DACNPM.asset_management.service;
 
-import DACNPM.asset_management.model.Asset;
 import DACNPM.asset_management.model.Warehouse;
 import DACNPM.asset_management.repository.WarehouseRepository;
 import jakarta.annotation.Resource;
