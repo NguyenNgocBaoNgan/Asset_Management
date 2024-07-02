@@ -27,8 +27,8 @@ public class WebSecurityConfig {
                         .usernameParameter("email")    // username
                         .passwordParameter("password")) // password
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")); // logout success
+                        .logoutUrl("/dang-xuat"));
+//                        .logoutSuccessUrl("/")); // logout success
         return http.build();
     }
     // xác thực người dùng
