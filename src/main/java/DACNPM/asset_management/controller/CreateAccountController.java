@@ -6,6 +6,7 @@ import DACNPM.asset_management.model.DetailAccount;
 import DACNPM.asset_management.repository.DetailAccountRepository;
 import DACNPM.asset_management.service.AssetService;
 import DACNPM.asset_management.service.SignUpService;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,6 +40,8 @@ public class CreateAccountController {
         } catch (RuntimeException e) {
             session.setAttribute("error", "Vui lòng điền đầy đủ thông tin.");
             return "redirect:/register";
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
         }
         return "redirect:/register";
     }

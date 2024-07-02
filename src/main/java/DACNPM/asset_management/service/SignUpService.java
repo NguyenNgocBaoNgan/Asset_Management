@@ -1,31 +1,35 @@
 package DACNPM.asset_management.service;
+
 import DACNPM.asset_management.model.Account;
 import DACNPM.asset_management.model.DetailAccount;
 import DACNPM.asset_management.repository.AccountRepository;
 import DACNPM.asset_management.repository.DetailAccountRepository;
-import jakarta.annotation.Resource;
-import DACNPM.asset_management.model.Asset;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jdbc.repository.query.Query;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import DACNPM.asset_management.repository.DetailAccountRepository;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class SignUpService {
+
     @Autowired
     private DetailAccountRepository detailAccountRepository;
+
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
     private static final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
     private static final String CHAR_UPPER = CHAR_LOWER.toUpperCase();
     private static final String NUMBER = "0123456789";
@@ -38,12 +42,16 @@ public class SignUpService {
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-
-    public void register(DetailAccount da, Account acc) {
+    public void register(DetailAccount da, Account acc) throws MessagingException {
         int userId = generateUserId();
         da.setIdAccount(userId);
         acc.setId_account(userId);
         String userPass = generateRandomPassword(8);
+
+        // Gửi email cho người dùng với mật khẩu chưa mã hóa
+        sendEmail(da.getMail(), userPass);
+
+        // Mã hóa mật khẩu
         String encodedPassword = passwordEncoder.encode(userPass);
         acc.setPassword(encodedPassword);
         acc.setRole(da.getRole());
@@ -58,7 +66,8 @@ public class SignUpService {
         int max = 999999; // Giá trị lớn nhất của id, 6 chữ số
         return random.nextInt(max - min + 1) + min;
     }
-    private String generateRandomPassword(int length){
+
+    private String generateRandomPassword(int length) {
         if (length < 4) {
             throw new IllegalArgumentException("Password length must be at least 4 characters");
         }
@@ -77,6 +86,26 @@ public class SignUpService {
 
         return password.toString();
     }
+
+    private void sendEmail(String to, String password) throws MessagingException {
+        String subject = "Your New Account Password";
+        String content = "Dear user,\n\n" +
+                "Your new account has been created.\n" +
+                "Your password is: " + password + "\n\n" +
+                "Please change your password after logging in.\n\n" +
+                "Best regards,\n" +
+                "Never Give Up Team";
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(content, true);
+
+        mailSender.send(message);
+    }
+
     public boolean isValidDateFormat(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         sdf.setLenient(false); // Đặt giá trị lenient thành false để kiểm tra chặt chẽ định dạng ngày tháng
@@ -93,6 +122,4 @@ public class SignUpService {
             return false;
         }
     }
-
 }
-
