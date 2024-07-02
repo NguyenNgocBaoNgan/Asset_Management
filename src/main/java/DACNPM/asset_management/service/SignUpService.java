@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 
 import java.security.SecureRandom;
 import java.util.Random;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class SignUpService {
@@ -35,14 +36,16 @@ public class SignUpService {
     private static SecureRandom random = new SecureRandom();
     private static final String DATE_PATTERN = "^\\d{4}/\\d{2}/\\d{2}$";
 
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
 
     public void register(DetailAccount da, Account acc) {
         int userId = generateUserId();
         da.setIdAccount(userId);
         acc.setId_account(userId);
         String userPass = generateRandomPassword(8);
-//        da.setPassword(userPass);
-        acc.setPassword(userPass);
+        String encodedPassword = passwordEncoder.encode(userPass);
+        acc.setPassword(encodedPassword);
         acc.setRole(da.getRole());
 
         accountRepository.save(acc);
