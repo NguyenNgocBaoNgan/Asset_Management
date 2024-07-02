@@ -20,7 +20,12 @@
                 <div class="col-md-8 col-lg-6 col-xxl-3">
                     <div class="card mb-0">
                         <div class="card-body">
-                            <div style="text-align: center"><b>SIGN IN</b></div>
+                            <div class="language-selector">
+                                <a href="?lang=vi" class="lang-btn">Vietnamese</a>
+                                <span>|</span>
+                                <a href="?lang=en" class="lang-btn">English</a>
+                            </div>
+                            <div style="text-align: center; font-size:24px;font-weight: 700  " th:text="#{signIn}"><b></b></div>
                             <p th:if="${session.error}" class="alert alert-danger" role="alert"
                                th:text="${session.error}" id="error-message"></p>
                             <form method="post" action="#" th:action="@{/checkLogin}" th:object="${account}">
@@ -31,12 +36,12 @@
                                            th:field="*{id_account}">
                                 </div>
                                 <div class="mb-4">
-                                    <label class="form-label">Password</label>
+                                    <label class="form-label" th:text="#{passWord}"></label>
                                     <input type="password" class="form-control" required id="password" name="password"
                                            th:field="*{password}" maxlength="12" minlength="8">
                                 </div>
                                 <button href="templates/index.html" type="submit"
-                                        class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In
+                                        class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" th:text="#{signIn}">
                                 </button>
                             </form>
                         </div>

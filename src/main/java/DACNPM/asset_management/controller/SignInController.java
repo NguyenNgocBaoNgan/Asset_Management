@@ -25,6 +25,12 @@ public class SignInController {
         return "authentication-login";
     }
 
+    @GetMapping("/login")
+    public String newLogin(){
+        return "redirect:/dang-nhap";
+    }
+
+
     @PostMapping("/checkLogin")
     public String checkLogin( @RequestParam("id_account") int id_account, @RequestParam("password") String password, HttpSession session) {
         try {
