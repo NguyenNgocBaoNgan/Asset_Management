@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LogoutController {
-    @GetMapping("/logout")
+    @GetMapping("/dang-xuat")
     public String logout(Model model, HttpSession session) {
         if (session.getAttribute("loggedInAccount") == null) {
             return "redirect:/login";
