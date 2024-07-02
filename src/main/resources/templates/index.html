@@ -381,8 +381,9 @@
 
         </div>
         <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+          <a href="/home?lang=vi">VI</a>|<a href="/home?lang=en">EN</a>
           <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-            <button  th:if="${loggedInAccount.role == 0}" type="button" class="btn btn-info m-1" onclick="momodal()">Add</button>
+            <button  th:if="${loggedInAccount.role == 0}" type="button" class="btn btn-info m-1" onclick="momodal()" th:text="#{add}">Add</button>
 
 
             <li class="nav-item dropdown">
