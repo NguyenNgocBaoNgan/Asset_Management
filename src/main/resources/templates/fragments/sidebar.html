@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <title th:text="${title}">Title</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png"/>
+    <link rel="stylesheet" href="../assets/css/styles.min.css"/>
+    <style>
+        .nav-small-cap-cus {
+            margin-top: 24px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: 700;
+            padding: 3px 12px;
+            line-height: 26px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+<!-- Sidebar Start -->
+<aside class="left-sidebar" th:fragment="sidebar">
+    <!-- Sidebar scroll-->
+    <div>
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav scroll-sidebar">
+            <ul id="sidebarnav">
+                <li class="sidebar-item" style="margin-top: 24px; font-size: 20px;">
+                    <a class="sidebar-link" href="/home">
+                        <span><i class="ti ti-home"></i></span>
+                        <span class="hide-menu" th:text="#{home}"></span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/response" aria-expanded="false">
+                        <span><i class="ti ti-cards"></i></span>
+                        <span class="hide-menu" th:text="#{listBorrow}"></span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/form" aria-expanded="false">
+                        <span><i class="ti ti-file-description"></i></span>
+                        <span class="hide-menu" th:text="#{registerBorrow}"></span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item" th:if="${loggedInAccount.role == 0}">
+                    <a class="sidebar-link" href="/register" aria-expanded="false">
+                        <span> <i class="ti ti-user-plus"></i></span>
+                        <span class="hide-menu" th:text="#{register}"></span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="/dang-xuat" aria-expanded="false">
+                        <span>  <i class="ti ti-login"></i> </span>
+                        <span class="hide-menu" th:text="#{logout}">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>
+<!--  Sidebar End -->
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const currentPath = window.location.pathname;
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+        sidebarLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+</html>
