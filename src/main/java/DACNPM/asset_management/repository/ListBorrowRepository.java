@@ -24,7 +24,7 @@ public interface ListBorrowRepository extends JpaRepository<ListBorrow, BorrowId
     List<ListBorrow> listAllRequestUser(@Param("idAccount") int idAccount);
 
     // list nhung yeu cau muon tai san
-    @Query(value = "select * from list_borrow where status = 0", nativeQuery = true)
+    @Query(value = "select * from list_borrow", nativeQuery = true)
     List<ListBorrow> listAllRequest();
 
     // list nhung yeu cau da cho muon
