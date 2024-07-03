@@ -5,13 +5,9 @@ import DACNPM.asset_management.model.DetailAccount;
 import DACNPM.asset_management.repository.AccountRepository;
 import DACNPM.asset_management.repository.DetailAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
 
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
@@ -28,7 +24,7 @@ public class SignUpService {
     private AccountRepository accountRepository;
 
     @Autowired
-    private JavaMailSender mailSender;
+    private EmailService emailService;
 
     private static final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
     private static final String CHAR_UPPER = CHAR_LOWER.toUpperCase();
@@ -48,16 +44,25 @@ public class SignUpService {
         acc.setId_account(userId);
         String userPass = generateRandomPassword(8);
 
-        // Gửi email cho người dùng với mật khẩu chưa mã hóa
-        sendEmail(da.getMail(), userPass);
-
         // Mã hóa mật khẩu
         String encodedPassword = passwordEncoder.encode(userPass);
         acc.setPassword(encodedPassword);
         acc.setRole(da.getRole());
 
+        // Lưu thông tin vào database
         accountRepository.save(acc);
         detailAccountRepository.save(da);
+
+        // Gửi email cho người dùng với mật khẩu chưa mã hóa sau khi lưu vào database
+        String subject = "Your New Account Password";
+        String content = "Dear user,\n\n" +
+                "Your new account has been created.\n" +
+                "Your ID and password is: " +da.getIdAccount() + " and "+  userPass + "\n\n" +
+                "Please change your password after logging in.\n\n" +
+                "Best regards,\n" +
+                "Never Give Up Team";
+
+        emailService.sendEmail(da.getMail(), subject, content);
     }
 
     private int generateUserId() {
@@ -85,25 +90,6 @@ public class SignUpService {
         }
 
         return password.toString();
-    }
-
-    private void sendEmail(String to, String password) throws MessagingException {
-        String subject = "Your New Account Password";
-        String content = "Dear user,\n\n" +
-                "Your new account has been created.\n" +
-                "Your password is: " + password + "\n\n" +
-                "Please change your password after logging in.\n\n" +
-                "Best regards,\n" +
-                "Never Give Up Team";
-
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
-        helper.setTo(to);
-        helper.setSubject(subject);
-        helper.setText(content, true);
-
-        mailSender.send(message);
     }
 
     public boolean isValidDateFormat(Date date) {

@@ -1,5 +1,8 @@
 package DACNPM.asset_management.service;
 
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -15,6 +18,7 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Async
     public void sendEmail(String to, String subject, String content) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
