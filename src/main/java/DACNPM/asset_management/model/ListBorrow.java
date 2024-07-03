@@ -14,6 +14,20 @@ import java.util.Date;
 public class ListBorrow {
     @EmbeddedId
     private BorrowId id;
+    @ManyToOne
+    @MapsId("idAccount")
+    @JoinColumn(name = "id_account", insertable = false, updatable = false)
+    private DetailAccount detailAccount;
+
+    @ManyToOne
+    @MapsId("idAsset")
+    @JoinColumn(name = "id_asset", insertable = false, updatable = false)
+    private Asset asset;
+
+    @ManyToOne
+    @MapsId("status")
+    @JoinColumn(name = "status", insertable = false, updatable = false)
+    private Status status;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
