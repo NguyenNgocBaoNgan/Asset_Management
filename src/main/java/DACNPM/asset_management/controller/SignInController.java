@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SignInController {
+
     @Autowired
     SignInService signInService;
 
@@ -21,18 +22,16 @@ public class SignInController {
             return "redirect:/home";
         }
         model.addAttribute("account", new Account());
-
         return "authentication-login";
     }
 
     @GetMapping("/login")
-    public String newLogin(){
+    public String newLogin() {
         return "redirect:/dang-nhap";
     }
 
-
     @PostMapping("/checkLogin")
-    public String checkLogin( @RequestParam("id_account") int id_account, @RequestParam("password") String password, HttpSession session) {
+    public String checkLogin(@RequestParam("id_account") int id_account, @RequestParam("password") String password, HttpSession session) {
         try {
             Account account = signInService.checkLogin(id_account, password);
             if (account != null) {
@@ -48,6 +47,5 @@ public class SignInController {
             session.setAttribute("error", "Login failed");
             return "redirect:/login";
         }
-
     }
 }
