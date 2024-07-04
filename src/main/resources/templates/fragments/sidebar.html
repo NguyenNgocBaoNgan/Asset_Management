@@ -5,6 +5,7 @@
     <title th:text="${title}">Title</title>
     <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png"/>
     <link rel="stylesheet" href="../assets/css/styles.min.css"/>
+
     <style>
         .nav-small-cap-cus {
             margin-top: 24px;
@@ -35,6 +36,12 @@
                     <a class="sidebar-link" href="/response" aria-expanded="false">
                         <span><i class="ti ti-cards"></i></span>
                         <span class="hide-menu" th:text="#{listBorrow}"></span>
+                    </a>
+                </li>
+                <li class="sidebar-item" th:if="${loggedInAccount.role == 0}">
+                    <a class="sidebar-link" href="/userManagement" aria-expanded="false">
+                <span><i class="ti ti-layout-dashboard"></i></span>
+                        <span class="hide-menu" >Quản lý tài khoản</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
