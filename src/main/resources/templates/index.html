@@ -206,7 +206,7 @@
   <!--  Main wrapper -->
   <div class="body-wrapper">
     <!--  Header Start -->
-    <div th:replace="~{/fragments/header::header}"></div>
+    <div th:replace="~{/fragments/header::header}" ></div>
     <!--  Header Start -->
 <!--    <header class="app-header">-->
 <!--      <nav class="navbar navbar-expand-lg navbar-light">-->
@@ -258,20 +258,23 @@
 <!--      </nav>-->
 <!--    </header>-->
     <!--  Header End -->
-    <div class="container-fluid">
+    <div class="container-fluid"style="max-width: none!important;
+">
       <!--  Row 1 -->
       <form th:action="@{/home}">
         <input type="text" name="keyword" id="keyword" size="50" height="37px" th:value="${keyword}" required />
         &nbsp
         <button type="submit" class="btn btn-info m-1" th:text="#{search}"></button>
         <button type="button" class="btn btn-warning m-1" id="btnClear" onclick="clearSearch()" th:text="#{clear}"></button>
+        <button  th:if="${loggedInAccount.role == 0}" type="button" class="btn btn-success m-1" onclick="momodal()" th:text="#{addAsset}"></button>
+
       </form>
       <div>
         <!-- html modal -->
         <div class="nenmodal"  id="nenmodal-1">
           <div class="nenmodal2" ></div>
           <div class="container-fluid ndmodal" style="margin-top: 40px">
-            <div class="card">
+            <div class="card" style="margin-bottom: 0px">
               <div class="card-body">
                 <h5 class="card-title fw-semibold mb-4">Forms</h5>
                 <div class="card-body" style="margin-top: -20px;">
@@ -360,7 +363,7 @@
                         <textarea rows="6" name="description" id="description" th:field="*{description}" th:placeholder="#{descriptionHolder}" class="formbold-form-input"></textarea>
                       </div>
                     </div>
-                    <div class="row btn-form">
+                    <div class="row btn-form" style="margin-top: -55px">
                       <button  type="submit" class="col-2 btn btn-success m-1" th:text="#{success}"></button>
                       <button  type="button" class="col-2 btn btn-default m-1" th:text="#{cancel}" onclick="redirectToHome()" ></button>
                     </div>
@@ -376,7 +379,6 @@
           <div class="card w-100">
             <div class="card-body p-4">
               <h5 class="card-title fw-semibold mb-4" th:text="#{listAsset}"></h5>
-              <button  th:if="${loggedInAccount.role == 0}" type="button" class="btn btn-info m-1" onclick="momodal()" th:text="#{addAsset}"></button>
               <div class="table-responsive">
                 <table class="table text-nowrap mb-0 align-middle">
                   <thead class="text-dark fs-4">
@@ -388,17 +390,17 @@
                       <h6 class="fw-semibold mb-0" th:text="#{assetName}"></h6>
                     </th>
                     <th class="border-bottom-0">
-                      <h6 class="fw-semibold mb-0" th:text="#{assetCategory}"></h6>
+                      <h6 class="fw-semibold mb-0" th:text="#{assetCategory}" style="white-space: pre-line;"></h6>
                     </th>
 
                     <th class="border-bottom-0">
                       <h6 class="fw-semibold mb-0" th:text="#{status}"></h6>
                     </th>
                     <th class="border-bottom-0">
-                      <h6 class="fw-semibold mb-0" th:text="#{quantityInStock}"></h6>
+                      <h6 class="fw-semibold mb-0" th:text="#{quantityInStock}" style="white-space: pre-line;"></h6>
                     </th>
                     <th class="border-bottom-0">
-                      <h6 class="fw-semibold mb-0" th:text="#{quantityBorrowed}"></h6>
+                      <h6 class="fw-semibold mb-0" th:text="#{quantityBorrowed}" style="white-space: pre-line;" ></h6>
                     </th>
                     <th class="border-bottom-0">
                       <h6 class="fw-semibold mb-0" th:text="#{price}"></h6>
@@ -448,12 +450,12 @@
                     <td class="border-bottom-0">
                       <h6 class="fw-semibold mb-0 fs-4" th:text="${asset.description}"></h6>
                     </td>
-                    <td class="border-bottom-0">
+                    <td class="border-bottom-0"  style="padding:16px 0px">
                       <form  th:if="${loggedInAccount.role == 0}" id="deleteForm" th:action="@{/deleteAsset/{id}(id=${asset.idAsset})}" method="post" onsubmit="return confirm('Are you sure you want to delete this asset?')">
                         <button type="submit" class="btn btn-danger m-1" th:text="#{delete}"></button>
                       </form>
                     </td>
-                    <td class="border-bottom-0">
+                    <td class="border-bottom-0" style="padding:16px 0px" >
                       <button  th:if="${loggedInAccount.role == 0}" type="submit" class="btn btn-warning m-1"  >
                         <a th:href="@{/updateAsset/{id}(id=${asset.idAsset})}" style="color:white" th:text="#{update}"></a>
                       </button>
