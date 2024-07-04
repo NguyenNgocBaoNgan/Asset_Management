@@ -32,8 +32,6 @@ public class Asset {
     @Column(name="purchase_price")
     private Integer purchasePrice;
 
-
-
     @Column(name="date_purchase")
     private LocalDate datePurchase;
 
