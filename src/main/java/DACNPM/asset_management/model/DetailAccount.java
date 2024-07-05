@@ -1,10 +1,12 @@
 package DACNPM.asset_management.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -27,6 +29,8 @@ public class DetailAccount {
     private String lastName;
 
     @Column(name="day_of_birth")
+    @DateTimeFormat(pattern = "yyyy-MM-dd") // For form submissions
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd") // For JSON processing
     private Date dayOfBirth;
 
     @Column(name="mail")
