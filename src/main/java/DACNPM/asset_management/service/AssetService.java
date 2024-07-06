@@ -1,6 +1,9 @@
 package DACNPM.asset_management.service;
 
 import DACNPM.asset_management.model.Asset;
+import DACNPM.asset_management.model.Status;
+import DACNPM.asset_management.model.Type;
+import DACNPM.asset_management.model.Warehouse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import DACNPM.asset_management.repository.AssetRepository;
@@ -24,6 +27,14 @@ public class AssetService {
     }
     public Asset addNewAsset(Asset asset){
         return assetRepository.save(asset);
+    }
+
+    public Optional<Status> getStatusByAssetId(int id){
+        return assetRepository.findStatusByAssetId(id);
+    }
+
+    public Optional<Type> getTypeByAssetId(int id){
+        return assetRepository.findTypeByAssetId(id);
     }
 
     public void updateAsset(int id,Asset updatedAsset) throws Exception {

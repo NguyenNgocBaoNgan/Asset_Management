@@ -38,4 +38,11 @@ public class Asset {
     @Column(name="id_type")
     private int type;
 
+    public Asset(Integer idAsset, String assetName, String description, Integer purchasePrice, LocalDate datePurchase) {
+        this.idAsset = idAsset;
+        this.assetName = assetName;
+        this.description = description;
+        this.purchasePrice = purchasePrice;
+        this.datePurchase = datePurchase;
+    }
 }

@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 
 @Controller
@@ -46,15 +43,33 @@ public class AssetController {
         List<Asset> listAsset= assetService.getAllAssets(keyword);
         Map<Integer, Warehouse> warehouseMap = new HashMap<>();
 
+        Map<Integer,Status> statusMap=new HashMap<>();
+        Map<Integer,Type> typeMap=new HashMap<>();
+
         for(Asset asset:listAsset){
             Optional<Warehouse> warehouseOptional=warehouseService.getQuantityByAssetId(asset.getIdAsset());
             if(warehouseOptional.isPresent()){
                 Warehouse warehouse=warehouseOptional.get();
                 warehouseMap.put(asset.getIdAsset(), warehouse); // Store warehouse info by assetId
             }
+
+            Optional<Status> statusOptional =assetService.getStatusByAssetId(asset.getIdAsset());
+            if(statusOptional.isPresent()){
+                Status status=statusOptional.get();
+                statusMap.put(asset.getIdAsset(),status);
+            }
+
+            Optional<Type> typeOptional =assetService.getTypeByAssetId(asset.getIdAsset());
+            if(typeOptional.isPresent()){
+                Type type=typeOptional.get();
+                typeMap.put(asset.getIdAsset(),type);
+            }
         }
+
         List<Type> listType=typeService.getAllType();
         model.addAttribute("assetWarehouseMap", warehouseMap);
+        model.addAttribute("statusMap", statusMap);
+        model.addAttribute("typeMap", typeMap);
         model.addAttribute("listAsset", listAsset);
         model.addAttribute("listType",listType);
         model.addAttribute("asset", new Asset());
