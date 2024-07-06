@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import jakarta.mail.MessagingException;
 
 import java.security.SecureRandom;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -39,6 +40,16 @@ public class SignUpService {
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public void register(DetailAccount da, Account acc) throws MessagingException {
+        // Kiểm tra email đã tồn tại
+        if (emailExists(da.getMail())) {
+            throw new IllegalArgumentException("Email already exists");
+        }
+
+        // Kiểm tra định dạng ngày tháng năm sinh
+        if (!isValidDateFormat(da.getDayOfBirth())) {
+            throw new IllegalArgumentException("Invalid date format. Please use YYYY/MM/DD");
+        }
+
         int userId = generateUserId();
         da.setIdAccount(userId);
         acc.setId_account(userId);
@@ -57,12 +68,16 @@ public class SignUpService {
         String subject = "Your New Account Password";
         String content = "Dear user,\n\n" +
                 "Your new account has been created.\n" +
-                "Your ID and password is: " +da.getIdAccount() + " and "+  userPass + "\n\n" +
+                "Your ID and password is: " + da.getIdAccount() + " and " + userPass + "\n\n" +
                 "Please change your password after logging in.\n\n" +
                 "Best regards,\n" +
                 "Never Give Up Team";
 
         emailService.sendEmail(da.getMail(), subject, content);
+    }
+
+    public boolean emailExists(String email) {
+        return detailAccountRepository.findByMail(email) != null;
     }
 
     private int generateUserId() {
@@ -93,19 +108,20 @@ public class SignUpService {
     }
 
     public boolean isValidDateFormat(Date date) {
+        if (date == null) {
+            return false;
+        }
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        sdf.setLenient(false); // Đặt giá trị lenient thành false để kiểm tra chặt chẽ định dạng ngày tháng
+        sdf.setLenient(false);
+
         try {
-            // Chuyển đổi đối tượng Date thành chuỗi ngày tháng theo định dạng yyyy/MM/dd
-            String dateString = sdf.format(date);
-            // Parse lại chuỗi ngày tháng thành đối tượng Date để kiểm tra xem có trùng khớp không
-            Date parsedDate = sdf.parse(dateString);
-            // Nếu hai đối tượng Date giống nhau, tức là ngày tháng đúng định dạng
-            return date.equals(parsedDate);
-        } catch (Exception e) {
-            // Nếu có bất kỳ ngoại lệ nào xảy ra, tức là ngày tháng không đúng định dạng
-            System.out.println("aaaaaaaaaaa");
+            String formattedDate = sdf.format(date);
+            sdf.parse(formattedDate);
+            return true;
+        } catch (ParseException e) {
             return false;
         }
     }
+
 }
