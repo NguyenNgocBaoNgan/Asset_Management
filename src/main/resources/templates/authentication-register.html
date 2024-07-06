@@ -27,15 +27,16 @@
                                 <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
                             </a>
                             <p class="text-center" th:text="#{createAccount}"></p>
-                            <p th:if="${session.error}" class="alert alert-danger" role="alert"
-                               th:text="${session.error}" id="error-message"></p>
+
+                            <!-- Thêm đoạn này để hiển thị thông báo lỗi -->
+                            <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
+
                             <form method="post" action="#" th:action="@{/detailAcc/register}" th:object="${detail_account}">
                                 <div class="mb-3">
                                     <div class="row">
                                         <div class="col">
                                             <label for="firstName" class="form-label" th:text="#{firstName}"></label>
                                             <input type="text" class="form-control" id="firstName" name="firstName" aria-describedby="textHelp" required>
-
                                         </div>
                                         <div class="col">
                                             <label for="lastName" class="form-label" th:text="#{lastName}"></label>
@@ -48,7 +49,6 @@
                                         <div class="col">
                                             <label for="mail" class="form-label" th:text="#{emailAddress}"></label>
                                             <input type="email" class="form-control" id="mail" name="mail" aria-describedby="emailHelp" required>
-
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="mb-4">
                                     <label for="role" class="form-label" th:text="#{role}"></label>
-                                    <input type="role" class="form-control" id="role" name="role" required>
+                                    <input type="text" class="form-control" id="role" name="role" required>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" th:text="#{signUp}"></button>

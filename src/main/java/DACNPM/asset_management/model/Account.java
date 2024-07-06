@@ -1,7 +1,5 @@
 package DACNPM.asset_management.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,5 +24,6 @@ public class Account {
     @Column(name="role")
     private int role;
 
-
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private DetailAccount detailAccount;
 }
