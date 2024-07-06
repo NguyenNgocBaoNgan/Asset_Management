@@ -312,21 +312,8 @@
                           function displaySelectedValue() {
                             var select = document.getElementById("assetType");
                             var selectedIndex = select.selectedIndex;
-                            var selectedOption = select.options[selectedIndex].text;
                             var typeHidden = document.getElementById("typeHidden");
-                            switch(selectedOption) {
-                              case "Ban":
-                                typeHidden.value = 1;
-                                break;
-                              case "Ghe":
-                                typeHidden.value = 2;
-                                break;
-                              case "May Tinh":
-                                typeHidden.value = 3;
-                                break;
-                              default:
-                                typeHidden.value = ""; // Nếu không có lựa chọn nào phù hợp, có thể đặt lại giá trị là rỗng
-                            }
+                            typeHidden.value = selectedIndex;
                           }
                         </script>
                       </div>
@@ -417,21 +404,14 @@
                   <tr th:each="asset : ${listAsset}">
                     <td class="border-bottom-0"><h6 class="fw-semibold mb-0"th:text="${asset.idAsset}"></h6></td>
                     <td class="border-bottom-0">
-                      <h6 class="fw-semibold mb-1" th:text="${asset.assetName}"></h6>
+                      <h6 style="white-space: normal;" class="fw-semibold mb-1" th:text="${asset.assetName}"></h6>
                     </td>
                     <td class="border-bottom-0">
-                      <div th:switch="${asset.type}">
-                        <h6 class="fw-semibold mb-1" th:case="1">Ban</h6>
-                        <h6 class="fw-semibold mb-1" th:case="2">Ghe</h6>
-                        <h6 class="fw-semibold mb-1" th:case="3">May tinh</h6>
-                      </div>
+                      <h6 style="white-space: normal;" class="fw-semibold mb-1" th:text="${typeMap.get(asset.idAsset).typeName}"></h6>
                     </td>
 
                     <td class="border-bottom-0">
-                      <div th:switch="${asset.status}">
-                        <h6 class="fw-semibold mb-1" th:case="0">Available</h6>
-                        <h6 class="fw-semibold mb-1" th:case="1">Unavailable</h6>
-                      </div>
+                      <h6 class="fw-semibold mb-1" th:text="${statusMap.get(asset.idAsset).valueStatus}"></h6>
                     </td>
                     <td class="border-bottom-0">
                       <h6 class="fw-semibold mb-1" th:text="${assetWarehouseMap.get(asset.idAsset).getStockQuantity()}"></h6>
@@ -440,7 +420,7 @@
                       <h6 class="fw-semibold mb-1" name="unavailableQuantity"  th:text="${assetWarehouseMap.get(asset.idAsset).getUnavailableQuantity()}"></h6>
                     </td>
                     <td class="border-bottom-0">
-                      <h6 class="fw-semibold mb-1" th:text="${asset.purchasePrice}"></h6>
+                      <h6 class="fw-semibold mb-1" th:text="${asset.purchasePrice} + ' VNĐ'"></h6>
                     </td>
                     <td class="border-bottom-0">
                       <div class="d-flex align-items-center gap-2">
@@ -448,7 +428,7 @@
                       </div>
                     </td>
                     <td class="border-bottom-0">
-                      <h6 class="fw-semibold mb-0 fs-4" th:text="${asset.description}"></h6>
+                      <h6 style="white-space: normal;" class="fw-semibold mb-0 fs-4" th:text="${asset.description}"></h6>
                     </td>
                     <td class="border-bottom-0"  style="padding:16px 0px">
                       <form  th:if="${loggedInAccount.role == 0}" id="deleteForm" th:action="@{/deleteAsset/{id}(id=${asset.idAsset})}" method="post" onsubmit="return confirm('Are you sure you want to delete this asset?')">
