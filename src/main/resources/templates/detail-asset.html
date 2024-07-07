@@ -121,7 +121,10 @@
             display: flex;
             justify-content: flex-end;
         }
-
+        .title-home {
+            font-weight: 700;
+            font-size: 16px;
+        }
         .btn-form button {
             margin-left: 5px;
             padding: 12px 20px;
@@ -162,155 +165,116 @@
                     <div class="nenmodall w-75" id="nenmodal-1" style="margin-top: -30px">
                         <div class="card w-100">
                             <div class="card-body">
-                                <h5 class="card-title fw-semibold mb-4" style="text-align: center"
-                                    th:text="#{updateAsset}"></h5>
+
                                 <div class="card-body" style="margin-top: -20px;">
-                                    <form th:action="@{/updateAsset/{id}(id=${asset.idAsset})}" th:object="${asset}"
-                                          method="POST">
+                                    <div class="row formbold-input-group" style="height: 40px">
+                                        <div class="col-40" style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                            <h6  class="mb-0 title-home" fw-semibold th:text="#{assetID}"></h6>
+                                        </div>
+                                        <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
+                                            <h6 style="white-space: normal;" class="fw-semibold mb-1 w-100 " th:text="${asset.idAsset}"></h6>
+                                        </div>
+                                    </div>
                                         <div class="row formbold-input-group" style="height: 40px">
                                             <div class="col-40" style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <label for="name" class="formbold-form-label"
-                                                       th:text="#{assetName}"></label>
+                                                <h6  class="mb-0 title-home fw-semibold" th:text="#{assetName}"></h6>
                                             </div>
                                             <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                                <input type="text" name="name" id="name" th:field="*{assetName}"
-                                                       class="formbold-form-input w-100"/>
+                                                <h6 style="white-space: normal;" class="fw-semibold mb-1" th:text="${asset.assetName}"></h6>
                                             </div>
                                         </div>
                                         <div class="row formbold-input-group" style="height: 40px">
-                                            <div class="col-40"  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <label for="name" class="formbold-form-label"
-                                                       th:text="#{assetCategory}"></label>
+                                            <div class="col-40 "  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                                <h6  class="fw-semibold mb-0 title-home" th:text="#{assetCategory}" ></h6>
                                             </div>
 
                                             <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                                <div id="oldTypeOptions" class="type-options" style="display: block">
-                                                    <select name="occupation" id="assetType"
-                                                            class="formbold-form-select w-100"
-                                                            onchange="displaySelectedValue()" style="padding: 5px">
-                                                        <option disabled selected hidden th:object="${oldType}"
-                                                                th:text="*{typeName}"></option>
-                                                        <option th:each="type : ${listType}" th:value="${type.typeName}"
-                                                                th:text="${type.typeName}"></option>
-                                                        <input type="hidden" id="typeHidden" name="type"
-                                                               th:field="*{type}"/>
-                                                    </select>
+                                                <h6  class="fw-semibold mb-1 " th:text="${typeMap.get(asset.idAsset).typeName}"></h6>
+                                            </div>
+
+                                        </div>
+                                        <div class="row formbold-input-group" style="height: 40px">
+                                            <div class="col-40 "  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                                <h6  class="fw-semibold mb-0 title-home" th:text="#{status}"></h6>
+                                            </div>
+
+                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
+                                                <h6 class="fw-semibold mb-1 " th:text="${statusMap.get(asset.idAsset).valueStatus}"></h6>
+                                            </div>
+
+                                        </div>
+                                        <div class="row formbold-input-group" style="height: 40px">
+                                            <div class="col-40 "  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                                <h6  class="fw-semibold mb-0 title-home" th:text="#{quantityInStock}" ></h6>
+
+                                            </div>
+                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
+                                                <h6 class="fw-semibold mb-1 center" th:text="${warehouse.getStockQuantity()}"></h6>
+                                            </div>
+                                        </div>
+                                        <div class="row formbold-input-group" style="height: 40px">
+                                            <div class="col-40 "  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                                <h6  class="fw-semibold mb-0 title-home" th:text="#{quantityBorrowed}"  ></h6>
+                                            </div>
+                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
+                                                <h6 class="fw-semibold mb-1 center" name="unavailableQuantity"
+                                                    th:text="${warehouse.getUnavailableQuantity()}"></h6>
+
+                                            </div>
+                                        </div>
+                                        <div class="row formbold-input-group" style="height: 40px">
+                                            <div class="col-40 "  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                                <h6  class="fw-semibold mb-0 title-home" th:text="#{price}"></h6>
+                                            </div>
+                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
+                                                <h6 class="fw-semibold mb-1 " th:text="${asset.purchasePrice} + ' VNĐ'"></h6>
+                                            </div>
+                                        </div>
+                                        <div class="row formbold-input-group" style="height: 40px">
+                                            <div class="col-40 "  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                                <h6  class="fw-semibold mb-0 title-home center" th:text="#{date}"></h6>
+                                            </div>
+                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <span class="badge bg-primary rounded-3 fw-semibold" th:text="${asset.datePurchase}"></span>
                                                 </div>
-                                                <script>
-                                                    function displaySelectedValue() {
-                                                        var select = document.getElementById("assetType");
-                                                        var selectedIndex = select.selectedIndex;
-                                                        var typeHidden = document.getElementById("typeHidden");
-                                                        typeHidden.value = selectedIndex;
-                                                    }
-                                                </script>
-                                            </div>
-
-                                        </div>
-                                        <div class="row formbold-input-group" style="height: 40px">
-                                            <div class="col-40"  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <label class="formbold-form-label" th:text="#{status}"></label>
-                                            </div>
-
-                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                                <div id="oldTypeOptions2" class="type-options" style="display: block">
-                                                    <select name="occupation" id="assetStatus"
-                                                            class="formbold-form-select w-100"
-                                                            onchange="displaySelectedValueStatus()"
-                                                            style="padding: 5px">
-                                                        <option disabled selected hidden th:object="${oldStatus}"
-                                                                th:text="*{valueStatus}"></option>
-                                                        <option th:each="status : ${listStatus}"
-                                                                th:value="${status.valueStatus}"
-                                                                th:text="${status.valueStatus}"></option>
-                                                        <input type="hidden" id="typeHiddenStatus" name="type"
-                                                               th:field="*{status}"/>
-                                                    </select>
-                                                </div>
-                                                <script>
-                                                    function displaySelectedValueStatus() {
-                                                        var select = document.getElementById("assetStatus");
-                                                        var selectedIndex = select.selectedIndex;
-                                                        var typeHidden = document.getElementById("typeHiddenStatus");
-                                                        console.log(selectedIndex);
-                                                        typeHidden.value = selectedIndex-1;
-                                                    }
-                                                </script>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row formbold-input-group" style="height: 40px">
-                                            <div class="col-40"  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <label class="formbold-form-label" th:text="#{quantityInStock}"></label>
-                                            </div>
-                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                                <input type="text" name="newStockQuantity"
-                                                       th:value="${warehouse.getStockQuantity()}"
-                                                       class="formbold-form-input w-100"/>
-                                            </div>
-                                        </div>
-
-                                        <div class="row formbold-input-group" style="height: 40px">
-                                            <div class="col-40"  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <label class="formbold-form-label"
-                                                       th:text="#{quantityBorrowed}"></label>
-                                            </div>
-                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                                <input type="text" name="newUnavailable"
-                                                       th:value="${warehouse.getUnavailableQuantity()}"
-                                                       class="formbold-form-input w-100"/>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="row formbold-input-group" style="height: 40px">
-                                            <div class="col-40"  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <label id="purchaseId" class="formbold-form-label" th:text="#{purchasePrice}"></label>
-                                            </div>
-                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-
-                                                <input type="text" name="number" th:field="*{purchasePrice}"
-                                                       class="formbold-form-input w-100"/>
-                                            </div>
-                                        </div>
-
-                                        <div class="row formbold-input-group" style="height: 40px">
-                                            <div class="col-40"  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <label class="formbold-form-label" th:text="#{purchaseDate}"></label>
-                                            </div>
-                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                                <input type="date" name="date-purcharse" th:field="*{datePurchase}"
-                                                       id="date-purcharse" class="formbold-form-input w-100"/>
                                             </div>
                                         </div>
                                         <div class="row formbold-input-group h-50" style="height: 40px">
-                                            <div class="col-40"  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <label class="formbold-form-label" th:text="#{description}"></label>
+                                            <div class="col-40 "  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                                <h6  class="fw-semibold mb-0 title-home center" th:text="#{description}"></h6>
                                             </div>
                                             <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                                <textarea rows="6" name="description" th:field="*{description}"
-                                                          placeholder="Type the description of asset"
-                                                          class="formbold-form-input w-100 h-50"></textarea>
+                                                <h6 style="white-space: normal;" class="fw-semibold mb-0 fs-4" th:text="${asset.description}"></h6>
                                             </div>
                                         </div>
-
-                                        <div class="row btn-form" style="margin-top: -50px; display: flex;justify-content: flex-end">
-                                            <button type="submit" class="col-2 btn btn-success m-1"
-                                                    th:text="#{success}"></button>
-                                            <button type="button" class="col-2 btn btn-default m-1"
-                                                    onclick="redirectToHome()" th:text="#{cancel}"></button>
-                                        </div>
-                                        <script>
-                                            function redirectToHome() {
-                                                window.location.href = "/home"; // Adjust the URL if necessary
-                                            }
-                                            </script>
-
-                                    </form>
                                 </div>
                             </div>
+
                         </div>
+                    </div>
+
+                    <div class="comments-section" style="min-width:500px;margin-left: 20px">
+                        <h2 th:text="#{comment}"></h2>
+                        <div style="max-height: 400px;overflow-y: auto">
+                            <div th:each="comment : ${comments}">
+                                <p style="font-size: 16px; margin-bottom: -3px"><strong th:text="${listNameComment.get(comment.getId())}"></strong>: <span th:text="${comment.content}"></span></p>
+                                <p style="font-size: 12px"><em th:text="${comment.createdAt}"></em></p>
+                            </div>
+                        </div>
+<!--                        <h5 th:text="#{addComment}"></h5>-->
+                        <form th:action="@{/asset/{id}/comment(id=${asset.idAsset})}" th:object="${newComment}" method="post">
+                            <div>
+                                <input type="" style="display: none" th:value="${loggedInAccount.getId_account()}"  name="accountId" id="accountId" th:field="*{accountId}"/>
+
+                                <textarea style="padding-left: 20px;min-height: 100px;  width: 95%;height: auto;word-break: break-word;white-space: normal; border-radius: 20px;margin-bottom: 20px;border: 1.5px solid #000;" id="content" th:placeholder="#{commentHolder}" th:field="*{content}" required></textarea>
+                            </div>
+                            <div style="margin-top: -20px;margin-right: 35px;float: right">
+                                <button type="submit" class="btn btn-danger m-1" th:text="#{send}"></button>
+
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>

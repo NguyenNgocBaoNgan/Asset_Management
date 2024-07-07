@@ -34,6 +34,8 @@ public class SignInController {
     public String checkLogin(@RequestParam("id_account") int id_account, @RequestParam("password") String password, HttpSession session) {
         try {
             Account account = signInService.checkLogin(id_account, password);
+
+
             if (account != null) {
                 // Thêm loggedInAccount vào session
                 session.removeAttribute("error");
