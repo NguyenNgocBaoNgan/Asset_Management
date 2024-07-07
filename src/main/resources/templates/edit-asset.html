@@ -200,22 +200,8 @@
                                                     function displaySelectedValue() {
                                                         var select = document.getElementById("assetType");
                                                         var selectedIndex = select.selectedIndex;
-                                                        var selectedOption = select.options[selectedIndex].text;
                                                         var typeHidden = document.getElementById("typeHidden");
-
-                                                        switch (selectedOption) {
-                                                            case "Ban":
-                                                                typeHidden.value = 1;
-                                                                break;
-                                                            case "Ghe":
-                                                                typeHidden.value = 2;
-                                                                break;
-                                                            case "May Tinh":
-                                                                typeHidden.value = 3;
-                                                                break;
-                                                            default:
-                                                                typeHidden.value = ""; // Nếu không có lựa chọn nào phù hợp, có thể đặt lại giá trị là rỗng
-                                                        }
+                                                        typeHidden.value = selectedIndex;
                                                     }
                                                 </script>
                                             </div>
@@ -245,20 +231,9 @@
                                                     function displaySelectedValueStatus() {
                                                         var select = document.getElementById("assetStatus");
                                                         var selectedIndex = select.selectedIndex;
-                                                        var selectedOption = select.options[selectedIndex].text;
                                                         var typeHidden = document.getElementById("typeHiddenStatus");
-
-                                                        switch (selectedOption) {
-                                                            case "Available":
-                                                                typeHiddenStatus.value = 0;
-                                                                break;
-                                                            case "Unavailable":
-                                                                typeHiddenStatus.value = 1;
-                                                                break;
-
-                                                            default:
-                                                                typeHiddenStatus.value = 0; // Nếu không có lựa chọn nào phù hợp, có thể đặt lại giá trị là rỗng
-                                                        }
+                                                        console.log(selectedIndex);
+                                                        typeHidden.value = selectedIndex-1;
                                                     }
                                                 </script>
                                             </div>

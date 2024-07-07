@@ -1,20 +1,20 @@
 package DACNPM.asset_management.controller;
 
 import DACNPM.asset_management.model.*;
-import DACNPM.asset_management.service.AssetService;
+import DACNPM.asset_management.service.*;
 
-import DACNPM.asset_management.service.StatusService;
-import DACNPM.asset_management.service.TypeService;
-import DACNPM.asset_management.service.WarehouseService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -32,7 +32,8 @@ public class AssetController {
     @Resource
     WarehouseService warehouseService;
 
-
+    @Resource
+    CommentService commentService;
 
     @GetMapping("/home")
     public String getAllAsset(@SessionAttribute(name = "loggedInAccount", required = false) Account loggedInAccount, Model model, @Param("keyword") String keyword, HttpSession session) {
@@ -124,6 +125,78 @@ public class AssetController {
         model.addAttribute("listStatus",listStatus);
         model.addAttribute("oldStatus",oldStatus);
         return "edit-asset";
+    }
+
+    @GetMapping("/detailAsset/{id}")
+    public String getDetailAsset(@SessionAttribute(name = "loggedInAccount", required = false) Account loggedInAccount, @PathVariable("id") int id, Model model) {
+        Map<Integer,Status> statusMap=new HashMap<>();
+        Map<Integer,Type> typeMap=new HashMap<>();
+        Map<Integer, Warehouse> warehouseMap = new HashMap<>();
+        Map<Integer,String> listNameComment=new HashMap<>();
+
+        if (loggedInAccount == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("loggedInAccount", loggedInAccount);
+
+
+        Optional<Asset> optionalAsset  = assetService.findAssetById(id);
+        Type oldType = typeService.getTypeByAssetId(id);
+
+        Status oldStatus=statusService.getStatusByAssetId(id);
+        Optional<Warehouse> warehouseOptional=warehouseService.getQuantityByAssetId(id);
+        if(warehouseOptional.isPresent()){
+            Warehouse warehouse=warehouseOptional.get();
+            model.addAttribute("warehouse",warehouse);
+        }
+
+        model.addAttribute("oldType",oldType);
+
+        if (optionalAsset.isPresent()) {
+            Asset asset = optionalAsset.get();
+            model.addAttribute("asset", asset);
+
+            List<Comment> comments =commentService.findCommentByAssetId(id);
+            for(Comment c:comments){
+                String accoutFullName=commentService.findAccoutNameById(c.getId());
+                listNameComment.put(c.getId(),accoutFullName);
+            }
+            model.addAttribute("listNameComment",listNameComment);
+            model.addAttribute("comments", comments);
+            model.addAttribute("newComment", new Comment());
+
+
+            Optional<Status> statusOptional =assetService.getStatusByAssetId(asset.getIdAsset());
+            if(statusOptional.isPresent()){
+                Status status=statusOptional.get();
+                statusMap.put(asset.getIdAsset(),status);
+            }
+
+            Optional<Type> typeOptional =assetService.getTypeByAssetId(asset.getIdAsset());
+            if(typeOptional.isPresent()){
+                Type type=typeOptional.get();
+                typeMap.put(asset.getIdAsset(),type);
+            }
+        } else {
+            model.addAttribute("errorMessage", "Not found asset with ID: " + id);
+        }
+
+        model.addAttribute("statusMap", statusMap);
+        model.addAttribute("typeMap", typeMap);
+        model.addAttribute("oldStatus",oldStatus);
+        return "detail-asset";
+    }
+
+    @PostMapping("/asset/{id}/comment")
+    public String addComment( @PathVariable("id") int id, @ModelAttribute("comment")Comment newComment) {
+
+        int acId=(int)(newComment.getAccountId());
+        newComment.setAccountId(acId);
+        newComment.setContent(newComment.getContent());
+        newComment.setAssetId(id);
+        newComment.setCreatedAt(new Date());
+        commentService.saveComment(newComment);
+        return "redirect:/detailAsset/"+id;
     }
 
     @PostMapping("updateAsset/{id}")
