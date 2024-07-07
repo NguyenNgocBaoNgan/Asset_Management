@@ -257,7 +257,7 @@
                     <div class="comments-section" style="min-width:500px;margin-left: 20px">
                         <h2 th:text="#{comment}"></h2>
                         <div style="max-height: 400px;overflow-y: auto">
-                            <div th:each="comment : ${comments}">
+                            <div style="width: 95%;height: auto;word-break: break-word;white-space: normal; " th:each="comment : ${comments}">
                                 <p style="font-size: 16px; margin-bottom: -3px"><strong th:text="${listNameComment.get(comment.getId())}"></strong>: <span th:text="${comment.content}"></span></p>
                                 <p style="font-size: 12px"><em th:text="${comment.createdAt}"></em></p>
                             </div>
