@@ -21,4 +21,7 @@ public class Status {
     @Column(name="value")
     private String valueStatus;
 
+    public Status(int idStatus) {
+        this.idStatus = idStatus;
+    }
 }

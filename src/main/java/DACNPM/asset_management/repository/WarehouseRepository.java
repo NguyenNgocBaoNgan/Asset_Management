@@ -11,4 +11,5 @@ import java.util.List;
 public interface WarehouseRepository extends JpaRepository<Warehouse,Integer> {
     @Query(value = "CALL check_quantity(:id_asset);", nativeQuery = true)
     List<Integer> checkQuantity(@Param("id_asset") int id_asset);
+
 }

@@ -16,7 +16,7 @@ public class DetailAccount {
 
     @Id
     @Column(name="id_account")
-    private int idAccount;
+    private Integer idAccount;
 
     @Column(name="first_name")
     private String firstName;

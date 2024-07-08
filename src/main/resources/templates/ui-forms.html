@@ -27,22 +27,16 @@
                             <div class="card-body">
                                 <p th:if="${session.error}" class="alert alert-primary" role="alert" th:text="${session.error}">
                                 </p>
-                                <form action="/form/request" method="post" th:object="${formData}">
-                                    <div class="mb-3">
-                                        <label class="form-label" th:text="#{accountID}" ></label>
-                                        <input type="text" th:field="*{id.idAccount}"
-                                               name="idAccount" id="disabledTextInput" class="form-control"
-                                               th:placeholder="#{employeeID}" required>
-                                    </div>
+                                <form id="requestForm">
                                     <div class="mb-3">
                                         <label for="disabledSelect" class="form-label" th:text="#{assetName}"></label>
-                                        <select id="disabledSelect" th:field="*{id.idAsset}"
+                                        <select id="disabledSelect"
                                                 name="idAsset" class="form-select">
                                         </select>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" th:text="#{quantity}"></label>
-                                        <input id="quantityInput" type="number" th:field="*{quantity}" name="quantity" class="form-control"
+                                        <input id="quantityInput" type="number" name="quantity" class="form-control"
                                                placeholder="">
                                     </div>
                                     <button type="submit" id="submit" class="btn btn-primary" th:text="#{submit}"></button>
@@ -76,8 +70,6 @@
         });
     });
 
-</script>
-<script th:inline="javascript">
     // Lấy thẻ form và nút submit theo id
     var form = document.querySelector('form');
     var quantityInput = document.getElementById('quantityInput');
@@ -101,8 +93,34 @@
             alert('Vui lòng thêm số lượng');
         }
     });
-</script>
 
+    $(document).ready(function() {
+        $('#requestForm').submit(function(event) {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+
+            // Thu thập dữ liệu từ form
+            var formData = {
+                idAsset: $('select[name="idAsset"]').val(),
+                quantity: $('input[name="quantity"]').val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/request',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    // Xử lý phản hồi thành công
+                    alert('Request submitted successfully!');
+                },
+                error: function(xhr, status, error) {
+                    // Xử lý lỗi
+                    alert('Error: ' + xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
 <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/sidebarmenu.js"></script>
 <script src="../assets/js/app.min.js"></script>
