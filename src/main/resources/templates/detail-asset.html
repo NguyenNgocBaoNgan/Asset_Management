@@ -165,14 +165,13 @@
                     <div class="nenmodall w-75" id="nenmodal-1" style="margin-top: -30px">
                         <div class="card w-100">
                             <div class="card-body">
-
                                 <div class="card-body" style="margin-top: -20px;">
                                     <div class="row formbold-input-group" style="height: 40px">
                                         <div class="col-40" style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
                                             <h6  class="mb-0 title-home" fw-semibold th:text="#{assetID}"></h6>
                                         </div>
                                         <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                            <h6 style="white-space: normal;" class="fw-semibold mb-1 w-100 " th:text="${asset.idAsset}"></h6>
+                                            <h6 style="white-space: normal;" class="fw-semibold mb-1 w-100 asset-id" th:data-index="${asset.idAsset}" th:text="${asset.idAsset}"></h6>
                                         </div>
                                     </div>
                                         <div class="row formbold-input-group" style="height: 40px">
@@ -249,6 +248,23 @@
                                             </div>
                                         </div>
                                 </div>
+                                <div class="card-body">
+                                    <h5 class="card-title fw-semibold mb-4" th:text="#{borrowRequest}"></h5>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <p th:if="${session.error}" class="alert alert-primary" role="alert" th:text="${session.error}">
+                                            </p>
+                                            <form id="requestForm">
+                                                <div class="mb-3">
+                                                    <label class="form-label" th:text="#{quantity}"></label>
+                                                    <input id="quantityInput" type="number" name="quantity" class="form-control"
+                                                           placeholder="">
+                                                </div>
+                                                <button type="submit" id="submit" class="btn btn-primary" th:text="#{submit}"></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -283,6 +299,61 @@
 </div>
 </div>
 <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+<script th:inline="javascript">
+        // Lấy thẻ form và nút submit theo id
+    var form = document.querySelector('form');
+    var quantityInput = document.getElementById('quantityInput');
+    var submitButton = document.getElementById('submit');
+
+    // Thêm sự kiện 'submit' vào form
+    form.addEventListener('submit', function(event) {
+        // Lấy giá trị của trường số liệu
+        var quantityValue = quantityInput.value;
+        if (quantityValue.trim() == '') {
+            // Ngăn chặn gửi form lên server nếu giá trị không hợp lệ
+            event.preventDefault();
+            // Hiển thị thông báo hoặc thực hiện hành động phù hợp ở đây
+            alert('Vui lòng thêm số lượng');
+            return;
+
+        }
+        // Kiểm tra nếu giá trị nhỏ hơn hoặc bằng 1
+        if (parseInt(quantityValue) < 1) {
+            // Ngăn chặn gửi form lên server nếu giá trị không hợp lệ
+            event.preventDefault();
+            // Hiển thị thông báo hoặc thực hiện hành động phù hợp ở đây
+            alert('Vui lòng thêm số lượng');
+            return;
+        }
+    });
+
+    $(document).ready(function() {
+        $('#requestForm').submit(function(event) {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+
+            // Thu thập dữ liệu từ form
+            var formData = {
+                idAsset: $('h6.asset-id').data('index'),
+                quantity: $('input[name="quantity"]').val()
+            };
+            alert(formData);
+            $.ajax({
+                type: 'POST',
+                url: '/request',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    // Xử lý phản hồi thành công
+                    alert('Request submitted successfully!');
+                },
+                error: function(xhr, status, error) {
+                    // Xử lý lỗi
+                    alert('Error: ' + xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
 <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/sidebarmenu.js"></script>
 <script src="../assets/js/app.min.js"></script>

@@ -85,6 +85,11 @@ public class FormService {
             MESS = "ACCOUNT NOT EXISTS";
             return false;
         }
+        if (listBorrowDTO.getQuantity() == null) {// kiểm tra SỐ LƯỢNG LÀ NULL
+            MESS = "INPUT QUANTITY";
+            return false;
+        }
+
         listBorrowDTO.setIdAccount(account.getId_account()); // gán id vào dto
 
         ListBorrow listBorrow = mapperGenerate.convert(listBorrowDTO, ListBorrow.class); // covert dto - entity

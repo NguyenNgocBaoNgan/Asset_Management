@@ -1,471 +1,443 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:fmt="http://www.thymeleaf.org/extras/formats/th">
+
+<fmt:setNumberFormat pattern="###,###,### VNĐ"/>
 <head>
-  <meta charset="utf-8">
-  <title>Trang chủ</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
-  <link rel="stylesheet" href="../assets/css/styles.min.css" />
-  <style>
-    /* CSS nền hiển thị Modal */
-    .nenmodal .nenmodal2 {
-      position:fixed;
-      top:0px;
-      left:0px;
-      width:100vw;
-      height:100vh;
-      background:rgba(0,0,0,0.7);
-      z-index:1;
-      display:none;
-    }
-    /* CSS bảng nội dung Modal */
-    .nenmodal .ndmodal {
-      position:absolute;
-      top:50%;
-      left:60%;
-      transform:translate(-50%,-50%) scale(0);
-      background:#fff;
-      width:900px;
-      z-index:2;
-      text-align:center;
-      padding:20px;
-      box-sizing:border-box;
-      font-family:"Open Sans",sans-serif;
-      border-radius:20px;
-      display: block;
-      position: fixed;
-      box-shadow:0px 0px 10px #111;
-    }
-    @media (max-width: 700px) {
-      .nenmodal .ndmodal {width:90%;}
-    }
-    /* CSS bao bọc của nút tắt Modal */
-    .nenmodal .closemodal {
-      text-align:center;
-      margin-top:-40px;
-      margin-bottom:10px;
-    }
-    .mr-10{
-      margin-right: 70px;
-    }
+    <meta charset="utf-8">
+    <title>Trang chủ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png"/>
+    <link rel="stylesheet" href="../assets/css/styles.min.css"/>
+    <style>
+        /* CSS nền hiển thị Modal */
+        .nenmodal .nenmodal2 {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+            display: none;
+        }
 
-    .center{
-      text-align: center;
-    }
-    /* CSS nút tắt modal */
-    .closemodal button{
-      width:40px;
-      height:40px;
-      font-size:30px;
-      padding:0px;
-      border-radius:100%;
-      background:#333;
-      color:#fff;
-      border:none;
-    }
-    .nenmodal.active .nenmodal2 {
-      display:block;
-    }
-    /* CSS hiệu ứng hiển thị Modal */
-    .nenmodal.active .ndmodal {
-      transition:all 300ms ease-in-out;
-      transform:translate(-50%,-50%) scale(1);
-    }
+        /* CSS bảng nội dung Modal */
+        .nenmodal .ndmodal {
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%) scale(0);
+            background: #fff;
+            width: 900px;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+            border-radius: 20px;
+            display: block;
+            position: fixed;
+            box-shadow: 0px 0px 10px #111;
+        }
 
-    .input-row {
-      white-space: nowrap; /* Ngăn các phần tử xuống dòng */
-    }
+        @media (max-width: 700px) {
+            .nenmodal .ndmodal {
+                width: 90%;
+            }
+        }
 
-    .title-home {
-      font-weight: 700;
-      font-size: 16px;
-    }
-    .input-row input {
-      display: inline-block; /* Hiển thị input trên cùng một hàng */
-      width: 120px; /* Đặt chiều rộng tự động */
-      margin-right: 30px; /* Khoảng cách giữa các input */
-      /*float:inline-start;*/
-    }
-    .input-row .form-sl  {
-      display: inline-block; /* Hiển thị input trên cùng một hàng */
-      width: 50px; /* Đặt chiều rộng tự động */
-      margin-right: 30px; /* Khoảng cách giữa các input */
-      /*float:inline-start;*/
-    }
-    .formbold-input-group input, .formbold-input-group select, .formbold-input-group textarea {
-      width: 100%;
-      height: 50%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-      resize: vertical;
-    }
-    .type-options {
-      display: none;
-    }
+        /* CSS bao bọc của nút tắt Modal */
+        .nenmodal .closemodal {
+            text-align: center;
+            margin-top: -40px;
+            margin-bottom: 10px;
+        }
 
-    .col-40 {
-      float: left;
-      width: 40%;
-      margin-top: 6px;
-      text-align: left;
-    }
+        .mr-10 {
+            margin-right: 70px;
+        }
 
-    /* Floating column for inputs: 75% width */
-    .col-60 {
-      float: left;
-      width: 60%;
-      margin-top: 6px;
-    }
+        .center {
+            text-align: center;
+        }
 
-    .btn-form {
-      display: flex;
-      justify-content: flex-end;
-    }
+        /* CSS nút tắt modal */
+        .closemodal button {
+            width: 40px;
+            height: 40px;
+            font-size: 30px;
+            padding: 0px;
+            border-radius: 100%;
+            background: #333;
+            color: #fff;
+            border: none;
+        }
 
-    .btn-form button{
-      margin-left: 5px;
-      padding: 12px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  </style>
-  <!-- js Modal -->
-  <script>
-    function momodal(){
-      document.getElementById("nenmodal-1").classList.toggle("active");
-    }
-    function redirectToHome() {
-      window.location.href = "/home"; // Adjust the URL if necessary
-    }
-    function showOptions() {
-      var typeOptions = document.getElementById("typeOptions");
-      if (typeOptions.style.display === "none") {
-        typeOptions.style.display = "block";
-      } else {
-        typeOptions.style.display = "none";
-      }
-    }
-  </script>
+        .nenmodal.active .nenmodal2 {
+            display: block;
+        }
+
+        /* CSS hiệu ứng hiển thị Modal */
+        .nenmodal.active .ndmodal {
+            transition: all 300ms ease-in-out;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .input-row {
+            white-space: nowrap; /* Ngăn các phần tử xuống dòng */
+        }
+
+        .title-home {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .input-row input {
+            display: inline-block; /* Hiển thị input trên cùng một hàng */
+            width: 120px; /* Đặt chiều rộng tự động */
+            margin-right: 30px; /* Khoảng cách giữa các input */
+            /*float:inline-start;*/
+        }
+
+        .input-row .form-sl {
+            display: inline-block; /* Hiển thị input trên cùng một hàng */
+            width: 50px; /* Đặt chiều rộng tự động */
+            margin-right: 30px; /* Khoảng cách giữa các input */
+            /*float:inline-start;*/
+        }
+
+        .formbold-input-group input, .formbold-input-group select, .formbold-input-group textarea {
+            width: 100%;
+            height: 50%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .type-options {
+            display: none;
+        }
+
+        .col-40 {
+            float: left;
+            width: 40%;
+            margin-top: 6px;
+            text-align: left;
+        }
+
+        /* Floating column for inputs: 75% width */
+        .col-60 {
+            float: left;
+            width: 60%;
+            margin-top: 6px;
+        }
+
+        .btn-form {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-form button {
+            margin-left: 5px;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+    <!-- js Modal -->
+    <script>
+        function momodal() {
+            document.getElementById("nenmodal-1").classList.toggle("active");
+        }
+
+        function redirectToHome() {
+            window.location.href = "/home"; // Adjust the URL if necessary
+        }
+
+        function showOptions() {
+            var typeOptions = document.getElementById("typeOptions");
+            if (typeOptions.style.display === "none") {
+                typeOptions.style.display = "block";
+            } else {
+                typeOptions.style.display = "none";
+            }
+        }
+    </script>
 </head>
 <body>
 <!--  Body Wrapper -->
 <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
      data-sidebar-position="fixed" data-header-position="fixed">
-  <!-- Sidebar Start -->
-<!--  <aside class="left-sidebar">-->
-<!--    &lt;!&ndash; Sidebar scroll&ndash;&gt;-->
-<!--    <div>-->
-<!--      &lt;!&ndash; Sidebar navigation&ndash;&gt;-->
-<!--      <nav class="sidebar-nav scroll-sidebar" data-simplebar="" >-->
-<!--        <ul id="sidebarnav">-->
-<!--          <li class="nav-small-cap">-->
-<!--            <span>-->
-<!--              <i class="ti ti-home" style="font-size:21px"></i>-->
-<!--            </span>-->
-<!--            <span class="hide-menu" >-->
-<!--              <a href="/home" style="color: #000;margin-left: 11px">Home</a>-->
-<!--            </span>-->
-<!--          </li>-->
-<!--          <li class="sidebar-item" th:if="${loggedInAccount.role == 0}">-->
-<!--            <a class="sidebar-link" href="/response" aria-expanded="false">-->
-<!--                <span>-->
-<!--                  <i class="ti ti-cards"></i>-->
-<!--                </span>-->
-<!--              <span class="hide-menu" th:text="#{listBorrow}"></span>-->
-<!--            </a>-->
-<!--          </li>-->
-<!--          <li class="sidebar-item">-->
-<!--            <a class="sidebar-link" href="/form" aria-expanded="false">-->
-<!--                <span>-->
-<!--                  <i class="ti ti-file-description"></i>-->
-<!--                </span>-->
-<!--              <span class="hide-menu" th:text="#{registerBorrow}"></span>-->
-<!--            </a>-->
-<!--          </li>-->
-<!--          <li class="sidebar-item" th:if="${loggedInAccount.role == 0}">-->
-<!--            <a class="sidebar-link" href="/register" aria-expanded="false">-->
-<!--              <span>-->
-<!--                    <i class="ti ti-user-plus"></i>-->
-<!--                </span>-->
-<!--              <span class="hide-menu" th:text="#{register}"></span>-->
-<!--            </a>-->
-<!--          </li>-->
-<!--          <li class="sidebar-item">-->
-<!--            <a class="sidebar-link" href="/dang-xuat" aria-expanded="false">-->
-<!--              <span>-->
-<!--                <i class="ti ti-login"></i>-->
-<!--              </span>-->
-<!--              <span class="hide-menu" th:text="#{logout}">Logout</span>-->
-<!--            </a>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--      </nav>-->
-<!--      &lt;!&ndash; End Sidebar navigation &ndash;&gt;-->
-<!--    </div>-->
-<!--    &lt;!&ndash; End Sidebar scroll&ndash;&gt;-->
-<!--  </aside>-->
-  <!--  Sidebar End -->
-  <!--  Main wrapper -->
-  <div th:replace="~{/fragments/sidebar::sidebar}"></div>
-  <!--  Sidebar End -->
-  <!--  Main wrapper -->
-  <div class="body-wrapper">
-    <!--  Header Start -->
-    <div th:replace="~{/fragments/header::header}" ></div>
-    <!--  Header Start -->
-<!--    <header class="app-header">-->
-<!--      <nav class="navbar navbar-expand-lg navbar-light">-->
-<!--        <ul class="navbar-nav">-->
-<!--          <li class="nav-item d-block d-xl-none">-->
-<!--            <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">-->
-<!--              <i class="ti ti-menu-2"></i>-->
-<!--            </a>-->
-<!--          </li>-->
-<!--          <li class="nav-item">-->
-<!--            <a class="nav-link nav-icon-hover" href="javascript:void(0)">-->
-<!--              <i class="ti ti-bell-ringing"></i>-->
-<!--              <div class="notification bg-primary rounded-circle"></div>-->
-<!--            </a>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--        <div class="navbar-collapse justify-content-end px-0" id="navbarNav">-->
-<!--          <div class="language-selector">-->
-<!--            <a href="?lang=vi" class="lang-btn">Vietnamese</a>-->
-<!--            <span>|</span>-->
-<!--            <a href="?lang=en" class="lang-btn">English</a>-->
-<!--          </div>-->
-<!--          <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">-->
-<!--            <li class="nav-item dropdown">-->
-<!--              <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"-->
-<!--                 aria-expanded="false">-->
-<!--                <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">-->
-<!--              </a>-->
-<!--              <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">-->
-<!--                <div class="message-body">-->
-<!--                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">-->
-<!--                    <i class="ti ti-user fs-6"></i>-->
-<!--                    <p class="mb-0 fs-3">My Profile</p>-->
-<!--                  </a>-->
-<!--                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">-->
-<!--                    <i class="ti ti-mail fs-6"></i>-->
-<!--                    <p class="mb-0 fs-3">My Account</p>-->
-<!--                  </a>-->
-<!--                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">-->
-<!--                    <i class="ti ti-list-check fs-6"></i>-->
-<!--                    <p class="mb-0 fs-3">My Task</p>-->
-<!--                  </a>-->
-<!--                  <a href="/dang-xuat" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </li>-->
-<!--          </ul>-->
-<!--        </div>-->
-<!--      </nav>-->
-<!--    </header>-->
-    <!--  Header End -->
 
-    <div class="container-fluid"style="max-width: none!important;
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div th:replace="~{/fragments/sidebar::sidebar}"></div>
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+        <!--  Header Start -->
+        <div th:replace="~{/fragments/header::header}"></div>
+        <!--  Header End -->
+        <div class="container-fluid" style="max-width: none!important;
 ">
-      <!--  Row 1 -->
-      <form th:action="@{/home}">
-        <input type="text" name="keyword" id="keyword" size="50" height="37px" th:value="${keyword}" required />
-        &nbsp
-        <button type="submit" class="btn btn-info m-1" th:text="#{search}"></button>
-        <button type="button" class="btn btn-warning m-1" id="btnClear" onclick="clearSearch()" th:text="#{clear}"></button>
-        <button  th:if="${loggedInAccount.role == 0}" type="button" class="btn btn-success m-1" onclick="momodal()" th:text="#{addAsset}"></button>
+            <!--  Row 1 -->
+            <form th:action="@{/home}">
+                <input type="text" name="keyword" id="keyword" size="50" height="37px" th:value="${keyword}" required/>
+                &nbsp
+                <button type="submit" class="btn btn-info m-1" th:text="#{search}"></button>
+                <button type="button" class="btn btn-warning m-1" id="btnClear" onclick="clearSearch()"
+                        th:text="#{clear}"></button>
+                <button th:if="${loggedInAccount.role == 0}" type="button" class="btn btn-success m-1"
+                        onclick="momodal()" th:text="#{addAsset}"></button>
 
-      </form>
-      <div>
-        <!-- html modal -->
-        <div class="nenmodal"  id="nenmodal-1">
-          <div class="nenmodal2" ></div>
-          <div class="container-fluid ndmodal" style="margin-top: 40px">
-            <div class="card" style="margin-bottom: 0px">
-              <div class="card-body">
-                <h5 class="card-title fw-semibold mb-4">Forms</h5>
-                <div class="card-body" style="margin-top: -20px;">
-                  <form method="post" action="#" th:action="@{/addNewAsset}" th:object="${asset}">
-                    <div class="row formbold-input-group">
-                      <div class="col-40">
-                        <label class="formbold-form-label" th:text="#{assetID}">
-                        </label>
-                      </div>
-                      <div class="col-60">
-                        <input type="text"  id="assetID" required th:field="*{idAsset}"  th:placeholder="#{assetIdHolder}" class="formbold-form-input"/>
-                      </div>
-                    </div>
-                    <div class="row formbold-input-group">
-                      <div class="col-40">
-                        <label class="formbold-form-label" th:text="#{assetName}"></label>
-                      </div>
-                      <div class="col-60">
-                        <input type="text"  id="assetName" th:field="*{assetName}" th:placeholder="#{assetNameHolder}" class="formbold-form-input"/>
-                      </div>
-                    </div>
-                    <div class="row formbold-input-group">
-                      <div class="col-40">
-                        <label  class="formbold-form-label"th:text="#{assetCategory}"></label>
-                      </div>
-                      <div class="col-60">
-                        <div id="typeOptions" class="type-options" style="display: block">
-                          <select name="occupation" id="assetType" class="formbold-form-select" onchange="displaySelectedValue()">
-                            <option value="" disabled selected hidden th:text="#{selectCategory}"></option>
-                            <option th:each="type : ${listType}" th:value="${type.typeName}" th:text="${type.typeName}"></option>
-                          </select>
-                          <input type="hidden" id="typeHidden" name="type" th:field="*{type}" />
+            </form>
+            <div>
+                <!-- html modal -->
+                <div class="nenmodal" id="nenmodal-1">
+                    <div class="nenmodal2"></div>
+                    <div class="container-fluid ndmodal" style="margin-top: 40px">
+                        <div class="card" style="margin-bottom: 0px">
+                            <div class="card-body">
+                                <h5 class="card-title fw-semibold mb-4">Forms</h5>
+                                <div class="card-body" style="margin-top: -20px;">
+                                    <form method="post" action="#" th:action="@{/addNewAsset}" th:object="${asset}">
+                                        <div class="row formbold-input-group">
+                                            <div class="col-40">
+                                                <label class="formbold-form-label" th:text="#{assetID}">
+                                                </label>
+                                            </div>
+                                            <div class="col-60">
+                                                <input type="text" id="assetID" required th:field="*{idAsset}"
+                                                       th:placeholder="#{assetIdHolder}" class="formbold-form-input"/>
+                                            </div>
+                                        </div>
+                                        <div class="row formbold-input-group">
+                                            <div class="col-40">
+                                                <label class="formbold-form-label" th:text="#{assetName}"></label>
+                                            </div>
+                                            <div class="col-60">
+                                                <input type="text" id="assetName" th:field="*{assetName}"
+                                                       th:placeholder="#{assetNameHolder}" class="formbold-form-input"/>
+                                            </div>
+                                        </div>
+                                        <div class="row formbold-input-group">
+                                            <div class="col-40">
+                                                <label class="formbold-form-label" th:text="#{assetCategory}"></label>
+                                            </div>
+                                            <div class="col-60">
+                                                <div id="typeOptions" class="type-options" style="display: block">
+                                                    <select name="occupation" id="assetType"
+                                                            class="formbold-form-select"
+                                                            onchange="displaySelectedValue()">
+                                                        <option value="" disabled selected hidden
+                                                                th:text="#{selectCategory}"></option>
+                                                        <option th:each="type : ${listType}" th:value="${type.typeName}"
+                                                                th:text="${type.typeName}"></option>
+                                                    </select>
+                                                    <input type="hidden" id="typeHidden" name="type"
+                                                           th:field="*{type}"/>
+                                                </div>
+                                                <script>
+                                                    function displaySelectedValue() {
+                                                        var select = document.getElementById("assetType");
+                                                        var selectedIndex = select.selectedIndex;
+                                                        var typeHidden = document.getElementById("typeHidden");
+                                                        typeHidden.value = selectedIndex;
+                                                    }
+                                                </script>
+                                            </div>
+                                        </div>
+                                        <div class="row formbold-input-group">
+                                            <div class="col-40">
+                                                <label for="number" class="formbold-form-label"
+                                                       th:text="#{quantity}"></label>
+                                            </div>
+                                            <div class="col-60">
+                                                <input type="text" name="quantity" required id="quantity"
+                                                       th:placeholder="#{quantityHolder}" class="formbold-form-input"/>
+                                            </div>
+                                        </div>
+                                        <div class="row formbold-input-group">
+                                            <div class="col-40">
+                                                <label for="number" class="formbold-form-label"
+                                                       th:text="#{purchasePrice}"></label>
+                                            </div>
+                                            <div class="col-60">
+                                                <input type="text" name="number" id="number" th:field="*{purchasePrice}"
+                                                       th:placeholder="#{purchaseHolder}" class="formbold-form-input"/>
+                                            </div>
+                                        </div>
+                                        <div class="row formbold-input-group">
+                                            <div class="col-40">
+                                                <label for="date-purcharse" class="formbold-form-label"
+                                                       th:text="#{purchaseDate}"></label>
+                                            </div>
+                                            <div class="col-60">
+                                                <input type="date" name="date-purcharse" th:field="*{datePurchase}"
+                                                       id="date-purcharse" class="formbold-form-input"/>
+                                            </div>
+                                        </div>
+                                        <div class="row formbold-input-group">
+                                            <div class="col-40">
+                                                <label for="description" class="formbold-form-label"
+                                                       th:text="#{description}"></label>
+                                            </div>
+                                            <div class="col-60">
+                                                <textarea rows="6" name="description" id="description"
+                                                          th:field="*{description}"
+                                                          th:placeholder="#{descriptionHolder}"
+                                                          class="formbold-form-input"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row btn-form" style="margin-top: -55px">
+                                            <button type="submit" class="col-2 btn btn-success m-1"
+                                                    th:text="#{success}"></button>
+                                            <button type="button" class="col-2 btn btn-default m-1" th:text="#{cancel}"
+                                                    onclick="redirectToHome()"></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <script>
-                          function displaySelectedValue() {
-                            var select = document.getElementById("assetType");
-                            var selectedIndex = select.selectedIndex;
-                            var typeHidden = document.getElementById("typeHidden");
-                            typeHidden.value = selectedIndex;
-                          }
-                        </script>
-                      </div>
                     </div>
-                    <div class="row formbold-input-group">
-                      <div class="col-40">
-                        <label for="number"  class="formbold-form-label" th:text="#{quantity}"></label>
-                      </div>
-                      <div class="col-60">
-                        <input type="text" name="quantity" required id="quantity" th:placeholder="#{quantityHolder}" class="formbold-form-input"/>
-                      </div>
-                    </div>
-                    <div class="row formbold-input-group">
-                      <div class="col-40">
-                        <label for="number" class="formbold-form-label" th:text="#{purchasePrice}"></label>
-                      </div>
-                      <div class="col-60">
-                        <input type="text" name="number" id="number"th:field="*{purchasePrice}" th:placeholder="#{purchaseHolder}" class="formbold-form-input"/>
-                      </div>
-                    </div>
-                    <div class="row formbold-input-group">
-                      <div class="col-40">
-                        <label for="date-purcharse"  class="formbold-form-label" th:text="#{purchaseDate}"></label>
-                      </div>
-                      <div class="col-60">
-                        <input type="date" name="date-purcharse" th:field="*{datePurchase}" id="date-purcharse"  class="formbold-form-input"/>
-                      </div>
-                    </div>
-                    <div class="row formbold-input-group">
-                      <div class="col-40">
-                        <label for="description" class="formbold-form-label" th:text="#{description}"></label>
-                      </div>
-                      <div class="col-60">
-                        <textarea rows="6" name="description" id="description" th:field="*{description}" th:placeholder="#{descriptionHolder}" class="formbold-form-input"></textarea>
-                      </div>
-                    </div>
-                    <div class="row btn-form" style="margin-top: -55px">
-                      <button  type="submit" class="col-2 btn btn-success m-1" th:text="#{success}"></button>
-                      <button  type="button" class="col-2 btn btn-default m-1" th:text="#{cancel}" onclick="redirectToHome()" ></button>
-                    </div>
-                  </form>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-12 d-flex align-items-stretch">
-          <div class="card w-100">
-            <div class="card-body p-4">
-              <h5 style="font-size: 18px;font-weight: bold" class="card-title mb-4" th:text="#{listAsset}"></h5>
-              <div class="table-responsive">
-                <table class="table text-nowrap mb-0 align-middle">
-                  <thead class="text-dark fs-4">
-                  <tr>
-                    <th class="border-bottom-0">
-                      <h6  class="mb-0 title-home">Id</h6>
-                    </th>
-                    <th class="border-bottom-0">
-                      <h6  class="mb-0 title-home" th:text="#{assetName}"></h6>
-                    </th>
-                    <th class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
-                      <h6  class=" mb-0 title-home" th:text="#{assetCategory}" ></h6>
-                    </th>
+            <div class="row">
+                <div class="col-lg-12 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        <div class="card-body p-4">
+                            <h5 style="font-size: 18px;font-weight: bold" class="card-title mb-4"
+                                th:text="#{listAsset}"></h5>
+                            <div class="table-responsive">
+                                <table class="table text-nowrap mb-0 align-middle">
+                                    <thead class="text-dark fs-4">
+                                    <tr>
+                                        <th class="border-bottom-0">
+                                            <h6 class="mb-0 title-home">Id</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="mb-0 title-home" th:text="#{assetName}"></h6>
+                                        </th>
+                                        <th class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
+                                            <h6 class=" mb-0 title-home" th:text="#{assetCategory}"></h6>
+                                        </th>
 
-                    <th class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
-                      <h6  class="mb-0 title-home" th:text="#{status}"></h6>
-                    </th>
-                    <th class="border-bottom-0">
-                      <h6  class="mb-0 title-home center" th:text="#{quantityInStock}" ></h6>
-                    </th>
-                    <th class="border-bottom-0">
-                      <h6  class="mb-0 title-home center" th:text="#{quantityBorrowed}"  ></h6>
-                    </th>
-                    <th class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
-                      <h6  class="mb-0 title-home" th:text="#{price}"></h6>
-                    </th>
-                    <th class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
-                      <h6  class="mb-0 title-home center" th:text="#{date}"></h6>
-                    </th>
+                                        <th class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
+                                            <h6 class="mb-0 title-home" th:text="#{status}"></h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="mb-0 title-home center" th:text="#{quantityInStock}"></h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="mb-0 title-home center" th:text="#{quantityBorrowed}"></h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="mb-0 title-home" th:text="#{price}"></h6>
+                                        </th>
+                                        <th class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
+                                            <h6 class="mb-0 title-home center" th:text="#{date}"></h6>
+                                        </th>
 
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr th:each="asset : ${listAsset}">
-                    <td class="border-bottom-0"><h6 class="fw-semibold mb-0"th:text="${asset.idAsset}"></h6></td>
-                    <td class="border-bottom-0">
-                      <h6 style="white-space: normal;" class="fw-semibold mb-1 " th:text="${asset.assetName}"></h6>
-                    </td>
-                    <td class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
-                      <h6  class="fw-semibold mb-1 " th:text="${typeMap.get(asset.idAsset).typeName}"></h6>
-                    </td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="asset : ${listAsset}">
+                                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0"
+                                                                        th:text="${asset.idAsset}"></h6></td>
+                                        <td class="border-bottom-0">
+                                            <h6 style="white-space: normal;" class="fw-semibold mb-1 "
+                                                th:text="${asset.assetName}"></h6>
+                                        </td>
+                                        <td class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
+                                            <h6 class="fw-semibold mb-1 "
+                                                th:text="${typeMap.get(asset.idAsset).typeName}"></h6>
+                                        </td>
 
-                    <td class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
-                      <h6 class="fw-semibold mb-1 " th:text="${statusMap.get(asset.idAsset).valueStatus}"></h6>
-                    </td>
-                    <td class="border-bottom-0">
-                      <h6 class="fw-semibold mb-1 center" th:text="${assetWarehouseMap.get(asset.idAsset).getStockQuantity()}"></h6>
-                    </td>
-                    <td class="border-bottom-0">
-                      <h6 class="fw-semibold mb-1 center" name="unavailableQuantity"  th:text="${assetWarehouseMap.get(asset.idAsset).getUnavailableQuantity()}"></h6>
-                    </td>
-                    <td class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
-                      <h6 class="fw-semibold mb-1 " th:text="${asset.purchasePrice} + ' VNĐ'"></h6>
-                    </td>
-                    <td class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
-                      <div class="d-flex align-items-center gap-2">
-                        <span class="badge bg-primary rounded-3 fw-semibold" th:text="${asset.datePurchase}"></span>
-                      </div>
-                    </td>
-
-<!--                    <td class="border-bottom-0"  style="padding:16px 0px">-->
-<!--                      <form  th:if="${loggedInAccount.role == 0}" id="deleteForm" th:action="@{/deleteAsset/{id}(id=${asset.idAsset})}" method="post" onsubmit="return confirm('Are you sure you want to delete this asset?')">-->
-<!--                        <button type="submit" class="btn btn-danger m-1" th:text="#{delete}"></button>-->
-<!--                      </form>-->
-<!--                    </td>-->
-                    <td class="border-bottom-0" style="padding:16px 0px" >
-                      <button type="submit" class="btn btn-success m-1"  >
-                        <a th:href="@{/detailAsset/{id}(id=${asset.idAsset})}" style="color:white" th:text="#{detail}"></a>
-                      </button>
-                    </td>
-                    <td class="border-bottom-0" style="padding:16px 0px" >
-                      <button  th:if="${loggedInAccount.role == 0}" type="submit" class="btn btn-warning m-1"  >
-                        <a th:href="@{/updateAsset/{id}(id=${asset.idAsset})}" style="color:white" th:text="#{update}"></a>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                  </tbody>
-                </table>
-              </div>
+                                        <td class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
+                                            <h6 class="fw-semibold mb-1 "
+                                                th:text="${statusMap.get(asset.idAsset).valueStatus}"></h6>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-1 center"
+                                                th:text="${assetWarehouseMap.get(asset.idAsset).getStockQuantity()}"></h6>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-1 center" name="unavailableQuantity"
+                                                th:text="${assetWarehouseMap.get(asset.idAsset).getUnavailableQuantity()}"></h6>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <span class="price" th:text="${asset.purchasePrice}"></span>
+                                        </td>
+                                        <td class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span class="badge bg-primary rounded-3 fw-semibold"
+                                                      th:text="${asset.datePurchase}"></span>
+                                            </div>
+                                        </td>
+                                        <td class="border-bottom-0" style="padding:16px 0px">
+                                            <button type="submit" class="btn btn-success m-1">
+                                                <a th:href="@{/detailAsset/{id}(id=${asset.idAsset})}"
+                                                   style="color:white" th:text="#{detail}"></a>
+                                            </button>
+                                        </td>
+                                        <td class="border-bottom-0" style="padding:16px 0px">
+                                            <button th:if="${loggedInAccount.role == 0}" type="submit"
+                                                    class="btn btn-warning m-1">
+                                                <a th:href="@{/updateAsset/{id}(id=${asset.idAsset})}"
+                                                   style="color:white" th:text="#{update}"></a>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 <script type="text/javascript">
-  function clearSearch() {
-    window.location = "[[@{/home}]]";
-  }
+    function clearSearch() {
+        window.location = "[[@{/home}]]";
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // Lấy tất cả phần tử có class price
+        const prices = document.querySelectorAll('.price');
+
+        function formatCurrency(num) {
+            return num.toLocaleString('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            });
+        }
+
+        // Duyệt qua từng phần tử
+        prices.forEach(price => {
+
+            // Lấy giá trị gốc
+            const originalPrice = parseInt(price.innerHTML);
+
+            // Định dạng
+            const formattedPrice = formatCurrency(originalPrice);
+
+            // Gán lại giá trị đã định dạng
+            price.innerHTML = formattedPrice;
+
+        });
+
+    });
+
+
 </script>
+
 <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
 <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/sidebarmenu.js"></script>

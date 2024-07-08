@@ -15,6 +15,8 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
     @Query("SELECT c FROM Comment c WHERE c.assetId=:assetId")
     List<Comment> findCommentByAssetId(@Param("assetId") int assetId);
 
+    List<Comment> findAllByAssetIdOrderByCreatedAtDesc(Integer assetId);
+
     @Query(value = "SELECT CONCAT(d.first_name,' ',d.last_name) FROM detail_account d JOIN comment c " +
             "ON d.id_account=c.account_id WHERE c.id=:id",nativeQuery = true)
     String getFullNameAccountById(@Param("id") int id);
