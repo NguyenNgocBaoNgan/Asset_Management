@@ -69,9 +69,8 @@
             }
         });
     });
-
     // Lấy thẻ form và nút submit theo id
-    var form = document.querySelector('form');
+    var form = document.getElementById('requestForm');
     var quantityInput = document.getElementById('quantityInput');
     var submitButton = document.getElementById('submit');
 
@@ -84,6 +83,7 @@
             event.preventDefault();
             // Hiển thị thông báo hoặc thực hiện hành động phù hợp ở đây
             alert('Vui lòng thêm số lượng');
+            return; // Dừng lại khi giá trị không hợp lệ
         }
         // Kiểm tra nếu giá trị nhỏ hơn hoặc bằng 1
         if (parseInt(quantityValue) < 1) {
@@ -91,33 +91,31 @@
             event.preventDefault();
             // Hiển thị thông báo hoặc thực hiện hành động phù hợp ở đây
             alert('Vui lòng thêm số lượng');
+            return; // Dừng lại khi giá trị không hợp lệ
         }
-    });
 
-    $(document).ready(function() {
-        $('#requestForm').submit(function(event) {
-            event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+        // Nếu mọi thứ hợp lệ, tiếp tục xử lý form
+        // Ngăn chặn hành vi mặc định của form
+        event.preventDefault();
 
-            // Thu thập dữ liệu từ form
-            var formData = {
-                idAsset: $('select[name="idAsset"]').val(),
-                quantity: $('input[name="quantity"]').val()
-            };
-
-            $.ajax({
-                type: 'POST',
-                url: '/request',
-                contentType: 'application/json',
-                data: JSON.stringify(formData),
-                success: function(response) {
-                    // Xử lý phản hồi thành công
-                    alert('Request submitted successfully!');
-                },
-                error: function(xhr, status, error) {
-                    // Xử lý lỗi
-                    alert('Error: ' + xhr.responseText);
-                }
-            });
+        // Thu thập dữ liệu từ form
+        var formData = {
+            idAsset: document.querySelector('h6.asset-id').dataset.index,
+            quantity: quantityValue
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/request',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            success: function(response) {
+                // Xử lý phản hồi thành công
+                alert('Request submitted successfully!');
+            },
+            error: function(xhr, status, error) {
+                // Xử lý lỗi
+                alert('Error: ' + xhr.responseText);
+            }
         });
     });
 </script>
