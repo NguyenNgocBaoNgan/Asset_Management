@@ -121,10 +121,12 @@
             display: flex;
             justify-content: flex-end;
         }
+
         .title-home {
             font-weight: 700;
             font-size: 16px;
         }
+
         .btn-form button {
             margin-left: 5px;
             padding: 12px 20px;
@@ -167,100 +169,121 @@
                             <div class="card-body">
                                 <div class="card-body" style="margin-top: -20px;">
                                     <div class="row formbold-input-group" style="height: 40px">
-                                        <div class="col-40" style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                            <h6  class="mb-0 title-home" fw-semibold th:text="#{assetID}"></h6>
+                                        <div class="col-40"
+                                             style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                            <h6 class="mb-0 title-home" fw-semibold th:text="#{assetID}"></h6>
                                         </div>
                                         <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                            <h6 style="white-space: normal;" class="fw-semibold mb-1 w-100 asset-id" th:data-index="${asset.idAsset}" th:text="${asset.idAsset}"></h6>
+                                            <h6 style="white-space: normal;" class="fw-semibold mb-1 w-100 asset-id"
+                                                th:data-index="${asset.idAsset}" th:text="${asset.idAsset}"></h6>
                                         </div>
                                     </div>
-                                        <div class="row formbold-input-group" style="height: 40px">
-                                            <div class="col-40" style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <h6  class="mb-0 title-home fw-semibold" th:text="#{assetName}"></h6>
-                                            </div>
-                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                                <h6 style="white-space: normal;" class="fw-semibold mb-1" th:text="${asset.assetName}"></h6>
-                                            </div>
+                                    <div class="row formbold-input-group" style="height: 40px">
+                                        <div class="col-40"
+                                             style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                            <h6 class="mb-0 title-home fw-semibold" th:text="#{assetName}"></h6>
                                         </div>
-                                        <div class="row formbold-input-group" style="height: 40px">
-                                            <div class="col-40 "  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <h6  class="fw-semibold mb-0 title-home" th:text="#{assetCategory}" ></h6>
-                                            </div>
+                                        <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
+                                            <h6 style="white-space: normal;" class="fw-semibold mb-1"
+                                                th:text="${asset.assetName}"></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row formbold-input-group" style="height: 40px">
+                                        <div class="col-40 "
+                                             style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                            <h6 class="fw-semibold mb-0 title-home" th:text="#{assetCategory}"></h6>
+                                        </div>
 
-                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                                <h6  class="fw-semibold mb-1 " th:text="${typeMap.get(asset.idAsset).typeName}"></h6>
-                                            </div>
+                                        <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
+                                            <h6 class="fw-semibold mb-1 "
+                                                th:text="${typeMap.get(asset.idAsset).typeName}"></h6>
+                                        </div>
+
+                                    </div>
+                                    <div class="row formbold-input-group" style="height: 40px">
+                                        <div class="col-40 "
+                                             style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                            <h6 class="fw-semibold mb-0 title-home" th:text="#{status}"></h6>
+                                        </div>
+
+                                        <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
+                                            <h6 class="fw-semibold mb-1 "
+                                                th:text="${statusMap.get(asset.idAsset).valueStatus}"></h6>
+                                        </div>
+
+                                    </div>
+                                    <div class="row formbold-input-group" style="height: 40px">
+                                        <div class="col-40 "
+                                             style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                            <h6 class="fw-semibold mb-0 title-home" th:text="#{quantityInStock}"></h6>
 
                                         </div>
-                                        <div class="row formbold-input-group" style="height: 40px">
-                                            <div class="col-40 "  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <h6  class="fw-semibold mb-0 title-home" th:text="#{status}"></h6>
-                                            </div>
+                                        <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
+                                            <h6 class="fw-semibold mb-1 center"
+                                                th:text="${warehouse.getStockQuantity()}"></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row formbold-input-group" style="height: 40px">
+                                        <div class="col-40 "
+                                             style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                            <h6 class="fw-semibold mb-0 title-home" th:text="#{quantityBorrowed}"></h6>
+                                        </div>
+                                        <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
+                                            <h6 class="fw-semibold mb-1 center" name="unavailableQuantity"
+                                                th:text="${warehouse.getUnavailableQuantity()}"></h6>
 
-                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                                <h6 class="fw-semibold mb-1 " th:text="${statusMap.get(asset.idAsset).valueStatus}"></h6>
-                                            </div>
-
                                         </div>
-                                        <div class="row formbold-input-group" style="height: 40px">
-                                            <div class="col-40 "  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <h6  class="fw-semibold mb-0 title-home" th:text="#{quantityInStock}" ></h6>
-
-                                            </div>
-                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                                <h6 class="fw-semibold mb-1 center" th:text="${warehouse.getStockQuantity()}"></h6>
-                                            </div>
+                                    </div>
+                                    <div class="row formbold-input-group" style="height: 40px">
+                                        <div class="col-40 "
+                                             style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                            <h6 class="fw-semibold mb-0 title-home" th:text="#{price}"></h6>
                                         </div>
-                                        <div class="row formbold-input-group" style="height: 40px">
-                                            <div class="col-40 "  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <h6  class="fw-semibold mb-0 title-home" th:text="#{quantityBorrowed}"  ></h6>
-                                            </div>
-                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                                <h6 class="fw-semibold mb-1 center" name="unavailableQuantity"
-                                                    th:text="${warehouse.getUnavailableQuantity()}"></h6>
-
-                                            </div>
+                                        <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
+                                            <h6 class="fw-semibold mb-1 "
+                                                th:text="${asset.purchasePrice} + ' VNĐ'"></h6>
                                         </div>
-                                        <div class="row formbold-input-group" style="height: 40px">
-                                            <div class="col-40 "  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <h6  class="fw-semibold mb-0 title-home" th:text="#{price}"></h6>
-                                            </div>
-                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                                <h6 class="fw-semibold mb-1 " th:text="${asset.purchasePrice} + ' VNĐ'"></h6>
+                                    </div>
+                                    <div class="row formbold-input-group" style="height: 40px">
+                                        <div class="col-40 "
+                                             style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                            <h6 class="fw-semibold mb-0 title-home center" th:text="#{date}"></h6>
+                                        </div>
+                                        <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span class="badge bg-primary rounded-3 fw-semibold"
+                                                      th:text="${asset.datePurchase}"></span>
                                             </div>
                                         </div>
-                                        <div class="row formbold-input-group" style="height: 40px">
-                                            <div class="col-40 "  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <h6  class="fw-semibold mb-0 title-home center" th:text="#{date}"></h6>
-                                            </div>
-                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <span class="badge bg-primary rounded-3 fw-semibold" th:text="${asset.datePurchase}"></span>
-                                                </div>
-                                            </div>
+                                    </div>
+                                    <div class="row formbold-input-group h-50" style="height: 40px">
+                                        <div class="col-40 "
+                                             style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
+                                            <h6 class="fw-semibold mb-0 title-home center"
+                                                th:text="#{description}"></h6>
                                         </div>
-                                        <div class="row formbold-input-group h-50" style="height: 40px">
-                                            <div class="col-40 "  style=" float: left;width: 40%;margin-top: 6px;text-align: left;">
-                                                <h6  class="fw-semibold mb-0 title-home center" th:text="#{description}"></h6>
-                                            </div>
-                                            <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
-                                                <h6 style="white-space: normal;" class="fw-semibold mb-0 fs-4" th:text="${asset.description}"></h6>
-                                            </div>
+                                        <div class="col-60" style="   float: left;width: 60%;margin-top: 6px;">
+                                            <h6 style="white-space: normal;" class="fw-semibold mb-0 fs-4"
+                                                th:text="${asset.description}"></h6>
                                         </div>
+                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title fw-semibold mb-4" th:text="#{borrowRequest}"></h5>
                                     <div class="card">
                                         <div class="card-body">
-                                            <p th:if="${session.error}" class="alert alert-primary" role="alert" th:text="${session.error}">
+                                            <p th:if="${session.error}" class="alert alert-primary" role="alert"
+                                               th:text="${session.error}">
                                             </p>
                                             <form id="requestForm">
                                                 <div class="mb-3">
                                                     <label class="form-label" th:text="#{quantity}"></label>
-                                                    <input id="quantityInput" type="number" name="quantity" class="form-control"
+                                                    <input id="quantityInput" type="number" name="quantity"
+                                                           class="form-control"
                                                            placeholder="">
                                                 </div>
-                                                <button type="submit" id="submit" class="btn btn-primary" th:text="#{submit}"></button>
+                                                <button type="submit" id="submit" class="btn btn-primary"
+                                                        th:text="#{submit}"></button>
                                             </form>
                                         </div>
                                     </div>
@@ -272,24 +295,38 @@
 
                     <div class="comments-section" style="min-width:500px;margin-left: 20px">
                         <h2 th:text="#{comment}"></h2>
-                        <div style="max-height: 400px;overflow-y: auto">
-                            <div style="width: 95%;height: auto;word-break: break-word;white-space: normal; " th:each="comment : ${comments}">
-                                <p style="font-size: 16px; margin-bottom: -3px"><strong th:text="${listNameComment.get(comment.getId())}"></strong>: <span th:text="${comment.content}"></span></p>
+                        <div style="max-height: 400px; overflow-y: auto">
+                            <div style="width: 95%; height: auto; word-break: break-word; white-space: normal;"
+                                 th:each="comment, commentIndex : ${comments}">
+                                <p style="font-size: 16px; margin-bottom: -3px"
+                                   th:data-comment-id="${comment.id}"
+                                   th:data-comment-content="${comment.content}"
+                                   th:data-index="${commentIndex.index}">
+                                    <strong th:text="${listNameComment.get(comment.getId())}"></strong>:
+                                    <span class="comment-content" th:text="${comment.content}"></span>
+                                </p>
                                 <p style="font-size: 12px"><em th:text="${comment.createdAt}"></em></p>
                             </div>
                         </div>
-<!--                        <h5 th:text="#{addComment}"></h5>-->
-                        <form th:action="@{/asset/{id}/comment(id=${asset.idAsset})}" th:object="${newComment}" method="post">
-                            <div>
-                                <input type="" style="display: none" th:value="${loggedInAccount.getId_account()}"  name="accountId" id="accountId" th:field="*{accountId}"/>
 
-                                <textarea style="padding-left: 20px;min-height: 100px;  width: 95%;height: auto;word-break: break-word;white-space: normal; border-radius: 20px;margin-bottom: 20px;border: 1.5px solid #000;" id="content" th:placeholder="#{commentHolder}" th:field="*{content}" required></textarea>
-                            </div>
-                            <div style="margin-top: -20px;margin-right: 35px;float: right">
-                                <button type="submit" class="btn btn-danger m-1" th:text="#{send}"></button>
 
-                            </div>
-                        </form>
+                        <!--                        <h5 th:text="#{addComment}"></h5>-->
+<!--                        <form th:action="@{/asset/{id}/comment(id=${asset.idAsset})}" th:object="${newComment}"-->
+<!--                              method="post">-->
+<!--                            <div>-->
+<!--                                <input type="" style="display: none" th:value="${loggedInAccount.getId_account()}"-->
+<!--                                       name="accountId" id="accountId" th:field="*{accountId}"/>-->
+
+<!--                                <textarea-->
+<!--                                        style="padding-left: 20px;min-height: 100px;  width: 95%;height: auto;word-break: break-word;white-space: normal; border-radius: 20px;margin-bottom: 20px;border: 1.5px solid #000;"-->
+<!--                                        id="content" th:placeholder="#{commentHolder}" th:field="*{content}"-->
+<!--                                        required></textarea>-->
+<!--                            </div>-->
+<!--                            <div style="margin-top: -20px;margin-right: 35px;float: right">-->
+<!--                                <button type="submit" class="btn btn-danger m-1" th:text="#{send}"></button>-->
+
+<!--                            </div>-->
+<!--                        </form>-->
 
                     </div>
                 </div>
@@ -301,12 +338,12 @@
 <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
 <script th:inline="javascript">
     // Lấy thẻ form và nút submit theo id
-    var form = document.getElementById('requestForm');
+    var form = document.querySelector('form');
     var quantityInput = document.getElementById('quantityInput');
     var submitButton = document.getElementById('submit');
 
     // Thêm sự kiện 'submit' vào form
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', function (event) {
         // Lấy giá trị của trường số liệu
         var quantityValue = quantityInput.value;
         if (quantityValue.trim() == '') {
@@ -314,7 +351,8 @@
             event.preventDefault();
             // Hiển thị thông báo hoặc thực hiện hành động phù hợp ở đây
             alert('Vui lòng thêm số lượng');
-            return; // Dừng lại khi giá trị không hợp lệ
+            return;
+
         }
         // Kiểm tra nếu giá trị nhỏ hơn hoặc bằng 1
         if (parseInt(quantityValue) < 1) {
@@ -322,33 +360,64 @@
             event.preventDefault();
             // Hiển thị thông báo hoặc thực hiện hành động phù hợp ở đây
             alert('Vui lòng thêm số lượng');
-            return; // Dừng lại khi giá trị không hợp lệ
+            return;
         }
+    });
 
-        // Nếu mọi thứ hợp lệ, tiếp tục xử lý form
-        // Ngăn chặn hành vi mặc định của form
-        event.preventDefault();
+    $(document).ready(function () {
+        $('#requestForm').submit(function (event) {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định của form
 
-        // Thu thập dữ liệu từ form
-        var formData = {
-            idAsset: document.querySelector('h6.asset-id').dataset.index,
-            quantity: quantityValue
-        };
-        $.ajax({
-            type: 'POST',
-            url: '/request',
-            contentType: 'application/json',
-            data: JSON.stringify(formData),
-            success: function(response) {
-                // Xử lý phản hồi thành công
-                alert('Request submitted successfully!');
-            },
-            error: function(xhr, status, error) {
-                // Xử lý lỗi
-                alert('Error: ' + xhr.responseText);
-            }
+            // Thu thập dữ liệu từ form
+            var formData = {
+                idAsset: $('h6.asset-id').data('index'),
+                quantity: $('input[name="quantity"]').val()
+            };
+            alert(formData);
+            $.ajax({
+                type: 'POST',
+                url: '/request',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function (response) {
+                    // Xử lý phản hồi thành công
+                    alert('Request submitted successfully!');
+                },
+                error: function (xhr, status, error) {
+                    // Xử lý lỗi
+                    alert('Error: ' + xhr.responseText);
+                }
+            });
         });
     });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const commentElements = document.querySelectorAll('[data-comment-id]');
+
+        commentElements.forEach(element => {
+            const commentContent = element.getAttribute('data-comment-content').trim();
+            const commentIndex = parseInt(element.getAttribute('data-index'), 10); // Lấy và chuyển đổi giá trị của data-index thành số
+            console.log(commentContent);
+                fetch(`http://localhost:8000/predict/${encodeURIComponent(commentContent)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(commentContent);
+                        console.log(data.prediction);
+
+                        if (data.prediction === 0) { // Đổi màu nếu dự đoán là 0
+                            element.querySelector('.comment-content').style.color = 'red';
+                        } else if (data.prediction === 1) { // Đổi màu nếu dự đoán là 1
+                            element.querySelector('.comment-content').style.color = 'green';
+                        }
+
+                    })
+                    .catch(error => {
+                        console.error('Error fetching prediction:', error);
+                    });
+        });
+    });
+
 </script>
 <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/sidebarmenu.js"></script>
