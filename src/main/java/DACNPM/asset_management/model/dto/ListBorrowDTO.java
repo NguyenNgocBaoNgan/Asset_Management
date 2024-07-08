@@ -1,5 +1,6 @@
 package DACNPM.asset_management.model.dto;
 
+import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import lombok.*;
 
@@ -11,6 +12,8 @@ import lombok.*;
 public class ListBorrowDTO {
     @Nullable
     private Integer idAccount;
+    @Nonnull
     private Integer idAsset;
+    @Nonnull
     private Integer quantity;
 }

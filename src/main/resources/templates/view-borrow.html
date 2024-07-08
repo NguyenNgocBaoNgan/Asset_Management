@@ -44,7 +44,7 @@
                                 <table class="table text-nowrap mb-0 align-middle">
                                     <thead class="text-dark fs-4">
                                     <tr>
-                                        <th class="border-bottom-0">
+                                        <th th:if="${loggedInAccount.role == 0}" class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0" th:text="#{employeeID}"></h6>
                                         </th>
                                         <th class="border-bottom-0">
@@ -56,10 +56,10 @@
                                         <th class="border-bottom-0 text-center">
                                             <h6 class="fw-semibold mb-0" th:text="#{quantity}"></h6>
                                         </th>
-                                        <th class="border-bottom-0 text-center">
+                                        <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0" th:text="#{borrowDate}"></h6>
                                         </th>
-                                        <th class="border-bottom-0 text-center">
+                                        <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0" th:text="#{returnDate}"></h6>
                                         </th>
                                         <th th:if="${loggedInAccount.role == 0}" class="text-center border-bottom-0">
@@ -70,7 +70,7 @@
                                     <tbody>
                                     <div th:each="request, iterStat : ${listAllRequest}">
                                         <tr>
-                                            <td class="border-bottom-0">
+                                            <td th:if="${loggedInAccount.role == 0}" class="border-bottom-0">
                                                 <h6 class="fw-semibold mb-0"
                                                     th:text="${request.getDetailAccount().getIdAccount()}"></h6>
                                             </td>
@@ -85,22 +85,23 @@
                                             <td class="border-bottom-0 text-center">
                                                 <h6 class="mb-0 fw-normal" th:text="${request.getQuantity()}"></h6>
                                             </td>
-                                            <td class="border-bottom-0 text-center">
-                                                <h6 class="badge bg-primary rounded-3 fw-semibold margin-bottom-0"
+                                            <td class="border-bottom-0">
+                                                <h6 class="margin-bottom-0"
                                                     th:text="${#dates.format(request.getBorrowDate(), 'dd/MM/yyyy HH:mm:ss')}"></h6>
                                             </td>
-                                            <td class="border-bottom-0 text-center">
-                                                <h6 class="badge bg-primary rounded-3 fw-semibold margin-bottom-0"
-                                                    th:text="${#dates.format(request.getReturnDate(), 'dd/MM/yyyy HH:mm:ss')}"></h6>
+                                            <td class="border-bottom-0">
+                                                <h6 class="margin-bottom-0"
+                                                    th:text="${#dates.format(request.getReturnDate(), 'dd/MM/yyyy HH:mm')}"></h6>
                                             </td>
                                             <td th:if="${loggedInAccount.role == 0 && request.getStatus().getIdStatus() == 0}"
                                                 class="border-bottom-0 text-center">
-                                                <a class="btn btn-info m-1"
+                                                <a class="btn btn-info m-1" style="background: none; color:#2a3547"
                                                    th:href="@{'/updateStatusListBorrow/' + ${request.getAsset().getIdAsset()} + '/' + ${request.getDetailAccount().getIdAccount()}}">
                                                     Return
                                                 </a>
                                             </td>
-                                            <td class="border-bottom-0 text-center">
+                                            <td th:if="${loggedInAccount.getRole() != 0}"
+                                                class="border-bottom-0 text-center">
                                                 <div>
                                                     <a class="btn btn-info m-1 comment-btn"
                                                        style="background: none; color:#2a3547"
@@ -112,10 +113,10 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="8"> <!-- Sét colspan để phủ hết các cột của bảng -->
-                                                <div class="comment-section"
-                                                     th:id="'comment-section-' + ${iterStat.index}"
-                                                     style="display: none;">
+                                            <td colspan="8" class="comment-section"
+                                                th:id="'comment-section-' + ${iterStat.index}"
+                                                style="display: none;"> <!-- Sét colspan để phủ hết các cột của bảng -->
+                                                <div>
                                                     <!-- Input bình luận -->
                                                     <input type="text" class="form-control comment-input"
                                                            style="width: 80%; display: inline"
@@ -137,6 +138,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -162,7 +164,7 @@
 
         function showCommentSection(index) {
             const commentSection = document.getElementById(`comment-section-${index}`);
-            const isDisplayed = commentSection.style.display === 'block';
+            const isDisplayed = commentSection.style.display === 'revert';
 
             // Ẩn tất cả các phần bình luận khác
             document.querySelectorAll('.comment-section').forEach(section => {
@@ -172,7 +174,7 @@
             });
 
             // Toggle phần bình luận hiện tại
-            commentSection.style.display = isDisplayed ? 'none' : 'block';
+            commentSection.style.display = isDisplayed ? 'none' : 'revert';
         }
 
         document.querySelectorAll('.submit-comment').forEach(button => {
@@ -183,33 +185,33 @@
                 const comment = commentInput.value;
                 if (comment.trim() === '') {
                     alert('Vui lòng nhập bình luận');
+                    return;
                 }
 
-                // // Gửi dữ liệu bình luận bằng AJAX
-                // fetch('/comment', {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //     },
-                //     body: JSON.stringify({
-                //         assetId: assetId,
-                //         comment: comment,
-                //     }),
-                // })
-                //     .then(response => response.json())
-                //     .then(data => {
-                //         if (data.success) {
-                //             alert('Bình luận đã được gửi');
-                //             commentInput.value = ''; // Xóa nội dung bình luận sau khi gửi thành công
-                //             document.getElementById(`comment-section-${index}`).style.display = 'none'; // Ẩn form bình luận sau khi gửi thành công
-                //         } else {
-                //             alert('Đã xảy ra lỗi khi gửi bình luận');
-                //         }
-                //     })
-                //     .catch(error => {
-                //         console.error('Error:', error);
-                //         alert('Đã xảy ra lỗi khi gửi bình luận');
-                //     });
+                // Gửi dữ liệu bình luận bằng AJAX
+                fetch('/comment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        assetId: assetId,
+                        content: comment,
+                    }),
+                })
+                    .then(data => {
+                        if (data.ok) {
+                            alert('Bình luận đã được gửi');
+                            commentInput.value = ''; // Xóa nội dung bình luận sau khi gửi thành công
+                            document.getElementById(`comment-section-${index}`).style.display = 'none'; // Ẩn form bình luận sau khi gửi thành công
+                        } else {
+                            alert('Đã xảy ra lỗi khi gửi bình luận');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Đã xảy ra lỗi khi gửi bình luận');
+                    });
             });
         });
     });
