@@ -4,6 +4,24 @@
 <head th:replace="~{/fragments/sidebar::head(title='Danh sách mượn')}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .input-icon {
+            position: relative;
+            width: 100%;
+        }
+
+
+        .input-icon .btn-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            cursor: pointer;
+            color: #007bff;
+        }
+    </style>
 </head>
 <body>
 <!--  Body Wrapper -->
@@ -50,36 +68,70 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="request : ${listAllRequest}">
-                                        <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0" th:text="${request.getDetailAccount().getIdAccount()}"></h6>
-                                        </td>
-                                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0"
-                                                                        th:text="${request.getDetailAccount().getFullName()}"></h6>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-1"
-                                                th:text="${request.getAsset().getAssetName()}"></h6>
-                                        </td>
-                                        <td class="border-bottom-0 text-center">
-                                            <h6 class="mb-0 fw-normal" th:text="${request.getQuantity()}"></h6>
-                                        </td>
-                                        <td class="border-bottom-0 text-center">
-                                            <h6 class="badge bg-primary rounded-3 fw-semibold margin-bottom-0"
-                                               th:text="${#dates.format(request.getBorrowDate(), 'dd/MM/yyyy HH:mm:ss')}"></h6>
-                                        </td>
-
-                                        <td class="border-bottom-0 text-center">
-                                            <h6 class="badge bg-primary rounded-3 fw-semibold margin-bottom-0"
-                                               th:text="${#dates.format(request.getReturnDate(), 'dd/MM/yyyy HH:mm:ss')}"></h6>
-                                        </td>
-                                        <td th:if="${loggedInAccount.role == 0 && request.getStatus().getIdStatus() == 0}" class="border-bottom-0 text-center">
-                                            <a class="btn btn-info m-1" th:href="@{'/updateStatusListBorrow/' + ${request.getAsset().getIdAsset()} + '/' + ${request.getDetailAccount().getIdAccount()}}">
-                                                Return
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
+                                    <div th:each="request, iterStat : ${listAllRequest}">
+                                        <tr>
+                                            <td class="border-bottom-0">
+                                                <h6 class="fw-semibold mb-0"
+                                                    th:text="${request.getDetailAccount().getIdAccount()}"></h6>
+                                            </td>
+                                            <td class="border-bottom-0">
+                                                <h6 class="fw-semibold mb-0"
+                                                    th:text="${request.getDetailAccount().getFullName()}"></h6>
+                                            </td>
+                                            <td class="border-bottom-0">
+                                                <h6 class="fw-semibold mb-1"
+                                                    th:text="${request.getAsset().getAssetName()}"></h6>
+                                            </td>
+                                            <td class="border-bottom-0 text-center">
+                                                <h6 class="mb-0 fw-normal" th:text="${request.getQuantity()}"></h6>
+                                            </td>
+                                            <td class="border-bottom-0 text-center">
+                                                <h6 class="badge bg-primary rounded-3 fw-semibold margin-bottom-0"
+                                                    th:text="${#dates.format(request.getBorrowDate(), 'dd/MM/yyyy HH:mm:ss')}"></h6>
+                                            </td>
+                                            <td class="border-bottom-0 text-center">
+                                                <h6 class="badge bg-primary rounded-3 fw-semibold margin-bottom-0"
+                                                    th:text="${#dates.format(request.getReturnDate(), 'dd/MM/yyyy HH:mm:ss')}"></h6>
+                                            </td>
+                                            <td th:if="${loggedInAccount.role == 0 && request.getStatus().getIdStatus() == 0}"
+                                                class="border-bottom-0 text-center">
+                                                <a class="btn btn-info m-1"
+                                                   th:href="@{'/updateStatusListBorrow/' + ${request.getAsset().getIdAsset()} + '/' + ${request.getDetailAccount().getIdAccount()}}">
+                                                    Return
+                                                </a>
+                                            </td>
+                                            <td class="border-bottom-0 text-center">
+                                                <div>
+                                                    <a class="btn btn-info m-1 comment-btn"
+                                                       style="background: none; color:#2a3547"
+                                                       href="javascript:void(0);"
+                                                       th:data-index="${iterStat.index}">
+                                                        Bình luận
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="8"> <!-- Sét colspan để phủ hết các cột của bảng -->
+                                                <div class="comment-section"
+                                                     th:id="'comment-section-' + ${iterStat.index}"
+                                                     style="display: none;">
+                                                    <!-- Input bình luận -->
+                                                    <input type="text" class="form-control comment-input"
+                                                           style="width: 80%; display: inline"
+                                                           placeholder="Nhập bình luận..."
+                                                           th:id="'comment-input-' + ${iterStat.index}"
+                                                           th:value="${request.getAsset().getAssetName()}">
+                                                    <!-- Nút gửi bình luận -->
+                                                    <button class="btn btn-info m-1 submit-comment btn-icon"
+                                                            th:data-asset-id="${request.getAsset().getIdAsset()}"
+                                                            th:data-index="${iterStat.index}">
+                                                        <i class="fa fa-paper-plane"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </div>
                                     </tbody>
                                 </table>
                             </div>
@@ -90,6 +142,78 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Xử lý cho các nút bình luận kiểu anchor (<a>)
+        document.querySelectorAll('a.comment-btn').forEach(anchor => {
+            anchor.addEventListener('click', function (event) {
+                event.preventDefault(); // Ngăn chặn hành động mặc định của liên kết
+                const index = this.getAttribute('data-index');
+                showCommentSection(index);
+            });
+        });
+// Xử lý cho các nút bình luận kiểu button
+        document.querySelectorAll('button.comment-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const index = this.getAttribute('data-index');
+                showCommentSection(index);
+            });
+        });
+
+        function showCommentSection(index) {
+            const commentSection = document.getElementById(`comment-section-${index}`);
+            const isDisplayed = commentSection.style.display === 'block';
+
+            // Ẩn tất cả các phần bình luận khác
+            document.querySelectorAll('.comment-section').forEach(section => {
+                if (section.id !== `comment-section-${index}`) {
+                    section.style.display = 'none';
+                }
+            });
+
+            // Toggle phần bình luận hiện tại
+            commentSection.style.display = isDisplayed ? 'none' : 'block';
+        }
+
+        document.querySelectorAll('.submit-comment').forEach(button => {
+            button.addEventListener('click', function () {
+                const index = this.getAttribute('data-index');
+                const assetId = this.getAttribute('data-asset-id');
+                const commentInput = document.getElementById(`comment-input-${index}`);
+                const comment = commentInput.value;
+                if (comment.trim() === '') {
+                    alert('Vui lòng nhập bình luận');
+                }
+
+                // // Gửi dữ liệu bình luận bằng AJAX
+                // fetch('/comment', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //     },
+                //     body: JSON.stringify({
+                //         assetId: assetId,
+                //         comment: comment,
+                //     }),
+                // })
+                //     .then(response => response.json())
+                //     .then(data => {
+                //         if (data.success) {
+                //             alert('Bình luận đã được gửi');
+                //             commentInput.value = ''; // Xóa nội dung bình luận sau khi gửi thành công
+                //             document.getElementById(`comment-section-${index}`).style.display = 'none'; // Ẩn form bình luận sau khi gửi thành công
+                //         } else {
+                //             alert('Đã xảy ra lỗi khi gửi bình luận');
+                //         }
+                //     })
+                //     .catch(error => {
+                //         console.error('Error:', error);
+                //         alert('Đã xảy ra lỗi khi gửi bình luận');
+                //     });
+            });
+        });
+    });
+</script>
 <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
 <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/sidebarmenu.js"></script>
