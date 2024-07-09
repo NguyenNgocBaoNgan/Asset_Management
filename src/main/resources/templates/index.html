@@ -146,6 +146,22 @@
             border-radius: 4px;
             cursor: pointer;
         }
+        .custom-input {
+            width: 35%;
+            height: 37px;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px; /* Bo góc */
+            box-sizing: border-box;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .custom-input:focus,
+        .custom-input:hover {
+            border-color: #17a2b8;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25);
+        }
     </style>
     <!-- js Modal -->
     <script>
@@ -184,8 +200,8 @@
         <div class="container-fluid" style="max-width: none!important;
 ">
             <!--  Row 1 -->
-            <form th:action="@{/home}">
-                <input type="text" name="keyword" id="keyword" size="50" height="37px" th:value="${keyword}" required/>
+            <form th:action="@{/home}" >
+                <input type="text"  class="custom-input" name="keyword" id="keyword" size="50" height="37px" th:value="${keyword}" required/>
                 &nbsp
                 <button type="submit" class="btn btn-info m-1" th:text="#{search}"></button>
                 <button type="button" class="btn btn-warning m-1" id="btnClear" onclick="clearSearch()"
@@ -401,6 +417,12 @@
             </div>
         </div>
     </div>
+    <df-messenger class="custom-df-messenger"
+                  intent="WELCOME"
+                  chat-title="Hỏi đáp"
+                  agent-id="2741cc83-fd8d-4f34-bd1b-6a49a8e0d185"
+                  language-code="vi"
+    ></df-messenger>
 </div>
 <script type="text/javascript">
     function clearSearch() {
@@ -437,6 +459,7 @@
 
 
 </script>
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 
 <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
 <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

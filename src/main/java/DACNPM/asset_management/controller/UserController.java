@@ -1,8 +1,12 @@
 package DACNPM.asset_management.controller;
 
+import DACNPM.asset_management.mapper.MapperGenerate;
 import DACNPM.asset_management.model.Account;
 import DACNPM.asset_management.model.DetailAccount;
+import DACNPM.asset_management.model.response.AccountResponse;
+import DACNPM.asset_management.model.response.ListBorrowResponse;
 import DACNPM.asset_management.service.DetailAccountService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -17,6 +21,9 @@ public class UserController {
 
     @Autowired
     DetailAccountService detailAccountService;
+    @Autowired
+    MapperGenerate mapperGenerate;
+
 
     @GetMapping("/userManagement")
     public String userManagement(@SessionAttribute(name = "loggedInAccount", required = false)Account loggedInAccount, Model model, @Param("keyword") String keyword, HttpSession session) {
@@ -43,7 +50,21 @@ public class UserController {
         detailAccountService.updateUser(id, detailAccount);
         return "redirect:/userManagement";
     }
-
+    @ResponseBody
+    @GetMapping("/getUpdateUser/{id}")
+    public AccountResponse getDetailAccountById(@PathVariable("id") int id) {
+        try {
+            AccountResponse detailAccount = mapperGenerate.convert(detailAccountService.getDetailAccountById(id), AccountResponse.class);
+            if (detailAccount != null) {
+                return detailAccount;
+            } else {
+                throw new EntityNotFoundException("User not found with id: " + id);
+            }
+        } catch (Exception e) {
+            // Xử lý ngoại lệ và log lại
+            throw new RuntimeException("Failed to retrieve user with id: " + id, e);
+        }
+    }
 
 
     @PostMapping("/deleteUser/{id}")

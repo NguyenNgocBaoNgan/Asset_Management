@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,6 +15,7 @@ public class AccountResponse {
     private Integer idAccount;
     private String firstName;
     private String lastName;
+    private Date dayOfBirth;
     private String mail;
     private int role;
 

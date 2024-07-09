@@ -1,7 +1,9 @@
 package DACNPM.asset_management.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -23,7 +25,7 @@ public class DetailAccount {
 
     @Column(name="last_name")
     private String lastName;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="day_of_birth")
     private Date dayOfBirth;
 
@@ -34,6 +36,7 @@ public class DetailAccount {
     private int role;
 
     @OneToOne
+
     @JoinColumn(name = "id_account", referencedColumnName = "id_account")
     private Account account;
 }
