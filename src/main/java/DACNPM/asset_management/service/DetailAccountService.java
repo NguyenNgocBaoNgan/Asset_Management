@@ -42,4 +42,7 @@ public class DetailAccountService {
     public void deleteUser(int id){
         detailAccountRepository.deleteById(id);
     }
+    public DetailAccount getDetailAccountById(int id) {
+        return detailAccountRepository.findById(id).orElse(null);
+    }
 }
