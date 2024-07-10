@@ -18,4 +18,9 @@ public class LogoutController {
         session.removeAttribute("loggedInAccount");
         return "authentication-login";
     }
+    @GetMapping("/logout")
+    public String newLogout() {
+        return "redirect:/dang-xuat";
+    }
+
 }
