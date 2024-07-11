@@ -4,24 +4,6 @@
 <head th:replace="~{/fragments/sidebar::head(title='Danh sách mượn')}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        .input-icon {
-            position: relative;
-            width: 100%;
-        }
-
-
-        .input-icon .btn-icon {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            border: none;
-            background: none;
-            cursor: pointer;
-            color: #007bff;
-        }
-    </style>
 </head>
 <body>
 <!--  Body Wrapper -->
@@ -45,7 +27,7 @@
                                     <thead class="text-dark fs-4">
                                     <tr>
                                         <th th:if="${loggedInAccount.role == 0}" class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0" th:text="#{employeeID}"></h6>
+                                            <h6 class="fw-semibold mb-0">ID</h6>
                                         </th>
                                         <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0" th:text="#{employeeName}"></h6>
