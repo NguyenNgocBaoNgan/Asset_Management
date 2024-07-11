@@ -268,7 +268,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body" th:if="${loggedInAccount.role == 1}">
                                     <h5 class="card-title fw-semibold mb-4" th:text="#{borrowRequest}"></h5>
                                     <div class="card">
                                         <div class="card-body">
@@ -295,39 +295,49 @@
 
                     <div class="comments-section" style="min-width:500px;margin-left: 20px">
                         <h2 th:text="#{comment}"></h2>
-                        <div style="max-height: 400px; overflow-y: auto">
+                        <div class="col-5" style="max-height: 400px; overflow-y: auto">
                             <div style="width: 95%; height: auto; word-break: break-word; white-space: normal;"
                                  th:each="comment, commentIndex : ${comments}">
                                 <p style="font-size: 16px; margin-bottom: -3px"
                                    th:data-comment-id="${comment.id}"
+                                   th:data-comment-asset-id="${comment.getAssetId()}"
                                    th:data-comment-content="${comment.content}"
+                                   th:data-username="${listNameComment.get(comment.getId())}"
                                    th:data-index="${commentIndex.index}">
                                     <strong th:text="${listNameComment.get(comment.getId())}"></strong>:
                                     <span class="comment-content" th:text="${comment.content}"></span>
+<!--                                    <button th:if="${loggedInAccount.role == 0}" type="button"-->
+<!--                                            class="report-cmt-btn btn btn-success m-1"-->
+<!--                                            th:text="#{report}" data-color="#D27878FF"></button>-->
+<!--                                    <button th:if="${loggedInAccount.role == 0}" type="button"-->
+<!--                                            class="unreport-cmt-btn btn btn-success m-1"-->
+<!--                                            th:text="#{unreport}" data-color="#ffffff"></button>-->
+                                    <button th:if="${loggedInAccount.role == 0}" type="button"
+                                            class="delete-cmt-btn btn btn-success m-1"
+                                            th:text="#{delete}"></button>
                                 </p>
                                 <p style="font-size: 12px"><em th:text="${comment.createdAt}"></em></p>
                             </div>
                         </div>
 
 
-                        <!--                        <h5 th:text="#{addComment}"></h5>-->
-<!--                        <form th:action="@{/asset/{id}/comment(id=${asset.idAsset})}" th:object="${newComment}"-->
-<!--                              method="post">-->
-<!--                            <div>-->
-<!--                                <input type="" style="display: none" th:value="${loggedInAccount.getId_account()}"-->
-<!--                                       name="accountId" id="accountId" th:field="*{accountId}"/>-->
-
-<!--                                <textarea-->
-<!--                                        style="padding-left: 20px;min-height: 100px;  width: 95%;height: auto;word-break: break-word;white-space: normal; border-radius: 20px;margin-bottom: 20px;border: 1.5px solid #000;"-->
-<!--                                        id="content" th:placeholder="#{commentHolder}" th:field="*{content}"-->
-<!--                                        required></textarea>-->
-<!--                            </div>-->
-<!--                            <div style="margin-top: -20px;margin-right: 35px;float: right">-->
-<!--                                <button type="submit" class="btn btn-danger m-1" th:text="#{send}"></button>-->
-
-<!--                            </div>-->
-<!--                        </form>-->
-
+                        <div th:if="${loggedInAccount.role == 0}">
+                            <h5 th:text="#{addComment}"></h5>
+                            <form th:action="@{/asset/{id}/comment(id=${asset.idAsset})}" th:object="${newComment}"
+                                  method="post">
+                                <div>
+                                    <input type="" style="display: none" th:value="${loggedInAccount.getId_account()}"
+                                           name="accountId" id="accountId" th:field="*{accountId}"/>
+                                    <textarea
+                                            style="padding-left: 20px;min-height: 100px;  width: 95%;height: auto;word-break: break-word;white-space: normal; border-radius: 20px;margin-bottom: 20px;border: 1.5px solid #000;"
+                                            id="content" th:placeholder="#{commentHolder}" th:field="*{content}"
+                                            required></textarea>
+                                </div>
+                                <div style="margin-top: -20px;margin-right: 35px;float: right">
+                                    <button type="submit" class="btn btn-danger m-1" th:text="#{send}"></button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -335,6 +345,56 @@
     </div>
 </div>
 </div>
+
+<!--<script>-->
+<!--    document.addEventListener('DOMContentLoaded', () => {-->
+<!--        const commentElements = document.querySelectorAll('[data-comment-id]');-->
+<!--        commentElements.forEach(element => {-->
+<!--            const button = element.querySelector('.report-cmt-btn');-->
+<!--            button.addEventListener('click', () => {-->
+<!--                element.style.backgroundColor = button.getAttribute('data-color');-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!--<script>-->
+<!--    document.addEventListener('DOMContentLoaded', () => {-->
+<!--        const commentElements = document.querySelectorAll('[data-comment-id]');-->
+<!--        commentElements.forEach(element => {-->
+<!--            const button = element.querySelector('.unreport-cmt-btn');-->
+<!--            button.addEventListener('click', () => {-->
+<!--                element.style.backgroundColor = button.getAttribute('data-color');-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.delete-cmt-btn', function () {
+            const commentId = $(this).closest('p').data('comment-id');
+            const assetId = $(this).closest('p').data('comment-asset-id');
+
+            const confirmation = confirm('Bạn có chắc chắn muốn xóa comment này không?');
+            if (confirmation) {
+                $.ajax({
+                    url: `/comment/deleteComment/${commentId}/${assetId}`,
+                    type: 'POST',
+                    success: function (response) {
+                        console.log('Đã xóa comment thành công');
+                        $(this).closest('.comment').remove();
+                        // Reload trang sau khi xóa thành công
+                        location.reload();
+                    }.bind(this),
+                    error: function (xhr, status, error) {
+                        console.error('Lỗi xóa comment:', error);
+                    }
+                });
+            }
+        });
+    });
+
+</script>
+
 <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
 <script th:inline="javascript">
     // Lấy thẻ form và nút submit theo id
@@ -397,24 +457,19 @@
 
         commentElements.forEach(element => {
             const commentContent = element.getAttribute('data-comment-content').trim();
-            const commentIndex = parseInt(element.getAttribute('data-index'), 10); // Lấy và chuyển đổi giá trị của data-index thành số
-            console.log(commentContent);
-                fetch(`http://localhost:8000/predict/${encodeURIComponent(commentContent)}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(commentContent);
-                        console.log(data.prediction);
+            fetch(`http://localhost:8000/predict/${encodeURIComponent(commentContent)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.prediction === 0) { // Đổi màu nếu dự đoán là 0
+                        element.querySelector('.comment-content').style.color = 'red';
+                    } else if (data.prediction === 1) { // Đổi màu nếu dự đoán là 1
+                        element.querySelector('.comment-content').style.color = 'green';
+                    }
 
-                        if (data.prediction === 0) { // Đổi màu nếu dự đoán là 0
-                            element.querySelector('.comment-content').style.color = 'red';
-                        } else if (data.prediction === 1) { // Đổi màu nếu dự đoán là 1
-                            element.querySelector('.comment-content').style.color = 'green';
-                        }
-
-                    })
-                    .catch(error => {
-                        console.error('Error fetching prediction:', error);
-                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching prediction:', error);
+                });
         });
     });
 
