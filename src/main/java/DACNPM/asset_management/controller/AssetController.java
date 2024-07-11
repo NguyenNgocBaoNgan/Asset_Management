@@ -7,14 +7,11 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -159,8 +156,8 @@ public class AssetController {
 
             List<Comment> comments = commentService.findCommentByAssetId(id);
             for (Comment c : comments) {
-                String accoutFullName = commentService.findAccoutNameById(c.getId());
-                listNameComment.put(c.getId(), accoutFullName);
+                String accountFullName = commentService.findAccountNameById(c.getId());
+                listNameComment.put(c.getId(), accountFullName);
             }
             model.addAttribute("listNameComment", listNameComment);
             model.addAttribute("comments", comments);
@@ -190,7 +187,6 @@ public class AssetController {
 
     @PostMapping("/asset/{id}/comment")
     public String addComment(@PathVariable("id") int id, @ModelAttribute("comment") Comment newComment) {
-
         int acId = (int) (newComment.getAccountId());
         newComment.setAccountId(acId);
         newComment.setContent(newComment.getContent());
