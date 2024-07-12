@@ -20,6 +20,9 @@ public class CreateAccountController {
     @PostMapping("/detailAcc/register")
     public String registerUser(@ModelAttribute DetailAccount da, @ModelAttribute Account acc, HttpSession session, RedirectAttributes redirectAttributes) {
         try {
+           session.removeAttribute("error");
+//            signUpService.register(da, acc);
+
             if (signUpService.emailExists(da.getMail())) {
                 redirectAttributes.addFlashAttribute("error", "Email đã tồn tại. Vui lòng nhập email khác!");
                 return "redirect:/register";
@@ -30,8 +33,8 @@ public class CreateAccountController {
             }
             signUpService.register(da, acc);
         } catch (RuntimeException | MessagingException e) {
-            redirectAttributes.addFlashAttribute("error", "Vui lòng nhập đúng thông tin.");
-            return "redirect:/register";
+            session.removeAttribute("message");
+            session.setAttribute("error", "Error: " + e.getMessage());
         }
         return "redirect:/register";
     }
