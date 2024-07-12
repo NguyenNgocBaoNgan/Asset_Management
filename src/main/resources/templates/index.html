@@ -433,9 +433,6 @@
                                         </td>
 
                                         <td class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
-<!--                                            <h6 class="fw-semibold mb-1 "-->
-<!--                                                th:text="${statusMap.get(asset.idAsset).getIdStatus()==0 ? #{usable} : #{unusable}}">-->
-<!--                                            </h6>-->
                                             <h6 class="fw-semibold mb-1 "
                                                 th:if="${statusMap.get(asset.idAsset).getIdStatus() == 0}" th:text="#{usable}">
                                             </h6>
