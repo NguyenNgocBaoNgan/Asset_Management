@@ -162,7 +162,6 @@
             outline: 0;
             box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25);
         }
-
          df-messenger {
              --df-messenger-bot-message: #e4e9f0;
              --df-messenger-button-titlebar-color: #5D87FF;
@@ -171,7 +170,18 @@
              --df-messenger-send-icon: #878fac;
              --df-messenger-user-message: #e4e9f0;
          }
-
+        .form-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .form-buttons {
+            display: flex;
+            align-items: center;
+        }
+        .form-buttons button {
+            margin-left: 5px;
+        }
     </style>
     <!-- js Modal -->
     <script>
@@ -259,17 +269,31 @@
         <div class="container-fluid" style="max-width: none!important;
 ">
             <!--  Row 1 -->
-            <form th:action="@{/home}" >
-                <input type="text"  class="custom-input" name="keyword" id="keyword" size="50" height="37px" th:value="${keyword}" required/>
-                &nbsp
-                <button type="submit" class="btn btn-info m-1" th:text="#{search}"></button>
-                <button type="button" class="btn btn-warning m-1" id="btnClear" onclick="clearSearch()"
-                        th:text="#{clear}"></button>
-                <button th:if="${loggedInAccount.role == 0}" type="button" class="btn btn-success m-1"
-                        onclick="momodal()" th:text="#{addAsset}"></button>
-
+            <form th:action="@{/home}" class="form-container">
+                <div class="form-buttons">
+                    <input type="text" class="custom-input" name="keyword" id="keyword" size="50" height="37px"
+                           th:value="${keyword}" required/>
+                    &nbsp
+                    <button type="submit" class="btn btn-info m-1" th:text="#{search}"></button>
+                    <button type="button" class="btn btn-warning m-1" id="btnClear" onclick="clearSearch()"
+                            th:text="#{clear}"></button>
+                    <button th:if="${loggedInAccount.role == 0}" type="button" class="btn btn-success m-1"
+                            onclick="momodal()" th:text="#{addAsset}"></button>
+                </div>
+                <div>
+                    <!-- Nút Import Asset -->
+                    <input type="file" name="file" id="file" accept=".xls,.xlsx" style="display:none;"
+                           onchange="importAsset()">
+                    <button type="button" class="btn btn-warning m-1" id="btnImport"
+                            onclick="document.getElementById('file').click()" th:text="#{importAsset}"></button>
+                </div>
             </form>
-            <div>
+            <form id="preview" style="display:none;">
+                <table class="table table-bordered" id="fileContent"></table>
+                <button type="button" class="btn btn-success m-1" onclick="submitForm()">Submit</button>
+                <button type="button" class="btn btn-warning m-1" onclick="cancelPreview()">Cancel</button>
+
+            </form>            <div>
                 <!-- html modal -->
                 <div class="nenmodal" id="nenmodal-1">
                     <div class="nenmodal2"></div>
@@ -488,6 +512,77 @@
     function clearSearch() {
         window.location = "[[@{/home}]]";
     }
+
+    function importAsset() {
+        var fileInput = document.getElementById('file');
+        if (fileInput.files.length > 0) {
+            var formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            fetch('/preview', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    var table = document.getElementById('fileContent');
+                    table.innerHTML = '';
+                    var headerRow = document.createElement('tr');
+                    var headers = ["Id", "Tên tài sản", "Danh mục tài sản", "Trạng thái", "Số lượng trong kho", "Số lượng đã mượn", "Giá", "Ngày", "Mô tả"];
+                    headers.forEach(header => {
+                        var th = document.createElement('th');
+                        th.textContent = header;
+                        headerRow.appendChild(th);
+                    });
+                    table.appendChild(headerRow);
+
+                    data.forEach(row => {
+                        var tr = document.createElement('tr');
+                        row.forEach(cell => {
+                            var td = document.createElement('td');
+                            td.textContent = cell;
+                            tr.appendChild(td);
+                        });
+                        table.appendChild(tr);
+                    });
+                    document.getElementById('preview').style.display = 'block';
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    }
+
+    function submitForm() {
+        var fileInput = document.getElementById('file');
+        if (fileInput.files.length > 0) {
+            var formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Xử lý dữ liệu trả về từ server và cập nhật ListAsset
+                    document.getElementById('preview').style.display = 'none';
+                    window.location.reload();
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    }
+
+    function cancelPreview() {
+        document.getElementById('preview').style.display = 'none';
+    }
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
 
     document.addEventListener('DOMContentLoaded', function() {
 
