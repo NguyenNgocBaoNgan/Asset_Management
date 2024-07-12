@@ -162,6 +162,14 @@
             outline: 0;
             box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25);
         }
+         df-messenger {
+             --df-messenger-bot-message: #e4e9f0;
+             --df-messenger-button-titlebar-color: #5D87FF;
+             --df-messenger-chat-background-color: #fafafa;
+             /*--df-messenger-font-color: white;*/
+             --df-messenger-send-icon: #878fac;
+             --df-messenger-user-message: #e4e9f0;
+         }
         .form-container {
             display: flex;
             align-items: center;
@@ -207,7 +215,56 @@
     <!--  Main wrapper -->
     <div class="body-wrapper">
         <!--  Header Start -->
-        <div th:replace="~{/fragments/header::header}"></div>
+<!--        <div  th:include="~{/fragments/header::header}"></div>-->
+        <header class="app-header" style="z-index: 0" th:fragment="header">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <ul class="navbar-nav">
+                    <li class="nav-item d-block d-xl-none">
+                        <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                            <i class="ti ti-menu-2"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+                            <i class="ti ti-bell-ringing"></i>
+                            <div class="notification bg-primary rounded-circle"></div>
+                        </a>
+                    </li>
+                </ul>
+                <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+                    <div class="language-selector">
+                        <a href="?lang=vi" class="lang-btn" data-lang="vi" th:text="#{vietnamese}"></a>
+                        <span>|</span>
+                        <a href="?lang=en" class="lang-btn" data-lang="en" th:text="#{english}"></a>
+                    </div>
+                    <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                                <div class="message-body">
+                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <i class="ti ti-user fs-6"></i>
+                                        <p class="mb-0 fs-3">My Profile</p>
+                                    </a>
+                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <i class="ti ti-mail fs-6"></i>
+                                        <p class="mb-0 fs-3">My Account</p>
+                                    </a>
+                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <i class="ti ti-list-check fs-6"></i>
+                                        <p class="mb-0 fs-3">My Task</p>
+                                    </a>
+                                    <a href="/dang-xuat" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
         <!--  Header End -->
         <div class="container-fluid" style="max-width: none!important;
 ">
@@ -445,9 +502,10 @@
     </div>
     <df-messenger class="custom-df-messenger"
                   intent="WELCOME"
-                  chat-title="Hỏi đáp"
+                  th:chat-title="#{askSome}"
                   agent-id="2741cc83-fd8d-4f34-bd1b-6a49a8e0d185"
                   language-code="vi"
+                  wait-open="true"
     ></df-messenger>
 </div>
 <script type="text/javascript">
@@ -556,6 +614,58 @@
 
 
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const langLinks = document.querySelectorAll('.lang-btn');
+
+        langLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                const lang = event.target.getAttribute('data-lang'); // Lấy giá trị của data-lang
+                console.log(`Clicked ${lang} link`);
+
+                try {
+                    localStorage.setItem('selectedLanguage', lang); // Lưu ngôn ngữ vào localStorage
+                    console.log(`Ngôn ngữ đã được lưu: ${lang}`);
+
+                    // Cập nhật language-code của df-messenger
+                    const dfMessenger = document.querySelector('df-messenger');
+                    if (dfMessenger) {
+                        dfMessenger.setAttribute('language-code', lang);
+                        console.log(`Đã cập nhật language-code của df-messenger thành: ${lang}`);
+                    } else {
+                        console.error('Không tìm thấy phần tử df-messenger');
+                    }
+
+                    // Không ngăn chặn hành vi mặc định của liên kết
+                    // event.preventDefault();
+
+                    // Không cần reload trang thủ công
+                    // window.location.reload();
+                } catch (error) {
+                    console.error('Lỗi khi lưu vào localStorage:', error);
+                    // Xử lý lỗi khi không thể lưu vào localStorage
+                }
+            });
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Lấy ngôn ngữ được lưu trữ trong localStorage
+        console.log("aaaaaaaaa");
+        const selectedLanguage = localStorage.getItem('selectedLanguage');
+        console.log("aaaaaaaaa",selectedLanguage);
+        if (selectedLanguage) {
+            // Cập nhật language-code của df-messenger nếu đã lưu trữ trong localStorage
+            const dfMessenger = document.querySelector('df-messenger.custom-df-messenger');
+            if (dfMessenger) {
+                dfMessenger.setAttribute('language-code', selectedLanguage);
+            }
+        }
+    });
+</script>
+
 <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 
 <script src="../assets/libs/jquery/dist/jquery.min.js"></script>

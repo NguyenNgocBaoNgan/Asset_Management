@@ -20,9 +20,9 @@
                     <div class="card mb-0">
                         <div class="card-body">
                             <div class="language-selector">
-                                <a href="?lang=vi" class="lang-btn">Vietnamese</a>
+                                <a href="?lang=vi" class="lang-btn" th:text="#{vietnamese}"></a>
                                 <span>|</span>
-                                <a href="?lang=en" class="lang-btn">English</a>
+                                <a href="?lang=en" class="lang-btn" th:text="#{english}"></a>
                             </div>
                             <div style="text-align: center; font-size:24px;font-weight: 700  " th:text="#{signIn}"><b></b></div>
                             <p th:if="${session.error}" class="alert alert-danger" role="alert"

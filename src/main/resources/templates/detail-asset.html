@@ -304,12 +304,12 @@
                                    th:data-index="${commentIndex.index}">
                                     <strong th:text="${listNameComment.get(comment.getId())}"></strong>:
                                     <span class="comment-content" th:text="${comment.content}"></span>
-<!--                                    <button th:if="${loggedInAccount.role == 0}" type="button"-->
-<!--                                            class="report-cmt-btn btn btn-success m-1"-->
-<!--                                            th:text="#{report}" data-color="#D27878FF"></button>-->
-<!--                                    <button th:if="${loggedInAccount.role == 0}" type="button"-->
-<!--                                            class="unreport-cmt-btn btn btn-success m-1"-->
-<!--                                            th:text="#{unreport}" data-color="#ffffff"></button>-->
+                                    <!--                                    <button th:if="${loggedInAccount.role == 0}" type="button"-->
+                                    <!--                                            class="report-cmt-btn btn btn-success m-1"-->
+                                    <!--                                            th:text="#{report}" data-color="#D27878FF"></button>-->
+                                    <!--                                    <button th:if="${loggedInAccount.role == 0}" type="button"-->
+                                    <!--                                            class="unreport-cmt-btn btn btn-success m-1"-->
+                                    <!--                                            th:text="#{unreport}" data-color="#ffffff"></button>-->
                                     <button th:if="${loggedInAccount.role == 0}" type="button"
                                             class="delete-cmt-btn btn btn-success m-1"
                                             th:text="#{delete}"
