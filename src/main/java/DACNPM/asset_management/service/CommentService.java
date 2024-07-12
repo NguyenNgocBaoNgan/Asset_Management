@@ -6,7 +6,6 @@ import DACNPM.asset_management.model.Comment;
 import DACNPM.asset_management.model.dto.CommentDTO;
 import DACNPM.asset_management.model.response.CommentResponse;
 import DACNPM.asset_management.repository.AccountRepository;
-import DACNPM.asset_management.repository.AssetRepository;
 import DACNPM.asset_management.repository.CommentRepository;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,7 +31,7 @@ public class CommentService {
         return commentRepository.findCommentByAssetId(id);
     }
 
-    public String findAccoutNameById(int id) {
+    public String findAccountNameById(int id) {
         return commentRepository.getFullNameAccountById(id);
     }
 
@@ -69,4 +68,8 @@ public class CommentService {
         commentRepository.deleteById(id);
         return true;
     }
+    public void deleteComment(int id){
+        commentRepository.deleteById(id);
+    }
+
 }

@@ -223,9 +223,9 @@
                 </ul>
                 <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                     <div class="language-selector">
-                        <a href="?lang=vi" class="lang-btn" data-lang="vi">Vietnamese</a>
+                        <a href="?lang=vi" class="lang-btn" data-lang="vi" th:text="#{vietnamese}"></a>
                         <span>|</span>
-                        <a href="?lang=en" class="lang-btn" data-lang="en">English</a>
+                        <a href="?lang=en" class="lang-btn" data-lang="en" th:text="#{english}"></a>
                     </div>
                     <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
                         <li class="nav-item dropdown">
@@ -478,7 +478,7 @@
     </div>
     <df-messenger class="custom-df-messenger"
                   intent="WELCOME"
-                  chat-title=th:text="#{askSome}"
+                  th:chat-title="#{askSome}"
                   agent-id="2741cc83-fd8d-4f34-bd1b-6a49a8e0d185"
                   language-code="vi"
                   wait-open="true"

@@ -1,7 +1,5 @@
 body {
     color: #566787;
-
-
     font-family: 'Roboto', sans-serif;
 }
 .table-responsive {
@@ -79,9 +77,9 @@ table.table th i {
     margin: 0 5px;
     cursor: pointer;
 }
-table.table th:first-child {
-    width: 60px;
-}
+/*table.table th:first-child {*/
+/*    width: 60px;*/
+/*}*/
 table.table th:last-child {
     width: 120px;
 }

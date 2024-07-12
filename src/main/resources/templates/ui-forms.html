@@ -65,7 +65,7 @@
             },
             error: function(xhr, status, error) {
                 console.log(xhr.responseText); // Log responseText để kiểm tra lỗi
-                alert('Đã xảy ra lỗi khi tải danh sách tài sản.');
+                alert('Load list asset failed.');
             }
         });
     });
@@ -82,7 +82,7 @@
             // Ngăn chặn gửi form lên server nếu giá trị không hợp lệ
             event.preventDefault();
             // Hiển thị thông báo hoặc thực hiện hành động phù hợp ở đây
-            alert('Vui lòng thêm số lượng');
+            alert('Please. Input Quantity');
             return; // Dừng lại khi giá trị không hợp lệ
         }
         // Kiểm tra nếu giá trị nhỏ hơn hoặc bằng 1
@@ -90,7 +90,7 @@
             // Ngăn chặn gửi form lên server nếu giá trị không hợp lệ
             event.preventDefault();
             // Hiển thị thông báo hoặc thực hiện hành động phù hợp ở đây
-            alert('Vui lòng thêm số lượng');
+            alert('Please. Input Quantity');
             return; // Dừng lại khi giá trị không hợp lệ
         }
 

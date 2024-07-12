@@ -4,24 +4,6 @@
 <head th:replace="~{/fragments/sidebar::head(title='Danh sách mượn')}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        .input-icon {
-            position: relative;
-            width: 100%;
-        }
-
-
-        .input-icon .btn-icon {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            border: none;
-            background: none;
-            cursor: pointer;
-            color: #007bff;
-        }
-    </style>
 </head>
 <body>
 <!--  Body Wrapper -->
@@ -106,8 +88,9 @@
                                                     <a class="btn btn-info m-1 comment-btn"
                                                        style="background: none; color:#2a3547"
                                                        href="javascript:void(0);"
-                                                       th:data-index="${iterStat.index}">
-                                                        Bình luận
+                                                       th:data-index="${iterStat.index}"
+                                                       th:text="#{comment}"
+                                                    >
                                                     </a>
                                                 </div>
                                             </td>
@@ -138,7 +121,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -184,7 +166,7 @@
                 const commentInput = document.getElementById(`comment-input-${index}`);
                 const comment = commentInput.value;
                 if (comment.trim() === '') {
-                    alert('Vui lòng nhập bình luận');
+                    alert('Please, Input Comment');
                     return;
                 }
 
@@ -201,16 +183,15 @@
                 })
                     .then(data => {
                         if (data.ok) {
-                            alert('Bình luận đã được gửi');
                             commentInput.value = ''; // Xóa nội dung bình luận sau khi gửi thành công
                             document.getElementById(`comment-section-${index}`).style.display = 'none'; // Ẩn form bình luận sau khi gửi thành công
                         } else {
-                            alert('Đã xảy ra lỗi khi gửi bình luận');
+                            alert('No Comment');
                         }
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        alert('Đã xảy ra lỗi khi gửi bình luận');
+                        alert('No Comment');
                     });
             });
         });

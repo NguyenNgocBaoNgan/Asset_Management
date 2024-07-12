@@ -1,14 +1,11 @@
 <!doctype html>
 <html lang="en">
 
-<head th:replace="~{/fragments/sidebar::head(title='Quản lý tài khoản')}"  >
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!--    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />-->
-<!--    <link rel="stylesheet" href="../assets/css/styles.min.css" />-->
-
-
+    <link href="/assets/css/stylesUM.css" rel="stylesheet" />
+    <th:block th:replace="~{/fragments/sidebar::head(title='Quản lý tài khoản')}" />
 </head>
 
 <body>
@@ -61,7 +58,7 @@
 
                                 <!--                                    <a th:href="@{/updateUser/{id}(id=${user.idAccount})}" class="edit" title="Edit" data-toggle="modal" data-target="#nenmodal-1"><i class="material-icons">&#xE254;</i></a>-->
                                 <a href="#" class="edit" title="Edit" data-toggle="modal" data-target="#editUserModal" th:data-userid="${user.idAccount}"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip" th:data-userid="${user.idAccount}"><i class="material-icons">&#xE872;</i></a>
+<!--                                <a href="#" class="delete" title="Delete" data-toggle="tooltip" th:data-userid="${user.idAccount}"><i class="material-icons">&#xE872;</i></a>-->
 
 
                             </td>

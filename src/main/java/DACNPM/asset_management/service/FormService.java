@@ -89,7 +89,6 @@ public class FormService {
             MESS = "INPUT QUANTITY";
             return false;
         }
-
         listBorrowDTO.setIdAccount(account.getId_account()); // gán id vào dto
 
         ListBorrow listBorrow = mapperGenerate.convert(listBorrowDTO, ListBorrow.class); // covert dto - entity
@@ -102,13 +101,11 @@ public class FormService {
             return false;
         }
         listBorrow.setDetailAccount(detailAccount); // gán detailAccount
-
+        if (warehouseRepository.checkQuantity(listBorrow.getId().getIdAsset()).get(0) < listBorrow.getQuantity()) { // kiểm tra số lượng tồn kho
+            MESS = "NOT ENOUGH QUANTITY";
+            return false;
+        }
         if (listBorrowRepository.existsById(listBorrow.getId())) { // kiểm tra đã mượn tài sản chưa
-            System.out.println(warehouseRepository.checkQuantity(listBorrowDTO.getIdAsset()).get(0));
-            if (warehouseRepository.checkQuantity(listBorrow.getId().getIdAsset()).get(0) < listBorrow.getQuantity()) { // kiểm tra số lượng tồn kho
-                MESS = "NOT ENOUGH QUANTITY";
-                return false;
-            }
             //update số lượng nếu đã mượn
             listBorrow.setQuantity(listBorrow.getQuantity() + listBorrowRepository.findByIdAccountAndIdAsset(listBorrow.getId().getIdAccount(), listBorrow.getId().getIdAsset()).getQuantity());
         }
