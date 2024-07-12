@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost_3306
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 100428 (10.4.28-MariaDB)
+ Source Server Version : 100432 (10.4.32-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : asset_management
 
  Target Server Type    : MySQL
- Target Server Version : 100428 (10.4.28-MariaDB)
+ Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 08/07/2024 18:24:34
+ Date: 12/07/2024 13:07:27
 */
 
 SET NAMES utf8mb4;
@@ -22,10 +22,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account`  (
-  `id_account` int NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `role` int NULL DEFAULT NULL,
-  PRIMARY KEY (`id_account`) USING BTREE
+                            `id_account` int NOT NULL,
+                            `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                            `role` int NULL DEFAULT NULL,
+                            PRIMARY KEY (`id_account`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -43,14 +43,14 @@ INSERT INTO `account` VALUES (938413, 'HF7kd?ID', 1);
 -- ----------------------------
 DROP TABLE IF EXISTS `asset`;
 CREATE TABLE `asset`  (
-  `id_asset` int NOT NULL AUTO_INCREMENT,
-  `asset_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `id_status` int NOT NULL,
-  `purchase_price` int NULL DEFAULT NULL,
-  `date_purchase` date NULL DEFAULT NULL,
-  `id_type` int NULL DEFAULT NULL,
-  PRIMARY KEY (`id_asset`) USING BTREE
+                          `id_asset` int NOT NULL AUTO_INCREMENT,
+                          `asset_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                          `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                          `id_status` int NOT NULL,
+                          `purchase_price` int NULL DEFAULT NULL,
+                          `date_purchase` date NULL DEFAULT NULL,
+                          `id_type` int NULL DEFAULT NULL,
+                          PRIMARY KEY (`id_asset`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 11112 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -70,13 +70,13 @@ INSERT INTO `asset` VALUES (11111, 'Laptop DELL 14 inch', 'Ram: 8G\r\nCPU: siêu
 -- ----------------------------
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `account_id` int NULL DEFAULT NULL,
-  `asset_id` int NULL DEFAULT NULL,
-  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `created_at` datetime(6) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+                            `id` int NOT NULL AUTO_INCREMENT,
+                            `account_id` int NULL DEFAULT NULL,
+                            `asset_id` int NULL DEFAULT NULL,
+                            `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                            `created_at` datetime(6) NULL DEFAULT NULL,
+                            PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of comment
@@ -89,19 +89,20 @@ INSERT INTO `comment` VALUES (52, 123456, 20, 'ban vuong tốt', '2024-07-08 17:
 INSERT INTO `comment` VALUES (53, 123456, 12, 'Ghế Công Thái Học đang sử dụng rất ok', '2024-07-08 17:06:30.000000');
 INSERT INTO `comment` VALUES (54, 123456, 12, 'Sử dụng tốt lắm mọi người, nên mượn', '2024-07-08 17:06:30.000000');
 INSERT INTO `comment` VALUES (55, 123456, 12, 'Ghế Công Thái Học mọi người nhớ nâng phần phía sau lên để k bị đau lưng nhé', '2024-07-08 18:17:40.000000');
+INSERT INTO `comment` VALUES (56, 921976, 5, 'ihihih', '2024-07-10 18:06:42.000000');
 
 -- ----------------------------
 -- Table structure for detail_account
 -- ----------------------------
 DROP TABLE IF EXISTS `detail_account`;
 CREATE TABLE `detail_account`  (
-  `id_account` int NOT NULL,
-  `first_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `last_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `day_of_birth` datetime(6) NULL DEFAULT NULL,
-  `mail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `role` int NULL DEFAULT NULL,
-  PRIMARY KEY (`id_account`) USING BTREE
+                                   `id_account` int NOT NULL,
+                                   `first_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                                   `last_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                                   `day_of_birth` datetime(6) NULL DEFAULT NULL,
+                                   `mail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                                   `role` int NULL DEFAULT NULL,
+                                   PRIMARY KEY (`id_account`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -119,18 +120,18 @@ INSERT INTO `detail_account` VALUES (938413, 'Nhi', 'Nguyen', '2000-07-19 00:00:
 -- ----------------------------
 DROP TABLE IF EXISTS `list_borrow`;
 CREATE TABLE `list_borrow`  (
-  `id_account` int NOT NULL,
-  `id_asset` int NOT NULL,
-  `borrow_date` datetime NOT NULL,
-  `return_date` datetime NULL DEFAULT NULL,
-  `quantity` int NULL DEFAULT NULL,
-  `status` int NULL DEFAULT NULL,
-  INDEX `FKhkxmqm4xtfovb3fhe8kemrf0k`(`id_asset` ASC) USING BTREE,
-  INDEX `FK2vivh0ittj555jcyvc1gkphyu`(`id_account` ASC) USING BTREE,
-  INDEX `FK2v73k00t57lnr402gn9ho9jpq`(`status` ASC) USING BTREE,
-  CONSTRAINT `FK2v73k00t57lnr402gn9ho9jpq` FOREIGN KEY (`status`) REFERENCES `status` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `FK2vivh0ittj555jcyvc1gkphyu` FOREIGN KEY (`id_account`) REFERENCES `detail_account` (`id_account`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `FKhkxmqm4xtfovb3fhe8kemrf0k` FOREIGN KEY (`id_asset`) REFERENCES `asset` (`id_asset`) ON DELETE RESTRICT ON UPDATE RESTRICT
+                                `id_account` int NOT NULL,
+                                `id_asset` int NOT NULL,
+                                `borrow_date` datetime NOT NULL,
+                                `return_date` datetime NULL DEFAULT NULL,
+                                `quantity` int NULL DEFAULT NULL,
+                                `status` int NULL DEFAULT NULL,
+                                INDEX `FKhkxmqm4xtfovb3fhe8kemrf0k`(`id_asset` ASC) USING BTREE,
+                                INDEX `FK2vivh0ittj555jcyvc1gkphyu`(`id_account` ASC) USING BTREE,
+                                INDEX `FK2v73k00t57lnr402gn9ho9jpq`(`status` ASC) USING BTREE,
+                                CONSTRAINT `FK2v73k00t57lnr402gn9ho9jpq` FOREIGN KEY (`status`) REFERENCES `status` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+                                CONSTRAINT `FK2vivh0ittj555jcyvc1gkphyu` FOREIGN KEY (`id_account`) REFERENCES `detail_account` (`id_account`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+                                CONSTRAINT `FKhkxmqm4xtfovb3fhe8kemrf0k` FOREIGN KEY (`id_asset`) REFERENCES `asset` (`id_asset`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -141,16 +142,17 @@ INSERT INTO `list_borrow` VALUES (938413, 5, '2024-04-13 15:50:47', '2024-07-03 
 INSERT INTO `list_borrow` VALUES (123456, 11111, '2024-04-13 15:50:47', '2024-04-13 15:51:14', 1, 1);
 INSERT INTO `list_borrow` VALUES (123456, 20, '2024-07-07 12:43:18', '2024-07-07 12:53:31', 2, 1);
 INSERT INTO `list_borrow` VALUES (123456, 20, '2024-07-07 12:54:04', '2024-07-07 12:54:43', 2, 1);
-INSERT INTO `list_borrow` VALUES (123456, 12, '2024-07-08 15:29:28', NULL, 2, 0);
+INSERT INTO `list_borrow` VALUES (123456, 12, '2024-07-08 15:29:28', '2024-07-12 12:01:42', 2, 1);
+INSERT INTO `list_borrow` VALUES (741152, 5, '2024-07-12 12:34:55', NULL, 1, 0);
 
 -- ----------------------------
 -- Table structure for status
 -- ----------------------------
 DROP TABLE IF EXISTS `status`;
 CREATE TABLE `status`  (
-  `id` int NOT NULL,
-  `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
+                           `id` int NOT NULL,
+                           `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                           PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -165,10 +167,10 @@ INSERT INTO `status` VALUES (2, 'cũ rồi');
 -- ----------------------------
 DROP TABLE IF EXISTS `type`;
 CREATE TABLE `type`  (
-  `id_type` int NOT NULL,
-  `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `description` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id_type`) USING BTREE
+                         `id_type` int NOT NULL,
+                         `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                         `description` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                         PRIMARY KEY (`id_type`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -183,17 +185,17 @@ INSERT INTO `type` VALUES (3, 'Điện tử', 'Điện tử');
 -- ----------------------------
 DROP TABLE IF EXISTS `warehouse`;
 CREATE TABLE `warehouse`  (
-  `id_asset` int NOT NULL AUTO_INCREMENT,
-  `stock_quantity` int NULL DEFAULT NULL,
-  `unavailable_quantity` int NULL DEFAULT NULL,
-  PRIMARY KEY (`id_asset`) USING BTREE
+                              `id_asset` int NOT NULL AUTO_INCREMENT,
+                              `stock_quantity` int NULL DEFAULT NULL,
+                              `unavailable_quantity` int NULL DEFAULT NULL,
+                              PRIMARY KEY (`id_asset`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 11112 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of warehouse
 -- ----------------------------
-INSERT INTO `warehouse` VALUES (5, 2, 0);
-INSERT INTO `warehouse` VALUES (12, 52, 2);
+INSERT INTO `warehouse` VALUES (5, 2, 1);
+INSERT INTO `warehouse` VALUES (12, 52, 0);
 INSERT INTO `warehouse` VALUES (16, 5, 0);
 INSERT INTO `warehouse` VALUES (18, 5, 0);
 INSERT INTO `warehouse` VALUES (19, 8, 0);
@@ -210,26 +212,26 @@ delimiter ;;
 CREATE PROCEDURE `checkLogin`(IN `ID` INT)
 BEGIN
     DECLARE rowCount INT;
-    
+
     -- Check if ID parameter is not null
     IF ID IS NULL THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'ID cannot be null';
-    END IF;
+END IF;
 
     -- Count the number of rows with matching ID
-    SELECT COUNT(*) INTO rowCount
-    FROM account
-    WHERE account.id_account = ID;
+SELECT COUNT(*) INTO rowCount
+FROM account
+WHERE account.id_account = ID;
 
-    -- If no matching record found, return an error
-    IF rowCount = 0 THEN
+-- If no matching record found, return an error
+IF rowCount = 0 THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Invalid ID';
-    END IF;
+END IF;
 
     -- If a matching record found, return the result
-    SELECT * FROM account WHERE account.id_account = ID;
+SELECT * FROM account WHERE account.id_account = ID;
 
 END
 ;;
@@ -247,15 +249,15 @@ BEGIN
     DECLARE rs INT; -- SL đã mượn
 
     -- Calculate the total quantity borrowed for the given asset
-    SELECT SUM(quantity) INTO borrow FROM list_borrow WHERE list_borrow.id_asset = `id_asset` AND status = 0;
+SELECT COALESCE(SUM(quantity), 0) INTO borrow FROM list_borrow WHERE list_borrow.id_asset = `id_asset` AND status = 0;
 
-    -- Retrieve the available stock quantity for the given asset
-    SELECT stock_quantity INTO stock FROM warehouse WHERE warehouse.id_asset = `id_asset` LIMIT 1;
+-- Retrieve the available stock quantity for the given asset
+SELECT stock_quantity INTO stock FROM warehouse WHERE warehouse.id_asset = `id_asset` LIMIT 1;
 
-    -- Subtract the borrowed quantity from the available quantity
-    SET rs = stock - borrow;
+-- Subtract the borrowed quantity from the available quantity
+SET rs = stock - borrow;
 
-    SELECT rs AS rs;
+SELECT rs AS rs;
 END
 ;;
 delimiter ;
@@ -267,7 +269,7 @@ DROP PROCEDURE IF EXISTS `getAccountInfo`;
 delimiter ;;
 CREATE PROCEDURE `getAccountInfo`(IN `ID` int)
 BEGIN
- select * from detail_account WHERE detail_account.id_account= ID;
+select * from detail_account WHERE detail_account.id_account= ID;
 
 END
 ;;
@@ -281,13 +283,13 @@ delimiter ;;
 CREATE PROCEDURE `getListBorrow`()
 BEGIN
     -- Select the list of borrowed assets for all users
-    SELECT d.id_account, d.last_name, d.first_name, t.`value` AS asset_type, a.asset_name, SUM(l.quantity) AS total_borrowed
-    FROM detail_account d
-    INNER JOIN list_borrow l ON d.id_account = l.id_account
-    INNER JOIN asset a ON l.id_asset = a.id_asset
-    INNER JOIN type t ON a.id_type = t.id_type
-    WHERE l.return_date IS NULL
-    GROUP BY d.id_account, l.id_asset;
+SELECT d.id_account, d.last_name, d.first_name, t.`value` AS asset_type, a.asset_name, SUM(l.quantity) AS total_borrowed
+FROM detail_account d
+         INNER JOIN list_borrow l ON d.id_account = l.id_account
+         INNER JOIN asset a ON l.id_asset = a.id_asset
+         INNER JOIN type t ON a.id_type = t.id_type
+WHERE l.return_date IS NULL
+GROUP BY d.id_account, l.id_asset;
 
 END
 ;;
@@ -305,18 +307,18 @@ BEGIN
     DECLARE user_first_name VARCHAR(255);
 
     -- Fetch user details
-    SELECT last_name, first_name INTO user_last_name, user_first_name
-    FROM detail_account
-    WHERE id_account = ID;
+SELECT last_name, first_name INTO user_last_name, user_first_name
+FROM detail_account
+WHERE id_account = ID;
 
-    -- Select the list of borrowed assets for the user
-    SELECT d.id_account, user_last_name, user_first_name, t.`value` AS asset_type, a.asset_name, SUM(l.quantity) AS total_borrowed
-    FROM detail_account d
-    INNER JOIN list_borrow l ON d.id_account = l.id_account
-    INNER JOIN asset a ON l.id_asset = a.id_asset
-    INNER JOIN type t ON a.id_type = t.id_type
-    WHERE l.return_date IS NULL AND d.id_account = ID
-    GROUP BY d.id_account, l.id_asset;
+-- Select the list of borrowed assets for the user
+SELECT d.id_account, user_last_name, user_first_name, t.`value` AS asset_type, a.asset_name, SUM(l.quantity) AS total_borrowed
+FROM detail_account d
+         INNER JOIN list_borrow l ON d.id_account = l.id_account
+         INNER JOIN asset a ON l.id_asset = a.id_asset
+         INNER JOIN type t ON a.id_type = t.id_type
+WHERE l.return_date IS NULL AND d.id_account = ID
+GROUP BY d.id_account, l.id_asset;
 
 END
 ;;
