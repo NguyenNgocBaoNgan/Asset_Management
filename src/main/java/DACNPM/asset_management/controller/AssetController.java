@@ -7,11 +7,11 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-
-
+import org.springframework.web.multipart.MultipartFile;
 import java.util.*;
 
 
@@ -214,6 +214,20 @@ public class AssetController {
 
         return "redirect:/home";
     }
+
+    @PostMapping("/preview")
+    public ResponseEntity<List<List<String>>> previewFile(@RequestParam("file") MultipartFile file) {
+        List<List<String>> previewData = assetService.previewFile(file);
+        return ResponseEntity.ok(previewData);
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<List<Asset>> uploadFile(@RequestParam("file") MultipartFile file) {
+        List<Asset> assets = assetService.saveFile(file);
+        return ResponseEntity.ok(assets);
+    }
+
+
 
 
 }

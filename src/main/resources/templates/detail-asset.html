@@ -312,7 +312,8 @@
 <!--                                            th:text="#{unreport}" data-color="#ffffff"></button>-->
                                     <button th:if="${loggedInAccount.role == 0}" type="button"
                                             class="delete-cmt-btn btn btn-success m-1"
-                                            th:text="#{delete}"></button>
+                                            th:text="#{delete}"
+                                            style="margin-top: -20px;margin-right: 35px;float: right"></button>
                                 </p>
                                 <p style="font-size: 12px"><em th:text="${comment.createdAt}"></em></p>
                             </div>
