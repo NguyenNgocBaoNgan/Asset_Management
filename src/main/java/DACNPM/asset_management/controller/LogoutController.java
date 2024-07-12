@@ -14,8 +14,9 @@ public class LogoutController {
             return "redirect:/login";
         }
         model.addAttribute("account", new Account());
-        session.removeAttribute("error");
+//        session.removeAttribute("error");
         session.removeAttribute("loggedInAccount");
+        //session.invalidate();
         return "authentication-login";
     }
     @GetMapping("/logout")

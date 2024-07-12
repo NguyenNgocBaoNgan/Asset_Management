@@ -16,16 +16,20 @@ public class ForgetPasswordController {
     private ForgetPasswordService forgetPasswordService;
 
     @GetMapping("/forgot-password")
-    public String showForgotPasswordForm(Model model) {
+    public String showForgotPasswordForm(Model model,HttpSession session) {
+       // session.removeAttribute("error");
+
         return "forgot-password";
     }
 
     @PostMapping("/forgot-password")
     public String processForgotPassword(@RequestParam("email") String email, HttpSession session) {
         try {
+            session.removeAttribute("error");
             forgetPasswordService.processForgotPassword(email);
             session.setAttribute("message", "A temporary password has been sent to your email");
         } catch (Exception e) {
+            session.removeAttribute("message");
             session.setAttribute("error", "Error: " + e.getMessage());
         }
         return "redirect:/forgot-password";
