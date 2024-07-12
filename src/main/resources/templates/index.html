@@ -238,30 +238,7 @@
                         <a href="?lang=en" class="lang-btn" data-lang="en" th:text="#{english}"></a>
                     </div>
                     <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
-                                <div class="message-body">
-                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                                        <i class="ti ti-user fs-6"></i>
-                                        <p class="mb-0 fs-3">My Profile</p>
-                                    </a>
-                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                                        <i class="ti ti-mail fs-6"></i>
-                                        <p class="mb-0 fs-3">My Account</p>
-                                    </a>
-                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                                        <i class="ti ti-list-check fs-6"></i>
-                                        <p class="mb-0 fs-3">My Task</p>
-                                    </a>
-                                    <a href="/dang-xuat" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                   </ul>
                 </div>
             </nav>
         </header>
@@ -309,7 +286,7 @@
                                                 </label>
                                             </div>
                                             <div class="col-60">
-                                                <input type="text" id="assetID" required th:field="*{idAsset}"
+                                                <input type="number" id="assetID" required th:field="*{idAsset}"
                                                        th:placeholder="#{assetIdHolder}" class="formbold-form-input"/>
                                             </div>
                                         </div>
@@ -355,7 +332,7 @@
                                                        th:text="#{quantity}"></label>
                                             </div>
                                             <div class="col-60">
-                                                <input type="text" name="quantity" required id="quantity"
+                                                <input type="number" name="quantity" required id="quantity"
                                                        th:placeholder="#{quantityHolder}" class="formbold-form-input"/>
                                             </div>
                                         </div>
@@ -365,7 +342,7 @@
                                                        th:text="#{purchasePrice}"></label>
                                             </div>
                                             <div class="col-60">
-                                                <input type="text" name="number" id="number" th:field="*{purchasePrice}"
+                                                <input type="number" name="number" id="number" th:field="*{purchasePrice}"
                                                        th:placeholder="#{purchaseHolder}" class="formbold-form-input"/>
                                             </div>
                                         </div>
@@ -456,8 +433,15 @@
                                         </td>
 
                                         <td class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
+<!--                                            <h6 class="fw-semibold mb-1 "-->
+<!--                                                th:text="${statusMap.get(asset.idAsset).getIdStatus()==0 ? #{usable} : #{unusable}}">-->
+<!--                                            </h6>-->
                                             <h6 class="fw-semibold mb-1 "
-                                                th:text="${statusMap.get(asset.idAsset).valueStatus}"></h6>
+                                                th:if="${statusMap.get(asset.idAsset).getIdStatus() == 0}" th:text="#{usable}">
+                                            </h6>
+                                            <h6 class="fw-semibold mb-1 "
+                                                th:if="${statusMap.get(asset.idAsset).getIdStatus() != 0}" th:text="#{unusable}">
+                                            </h6>
                                         </td>
                                         <td class="border-bottom-0">
                                             <h6 class="fw-semibold mb-1 center"
@@ -468,7 +452,7 @@
                                                 th:text="${assetWarehouseMap.get(asset.idAsset).getUnavailableQuantity()}"></h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <span class="price" th:text="${asset.purchasePrice}"></span>
+                                            <h6 class="fw-semibold mb-1 price" th:text="${asset.purchasePrice}"></h6>
                                         </td>
                                         <td class="border-bottom-0" th:if="${loggedInAccount.role == 0}">
                                             <div class="d-flex align-items-center gap-2">
