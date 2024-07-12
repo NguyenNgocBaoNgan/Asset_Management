@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
 </head>
 <body>
 <!--  Header Start -->
@@ -22,9 +23,9 @@
     </ul>
     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
       <div class="language-selector">
-        <a href="?lang=vi" class="lang-btn">Vietnamese</a>
+        <a href="?lang=vi" class="lang-btn" data-lang="vi">Vietnamese</a>
         <span>|</span>
-        <a href="?lang=en" class="lang-btn">English</a>
+        <a href="?lang=en" class="lang-btn" data-lang="en">English</a>
       </div>
       <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
         <li class="nav-item dropdown">
@@ -55,5 +56,71 @@
   </nav>
 </header>
 <!--  Header End -->
+<!--<script th:inline="javascript">-->
+<!--  /*<![CDATA[*/-->
+<!--  document.addEventListener('DOMContentLoaded', function() {-->
+<!--    const langLinks = document.querySelectorAll('.lang-btn');-->
+<!--    console.log("hhhhhhhhhhhh",langLinks);-->
+<!--    langLinks.forEach(link => {-->
+<!--      link.addEventListener('click', function(event) {-->
+<!--        event.preventDefault();-->
+<!--        const lang = event.target.getAttribute('[data-lang]');-->
+<!--        console.log(`Clicked ${lang} link`);-->
+<!--        try {-->
+<!--          localStorage.setItem('selectedLanguage', lang);-->
+<!--          console.log(`Ngôn ngữ đã được lưu: ${lang}`);-->
+<!--          // Thay đổi ngôn ngữ trực tiếp ở đây nếu cần-->
+<!--          // Ví dụ: Cập nhật thuộc tính 'language-code' của df-messenger-->
+<!--          const dfMessenger = document.querySelector('df-messenger');-->
+<!--          if (dfMessenger) {-->
+<!--            dfMessenger.setAttribute('language-code', lang);-->
+<!--          }-->
+<!--          // Tải lại trang để cập nhật ngôn ngữ-->
+<!--          window.location.reload();-->
+<!--        } catch (error) {-->
+<!--          console.error('Lỗi khi lưu vào localStorage:', error);-->
+<!--          // Xử lý lỗi khi không thể lưu vào localStorage-->
+<!--        }-->
+<!--      });-->
+<!--    });-->
+<!--  });-->
+<!--  /*]]>*/-->
+<!--</script>-->
+<!-- header.html -->
+<!--<script>-->
+<!--  document.addEventListener('DOMContentLoaded', function() {-->
+<!--    console.log("hihi");-->
+<!--    const langLinks = document.querySelectorAll('.lang-btn');-->
+
+<!--    langLinks.forEach(link => {-->
+<!--      link.addEventListener('click', function(event) {-->
+<!--        event.preventDefault();-->
+<!--        const lang = event.target.getAttribute('th:data-lang'); // Lấy giá trị của data-lang-->
+<!--        console.log(`Clicked ${lang} link`);-->
+
+<!--        try {-->
+<!--          localStorage.setItem('selectedLanguage', lang); // Lưu ngôn ngữ vào localStorage-->
+<!--          console.log(`Ngôn ngữ đã được lưu: ${lang}`);-->
+
+<!--          // Cập nhật language-code của df-messenger-->
+<!--          const dfMessenger = document.querySelector('df-messenger.custom-df-messenger');-->
+<!--          if (dfMessenger) {-->
+<!--            dfMessenger.setAttribute('language-code', lang);-->
+<!--            console.log(`Đã cập nhật language-code của df-messenger thành: ${lang}`);-->
+<!--          } else {-->
+<!--            console.error('Không tìm thấy phần tử df-messenger');-->
+<!--          }-->
+
+<!--          // Tải lại trang để cập nhật ngôn ngữ-->
+<!--          // window.location.reload(); // Bạn có thể bỏ comment nếu muốn reload trang-->
+<!--        } catch (error) {-->
+<!--          console.error('Lỗi khi lưu vào localStorage:', error);-->
+<!--          // Xử lý lỗi khi không thể lưu vào localStorage-->
+<!--        }-->
+<!--      });-->
+<!--    });-->
+<!--  });-->
+<!--</script>-->
+
 </body>
 </html>
